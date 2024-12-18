@@ -1,0 +1,47 @@
+[
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "dob": "2001-05-14",
+      "index": "19001234",
+      "username": "john.doe",
+      "password": "john123",
+      "role": "student",
+      "faculty": "Engineering",
+      "batch": "19"
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "dob": "2000-10-22",
+      "index": "18004567",
+      "username": "jane.smith",
+      "password": "jane123",
+      "role": "student",
+      "faculty": "Science",
+      "batch": "18"
+    },
+    {
+      "firstName": "Alice",
+      "lastName": "Brown",
+      "dob": "1985-07-09",
+      "index": null,
+      "username": "alice.brown",
+      "password": "alice123",
+      "role": "lecturer",
+      "faculty": "Engineering",
+      "batch": null
+    },
+    {
+      "firstName": "Bob",
+      "lastName": "Johnson",
+      "dob": "1992-03-12",
+      "index": null,
+      "username": "bob.johnson",
+      "password": "bob123",
+      "role": "officer",
+      "faculty": "Administration",
+      "batch": null
+    }
+  ]
+  
