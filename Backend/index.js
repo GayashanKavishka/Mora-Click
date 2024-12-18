@@ -5,13 +5,25 @@ const bcryot = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const db = require('./config/db');
+const users = require('./model/userModel');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+// const func = async (users) => {
+//      const a = await users.find({username:"john.doe"}).then((data) => {
+//            console.log(data);
+//     }).catch((err) => { console.log(err) }
+//     );
+// }
 
+// func(users);
+
+
+const authRouter = require('./Routes/authRoute');
+app.use('/auth', authRouter);
 
 
 app.listen(process.env.PORT, () => {
