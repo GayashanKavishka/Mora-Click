@@ -22,7 +22,7 @@ export default function Header() {
           </div>
         </div>
 
-        <a href="#">Contact Us</a>
+        <Link to="/contact">Contact Us</Link>
       </nav>
       <button className="login-button">Log in</button>
     </header>
