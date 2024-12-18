@@ -1,95 +1,111 @@
 /* Footer General Styles */
 .footer {
-    background-color: #2c3e50;
+    background-image: url("../assets/footer.jpg"); /* Add your footer image path */
+    background-size: cover; /* Ensure the image covers the entire footer */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Avoid repeating the image */
     color: #ecf0f1;
     padding: 40px 0 10px 0;
     font-family: "Poppins", sans-serif;
-  }
-  
-  .footer-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a dark overlay for better text readability */
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Adjust the opacity for desired effect */
+    z-index: -1;
+}
+
+.footer-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-  }
-  
-  .footer-column {
+}
+
+.footer-column {
     flex: 1;
     min-width: 250px;
     margin-bottom: 20px;
-  }
-  
-  .footer-logo {
+}
+
+.footer-logo {
     font-size: 1.8rem;
     font-weight: bold;
     color: #f1c40f;
-  }
-  
-  .footer-column h3 {
+}
+
+.footer-column h3 {
     margin-bottom: 15px;
     color: #f1c40f;
     font-size: 1.2rem;
-  }
-  
-  .footer-column p,
-  .footer-column a {
+}
+
+.footer-column p,
+.footer-column a {
     font-size: 0.9rem;
     color: #bdc3c7;
     line-height: 1.8;
     text-decoration: none;
-  }
-  
-  .footer-column a:hover {
+}
+
+.footer-column a:hover {
     color: #f1c40f;
-  }
-  
-  .footer-column ul {
+}
+
+.footer-column ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .footer-column ul li {
+}
+
+.footer-column ul li {
     margin-bottom: 10px;
-  }
-  
-  .footer-column ul li a {
+}
+
+.footer-column ul li a {
     transition: color 0.3s ease;
-  }
-  
-  .social-icons a {
+}
+
+.social-icons a {
     display: inline-block;
     margin-right: 15px;
     font-size: 1.2rem;
     color: #ecf0f1;
     transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .social-icons a:hover {
+}
+
+.social-icons a:hover {
     color: #f1c40f;
     transform: scale(1.1);
-  }
-  
-  /* Bottom Footer */
-  .footer-bottom {
+}
+
+/* Bottom Footer */
+.footer-bottom {
     text-align: center;
     margin-top: 20px;
     border-top: 1px solid #34495e;
     padding-top: 10px;
     font-size: 0.9rem;
     color: #bdc3c7;
-  }
-  
-  /* Responsive Footer */
-  @media (max-width: 768px) {
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
     .footer-container {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
-  
+
     .footer-column {
-      margin-bottom: 30px;
+        margin-bottom: 30px;
     }
-  }
-  
+}

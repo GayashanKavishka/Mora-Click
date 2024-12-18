@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Footer.css";
+import footer from "../assets/footer.jpg"; // Add your footer image here
 
 export default function Footer() {
     return (
