@@ -21,7 +21,7 @@ const login =(username, password) => {
             } else if (canteenData.length > 0) {
             const canteen = canteenData[0];
             if (canteen.password === password) {
-                const token = jwt.sign({ username: canteen.username, role: canteen.role }, process.env.Secret_Key, { expiresIn: '1h' });
+                const token = jwt.sign({ username: canteen.username, role: "canteen" }, process.env.Secret_Key, { expiresIn: '1h' });
                 return resolve({ status: 200, token });
             } else {
                 return resolve({ status: 401, message: "Invalid password" });
