@@ -25,6 +25,9 @@ app.use(express.json());
 const authRouter = require('./Routes/authRoute');
 app.use('/auth', authRouter);
 
+const menuRouter = require('./Routes/menuRoute');
+app.use('/menu', menuRouter);
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 5000');
