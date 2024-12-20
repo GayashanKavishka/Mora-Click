@@ -15,9 +15,6 @@ const getmenu = (canteen_id)=>{
 };
 
 
-
-
-
 module.exports={
     getmenu
 };

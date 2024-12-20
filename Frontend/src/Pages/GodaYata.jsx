@@ -1,87 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './GodaYata.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import godayata from '../assets/godayata.jpg';
-import ChickenBurger from '../assets/Chicken Burger.jpg';
-import VeggiePizza from '../assets/Veggie Pizza.png';
-import VegRoll from '../assets/Veg Roll.jpg';
-import FishPattie from '../assets/Fish Pattie.jpg';
-import MangoSmoothie from '../assets/Mango Smoothie.jpg';
-import IcedCoffee from '../assets/Iced Coffee.jpg';
-import SizzlingBrownie from '../assets/Sizzling Brownie.jpg';
-import GodaYataSpecialThali from '../assets/Special Thali.jpg';
 
-const foodData = {
-  mainMeals: [
-    {
-      id: 1,
-      name: 'Chicken Burger',
-      image: ChickenBurger,
-      price: 350,
-      available: true,
-    },
-    {
-      id: 2,
-      name: 'Veggie Pizza',
-      image: VeggiePizza,
-      price: 500,
-      available: false,
-    },
-  ],
-  beverages: [
-    {
-      id: 3,
-      name: 'Mango Smoothie',
-      image: MangoSmoothie,
-      price: 200,
-      available: true,
-    },
-    {
-      id: 4,
-      name: 'Iced Coffee',
-      image: IcedCoffee,
-      price: 150,
-      available: true,
-    },
-  ],
-  shortEats: [
-    {
-      id: 5,
-      name: 'Veg Roll',
-      image: VegRoll,
-      price: 50,
-      available: true,
-    },
-    {
-      id: 6,
-      name: 'Fish Pattie',
-      image: FishPattie,
-      price: 75,
-      available: false,
-    },
-  ],
-  specialItems: [
-    {
-      id: 7,
-      name: 'Sizzling Brownie',
-      image: SizzlingBrownie,
-      price: 250,
-      available: true,
-    },
-    {
-      id: 8,
-      name: 'Goda Yata Special Thali',
-      image: GodaYataSpecialThali,
-      price: 650,
-      available: true,
-    },
-  ],
-};
 
-const isCanteenOpen = false;  // This can be dynamic, based on time or other conditions
+const API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
+
 
 export default function GodaYata() {
+  const [foodData, setFoodData] = useState(null);
+  const [isCanteenOpen, setIsCanteenOpen] = useState(true); // Assuming canteen open status
+
+  useEffect(() => {
+    // Fetch the menu data from the backend
+    const fetchMenu = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        const menu = response.data.data[0]; // Access the menu data
+
+        // Reshape the data to fit the UI structure
+        const reshapedData = {
+          mainMeals: menu.main.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            available: item.available,
+            description: item.description || '',
+          })),
+          shortEats: menu.short_eat.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            available: item.available,
+          })),
+          beverages: menu.beverag.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            available: item.available,
+          })),
+        };
+
+        setFoodData(reshapedData);
+      } catch (error) {
+        console.error('Error fetching menu:', error);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
   return (
     <>
       <Header />
@@ -99,7 +68,7 @@ export default function GodaYata() {
       </div>
 
       {/* Only show food items if canteen is open */}
-      {isCanteenOpen && (
+      {isCanteenOpen && foodData && (
         <div className="categories-container">
           {Object.entries(foodData).map(([category, items]) => (
             <div key={category} className="category">
@@ -107,12 +76,12 @@ export default function GodaYata() {
               <div className="food-items">
                 {items.map((food) => (
                   <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
-                    <img src={food.image} alt={food.name} className="food-image" />
                     <h3 className="food-name">{food.name}</h3>
                     <p className="food-price">Rs. {food.price}</p>
                     <p className="food-availability">
                       {food.available ? 'Available' : 'Not Available'}
                     </p>
+                    {food.description && <p className="food-description">{food.description}</p>}
                   </div>
                 ))}
               </div>
