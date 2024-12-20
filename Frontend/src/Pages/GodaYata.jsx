@@ -4,8 +4,12 @@ import './GodaYata.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
+
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9ef';
+const API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
+
+
 
 export default function GodaYata() {
   const [foodData, setFoodData] = useState(null);

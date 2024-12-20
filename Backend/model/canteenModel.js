@@ -8,4 +8,4 @@ const canteens = new mongoose.Schema({
     open:{type:Boolean, required:true, default:true},
 })
 
-module.exports = mongoose.model('canteens', canteens);
+module.exports = mongoose.model.canteens ||mongoose.model('canteens', canteens);

@@ -13,4 +13,4 @@ const users = new mongoose.Schema({
   batch: { type: String, default: null }, // Optional for non-students
 });
 
-module.exports = mongoose.model('users', users);
+module.exports = mongoose.model.users||mongoose.model('users', users);
