@@ -1,0 +1,91 @@
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(44, 62, 80, 0.8); /* Transparent background */
+    padding: 15px 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo Image */
+  .logo img {
+    width: 60px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: Circular logo */
+    object-fit: contain; /* Ensures the image fits well */
+  }
+  
+  /* User Section */
+  .user_section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between canteen name, user icon, and logout button */
+  }
+  
+  .canteen-name {
+    font-size: 1.2rem;
+    color: #ecf0f1;
+  }
+  
+  /* User Icon */
+  .user-icon-container {
+    position: relative;
+  }
+  
+  .user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    position: absolute;
+    top: 50px; /* Positioned below the user icon */
+    right: 0;
+    background-color: rgba(44, 62, 80, 0.8); /* Match navbar background */
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f1c40f;
+    color: #2c3e50;
+  }
+  
+  /* Login Button */
+  .login-button {
+    background-color: #f1c40f;
+    color: #2c3e50;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background-color: #e67e22;
+    color: #ffffff;
+  }
+  

@@ -79,7 +79,7 @@ const foodData = {
   ],
 };
 
-const isCanteenOpen = true;  // This can be dynamic, based on time or other conditions
+const isCanteenOpen = false;  // This can be dynamic, based on time or other conditions
 
 export default function GodaYata() {
   return (

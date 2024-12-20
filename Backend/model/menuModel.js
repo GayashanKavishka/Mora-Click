@@ -25,4 +25,4 @@ const menus = new mongoose.Schema({
     }]
 })
 
-module.exports = mongoose.model('menus', menus);
+module.exports = mongoose.model.menus||mongoose.model('menus', menus);
