@@ -1,0 +1,84 @@
+.civilcanteenhero {
+    background: url('../assets/civil.jpg') center/cover no-repeat;
+    position: relative;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.civilcanteenhero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.civilcanteenhero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #2980b9;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.civilcanteenhero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.canteen-status {
+    text-align: center;
+    padding: 30px 20px;
+    margin: 30px 0;
+    border-radius: 10px;
+    background-color: #ecf0f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.canteen-status.open {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+.canteen-status.closed {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+.categories-container {
+    padding: 40px 20px;
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.category-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #34495e;
+    border-bottom: 3px solid #2980b9;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}

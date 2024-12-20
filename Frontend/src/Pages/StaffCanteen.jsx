@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './GodaYata.css';
+import './StaffCanteen.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
+const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f2';
+const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9f2';
 
-const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
-const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9ef';
-const API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
-
-
-
-export default function GodaYata() {
+export default function StaffCanteen() {
   const [foodData, setFoodData] = useState(null);
   const [isCanteenOpen, setIsCanteenOpen] = useState(true);
 
   useEffect(() => {
-    // Fetch the canteen status and menu data from the backend
     const fetchCanteenStatus = async () => {
       try {
         const response = await axios.get(CANTEEN_API_URL);
-        const canteen = response.data.data[0]; // Access the canteen data
+        const canteen = response.data.data[0];
         setIsCanteenOpen(canteen.open);
       } catch (error) {
         console.error('Error fetching canteen status:', error);
@@ -30,9 +25,8 @@ export default function GodaYata() {
     const fetchMenu = async () => {
       try {
         const response = await axios.get(MENU_API_URL);
-        const menu = response.data.data[0]; // Access the menu data
+        const menu = response.data.data[0];
 
-        // Reshape the data to fit the UI structure
         const reshapedData = {
           mainMeals: menu.main.map(item => ({
             id: item._id,
@@ -68,20 +62,18 @@ export default function GodaYata() {
   return (
     <>
       <Header />
-      <section className="godayatahero">
+      <section className="staff-canteen-hero">
         <div className="hero-content">
-          <h1>Welcome to Goda Yata Canteen</h1>
-          <p>Enjoy our variety of delicious meals, refreshing beverages, and tasty short eats.</p>
+          <h1>Welcome to the Staff Canteen</h1>
+          <p>Enjoy exclusive meals and beverages specially curated for our staff.</p>
         </div>
       </section>
 
-      {/* Canteen Status Section */}
       <div className={`canteen-status ${isCanteenOpen ? 'open' : 'closed'}`}>
         <h2>{isCanteenOpen ? 'Canteen is Open' : 'Canteen is Closed'}</h2>
-        <p>{isCanteenOpen ? 'Come in and enjoy your meal!' : 'Sorry, we are currently closed. Please visit later!'}</p>
+        <p>{isCanteenOpen ? 'We are ready to serve you!' : 'Please come back during our operational hours.'}</p>
       </div>
 
-      {/* Only show food items if canteen is open */}
       {isCanteenOpen && foodData && (
         <div className="categories-container">
           {Object.entries(foodData).map(([category, items]) => (

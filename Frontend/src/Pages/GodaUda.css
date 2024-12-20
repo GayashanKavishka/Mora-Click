@@ -1,0 +1,39 @@
+/* Hero Section Styling */
+.godaudahero {
+    background: url('../assets/Goda Uda.jpg') center/cover no-repeat;
+    position: relative;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.godaudahero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.godaudahero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f1c40f;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.godaudahero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
