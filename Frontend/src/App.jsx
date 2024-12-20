@@ -7,6 +7,7 @@ import Footer from './Components/Footer';
 import Header from './Components/Header';
 import ContactUs from './Pages/ContactUs';
 import GodaYata from './Pages/GodaYata';
+import Home from './Canteen_Level/Home/home';
 
 function App() {
   return (
@@ -17,6 +18,12 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="/godayata" element={<GodaYata/>} />
+
+
+
+
+          {/*----------------------canteeen level----------------------*/}
+          <Route path= "/canteen/home" element = {<Home/>} />
         </Routes>
       </main>
     </Router>
