@@ -5,12 +5,15 @@ import yasith from '../assets/yasith.png'
 import gaya from '../assets/gaya.jpg'
 import dineth from '../assets/dineth.jpg'
 import sethna from '../assets/sethna.jpg'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 
 
 export default function AboutUs() {
     return (
 
         <div className="about-us-container">
+          <Header/>
           <header className="about-header">
             <h1>About Us</h1>
             <p>We are a team dedicated to providing the best food experiences for you.</p>
@@ -52,6 +55,7 @@ export default function AboutUs() {
               </div>
             </div>
           </section>
+          <Footer/>
         </div>
       );
 }

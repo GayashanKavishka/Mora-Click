@@ -6,19 +6,19 @@ import AboutUs from './Pages/AboutUs';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import ContactUs from './Pages/ContactUs';
+import GodaYata from './Pages/GodaYata';
 
 function App() {
   return (
     <Router>
-      <Header />
       <main>
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs/>} />
+          <Route path="/godayata" element={<GodaYata/>} />
         </Routes>
       </main>
-      <Footer />
     </Router>
   );
 }

@@ -5,12 +5,14 @@ import Food1Image from "../assets/food1.jpg"; // Food image 1
 import Food2Image from "../assets/food2.jpg"; // Food image 2
 import Food3Image from "../assets/food3.jpeg"; // Food image 3
 import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Welcome() {
   return (
     <div className="main-container">
+      <Header/>
       {/* Hero Section */}
-      <section className="hero">
+      <section className="welcomehero">
         <div className="content">
           <h1>Mora Click</h1>
           <p>
@@ -40,6 +42,7 @@ export default function Welcome() {
           <img src={Food3Image} alt="Short Eats" />
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }
