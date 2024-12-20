@@ -1,0 +1,207 @@
+/* Hero Section Styling */
+.godayatahero {
+    background: url('../assets/godayata.jpg') center/cover no-repeat;
+    position: relative;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.godayatahero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2); /* Slightly translucent white background for content */
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px); /* Adds a blur effect for better readability */
+}
+
+.godayatahero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f1c40f; /* Highlighted text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds text shadow for contrast */
+}
+
+.godayatahero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+}
+
+/* Canteen Status Section */
+.canteen-status {
+    text-align: center;
+    padding: 30px 20px;
+    margin: 30px 0;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.canteen-status h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.canteen-status p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+/* Styles for when the canteen is open */
+.canteen-status.open {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+.canteen-status.open h2 {
+    color: #fff;
+}
+
+.canteen-status.open p {
+    color: #fff;
+}
+
+/* Styles for when the canteen is closed */
+.canteen-status.closed {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.canteen-status.closed h2 {
+    color: #fff;
+}
+
+.canteen-status.closed p {
+    color: #fff;
+}
+
+/* Categories Container Styling */
+.categories-container {
+    padding: 40px 20px;
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+/* Category Section */
+.category {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.category-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #f1c40f; /* Modern underline effect */
+    letter-spacing: 2px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.category-title:hover {
+    color: #f1c40f;
+    transform: translateY(-5px);
+}
+
+/* Special Items Styling */
+.category.specialItems .category-title {
+    color: #e74c3c; /* Special color for special items */
+    border-color: #e74c3c; /* Red underline */
+}
+
+.food-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+/* Food Card Styling */
+.food-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.unavailable {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Food Image Styling */
+.food-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Food Name */
+.food-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+/* Food Price */
+.food-price {
+    font-size: 1rem;
+    color: #27ae60;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Food Availability */
+.food-availability {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.food-availability:before {
+    content: '• ';
+    color: inherit;
+}
+
+.food-card:not(.unavailable) .food-availability {
+    color: #2ecc71;
+}

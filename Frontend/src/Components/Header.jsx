@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import logo from '../assets/logo.jpg';
 
 export default function Header() {
   return (
     <header className="navbar">
-      <div className="logo">logo</div>
+      <div className="logo"><img src={logo} alt="logo" /></div>
       <nav>
         <Link to="/">Home</Link>
         <a href="#">Menu</a>
@@ -15,6 +16,7 @@ export default function Header() {
         <div className="dropdown">
           <button className="dropbtn">Canteens</button>
           <div className="dropdown-content">
+          <Link to="/godayata">Goda Yata</Link>
             <a href="#">Canteen 1</a>
             <a href="#">Canteen 2</a>
             <a href="#">Canteen 3</a>

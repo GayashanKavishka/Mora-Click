@@ -1,9 +1,13 @@
 import React from 'react'
 import './ContactUs.css';
 import contact from '../assets/contact.jpg';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function ContactUs() {
     return (
+      <>
+      <Header/>
         <div className="contact-container">
           <header className="contact-header">
             <h1>Contact Us</h1>
@@ -37,5 +41,7 @@ export default function ContactUs() {
             </div>
           </section>
         </div>
+        <Footer/>
+        </>
       );
 }
