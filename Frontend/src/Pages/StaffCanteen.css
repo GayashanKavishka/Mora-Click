@@ -1,0 +1,52 @@
+/* Hero Section Styling */
+.staff-canteen-hero {
+    background: url('../assets/staff.jpg') center/cover no-repeat;
+    position: relative;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.staff-canteen-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.staff-canteen-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #3498db;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.staff-canteen-hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Remaining styles are similar to the Goda Yata CSS */

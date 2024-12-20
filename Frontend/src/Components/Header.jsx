@@ -17,10 +17,9 @@ export default function Header() {
           <button className="dropbtn">Canteens</button>
           <div className="dropdown-content">
           <Link to="/godayata">Goda Yata</Link>
-            <a href="#">Canteen 1</a>
-            <a href="#">Canteen 2</a>
-            <a href="#">Canteen 3</a>
-            <a href="#">Canteen 4</a>
+          <Link to="/godauda">Goda Uda</Link>
+          <Link to="/staff">Staff Canteen</Link>
+          <Link to="/civil">Civil Canteen</Link>
           </div>
         </div>
 

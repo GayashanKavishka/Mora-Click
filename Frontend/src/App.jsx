@@ -7,6 +7,9 @@ import Footer from './Components/Footer';
 import Header from './Components/Header';
 import ContactUs from './Pages/ContactUs';
 import GodaYata from './Pages/GodaYata';
+import GodaUda from './Pages/GodaUda';
+import StaffCanteen from './Pages/StaffCanteen';
+import CivilCanteen from './Pages/CivilCanteen';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="/godayata" element={<GodaYata/>} />
+          <Route path="/godauda" element={<GodaUda/>} />
+          <Route path="/staff" element={<StaffCanteen/>} />
+          <Route path="/civil" element={<CivilCanteen/>} />
         </Routes>
       </main>
     </Router>
