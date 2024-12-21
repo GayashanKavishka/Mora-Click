@@ -1,11 +1,40 @@
 import React from "react";
+import { useState  } from "react";
+import {useNavigate} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
+import axios from "axios";
 import "./Login.css"; // Create a CSS file for styling
 import logo from "../assets/logo.png"; // Add your logo image here
 
 const LoginPage = () => {
+   const [userName, setUserName] = useState("");
+   const [password, setPassword] = useState("");
+
+   const navigate = useNavigate();
+
+   const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:5000/auth/login", {
+      username: userName,
+      password: password,
+    }).then((response) => {
+      console.log(response);
+      localStorage.setItem("token", response.data.token);
+      console.log(response.data.token);
+      alert("Login Successful");
+      const decoded = jwtDecode(response.data.token);
+      if(decoded.role === "canteen") navigate("/canteen/home");
+      else navigate("/");
+    }).catch((error) => {
+      console.log(error);
+      alert("Login Failed");
+    });
+  
+   }
+
+
   return (
     <div className="login-page-container">
-      {/* Left Section */}
       <div className="login-left">
         <div className="logo-container">
           <img
@@ -38,6 +67,8 @@ const LoginPage = () => {
               type="text"
               id="username"
               placeholder="Enter the username"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -47,10 +78,12 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 placeholder="Enter the password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
-          <button type="submit" className="login_button">
+          <button type="submit" className="login_button" onClick={handleSubmit}>
             Login
           </button>
         </form>

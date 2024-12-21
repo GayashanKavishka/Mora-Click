@@ -4,6 +4,7 @@ import Canteen_header from '../header/header'
 import Canteen_Footer from '../footer/footer'
 import './home.css'
 import Menu from '../menu/menu'
+import ProtectedCanteenRoute from '../../Auth/protectedCanteenRoutes'
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
 
   return (
     <div>
+      <ProtectedCanteenRoute/>
       <Canteen_header/>
       <div className = "he">
           <div className='mas'>
