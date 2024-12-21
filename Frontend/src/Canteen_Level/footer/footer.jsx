@@ -14,17 +14,6 @@ export default function Canteen_Footer() {
               </p>
             </div>
     
-            {/* Column 2: Quick Links */}
-            {/* <div className="footer-column">
-              <h3>Quick Links</h3>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Canteens</a></li>
-                <li><a href="#">Contact us</a></li>
-              </ul>
-            </div> */}
     
             {/* Column 3: Contact Info */}
             <div className="footer-column">

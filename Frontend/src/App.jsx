@@ -11,6 +11,7 @@ import GodaUda from './Pages/GodaUda';
 import StaffCanteen from './Pages/StaffCanteen';
 import CivilCanteen from './Pages/CivilCanteen';
 import Home from './Canteen_Level/Home/home';
+import Login from './Pages/Login';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/civil" element={<CivilCanteen/>} />
 
           {/*----------------------canteeen level----------------------*/}
+          <Route path="/login" element={<Login/>} />
           <Route path= "/canteen/home" element = {<Home/>} />
         </Routes>
       </main>
