@@ -12,6 +12,7 @@ import StaffCanteen from './Pages/StaffCanteen';
 import CivilCanteen from './Pages/CivilCanteen';
 import Home from './Canteen_Level/Home/home';
 import Login from './Pages/Login';
+import Menu from './Pages/Menu';
 
 function App() {
   return (
@@ -25,10 +26,12 @@ function App() {
           <Route path="/godauda" element={<GodaUda/>} />
           <Route path="/staff" element={<StaffCanteen/>} />
           <Route path="/civil" element={<CivilCanteen/>} />
+          <Route path="/menu" element={<Menu/>} />
 
           {/*----------------------canteeen level----------------------*/}
           <Route path="/login" element={<Login/>} />
           <Route path= "/canteen/home" element = {<Home/>} />
+
         </Routes>
       </main>
     </Router>
