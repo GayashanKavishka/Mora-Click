@@ -34,7 +34,8 @@
     justify-content: space-between; /* Evenly space out children */
     align-items: center; /* Align items vertically */
     height: 200px;
-    background-color: #d3d1cb;
+    background-color: #f1efe8;
+    box-shadow: 0 4px 8px rgba(3, 3, 3, 0.1);
     color: #2c3e50;
     font-size: 20px;
     font-weight: bold;
@@ -89,9 +90,17 @@
     padding-top: 10px;
     padding-bottom: 10px;
     width: 180px;
+    transition: 0.5s;
 
     
 }
+
+.boxs .available .available:hover
+{
+    color:#ecf0f1;
+    transition: 0.5s;
+}
+
 /* .imgage
 {
     margin-right: 300px;
