@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import './header.css';
 import logo from '../../assets/logo.jpg';
 import user_icon from '../../assets/user.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Canteen_header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -16,6 +19,11 @@ export default function Canteen_header() {
       setIsDropdownOpen(false);
     }
   };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
 
   useEffect(() => {
     document.addEventListener('click', closeDropdown);
@@ -50,7 +58,7 @@ export default function Canteen_header() {
             </div>
           )}
         </div>
-        <button className="login-button">Logout</button>
+        <button className="login-button" onClick={logout}>Logout</button>
       </div>
     </header>
   );
