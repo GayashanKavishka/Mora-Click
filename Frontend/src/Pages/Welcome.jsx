@@ -4,6 +4,7 @@ import main from "../assets/main.jpg"; // Main image
 import Food1Image from "../assets/food1.jpg"; // Food image 1
 import Food2Image from "../assets/food2.jpg"; // Food image 2
 import Food3Image from "../assets/food3.jpeg"; // Food image 3
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
@@ -31,17 +32,18 @@ export default function Welcome() {
       <section className="food-sections">
         <div className="food-category">
           <h2>Main Meals</h2>
-          <img src={Food1Image} alt="Main Meal" />
+          <Link to="/menu"><img src={Food1Image} alt="Main Meal" /></Link>
         </div>
         <div className="food-category">
           <h2>Beverages</h2>
-          <img src={Food2Image} alt="Beverages" />
+          <Link to="/menu"><img src={Food2Image} alt="Beverages" /></Link>
         </div>
         <div className="food-category">
           <h2>Short Eats</h2>
-          <img src={Food3Image} alt="Short Eats" />
+          <Link to="/menu"><img src={Food3Image} alt="Short Eats" /></Link>
         </div>
       </section>
+      
       <Footer/>
     </div>
   );

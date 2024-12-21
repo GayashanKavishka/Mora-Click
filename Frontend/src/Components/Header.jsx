@@ -9,7 +9,7 @@ export default function Header() {
       <div className="logo"><img src={logo} alt="logo" /></div>
       <nav>
         <Link to="/">Home</Link>
-        <a href="#">Menu</a>
+        <Link to="/menu">Menu</Link>
         <Link to="/about">About Us</Link>
 
         {/* Canteen Dropdown */}
