@@ -1,7 +1,8 @@
 import React from "react";
 import { useState  } from "react";
 import {useNavigate} from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
 import axios from "axios";
 import "./Login.css"; // Create a CSS file for styling
 import logo from "../assets/logo.png"; // Add your logo image here

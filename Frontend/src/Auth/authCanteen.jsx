@@ -1,4 +1,5 @@
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+
 
 function isCanteenAuthenticated() {
     const token = localStorage.getItem('token'); // Retrieve token
