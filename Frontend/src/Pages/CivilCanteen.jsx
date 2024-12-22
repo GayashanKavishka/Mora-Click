@@ -34,18 +34,21 @@ export default function CivilCanteen() {
             price: item.price,
             available: item.available,
             description: item.description || '',
+            image: item.image || '', // Include image URL
           })),
           shortEats: menu.short_eat.map(item => ({
             id: item._id,
             name: item.name,
             price: item.price,
             available: item.available,
+            image: item.image || '', // Include image URL
           })),
           beverages: menu.beverag.map(item => ({
             id: item._id,
             name: item.name,
             price: item.price,
             available: item.available,
+            image: item.image || '', // Include image URL
           })),
         };
 
@@ -82,6 +85,15 @@ export default function CivilCanteen() {
               <div className="food-items">
                 {items.map((food) => (
                   <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
+                    <img
+                      src={food.image}
+                      alt={food.name}
+                      className="food-image"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/default-image.jpg'; // Fallback image
+                      }}
+                    />
                     <h3 className="food-name">{food.name}</h3>
                     <p className="food-price">Rs. {food.price}</p>
                     <p className="food-availability">
