@@ -6,6 +6,7 @@ function isCanteenAuthenticated() {
 
     try {
         const decoded = jwtDecode(token); // Decode the token
+        console.log(decoded);
         if (!decoded.exp) return false;
 
         if(decoded.role !== "canteen") return false; // Check if the role is canteen

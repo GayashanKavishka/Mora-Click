@@ -3,8 +3,9 @@ import './header.css';
 import logo from '../../assets/logo.jpg';
 import user_icon from '../../assets/user.png';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export default function Canteen_header() {
+export default function Canteen_header({canteenName}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -25,6 +26,7 @@ export default function Canteen_header() {
     navigate('/login');
   }
 
+
   useEffect(() => {
     document.addEventListener('click', closeDropdown);
     return () => {
@@ -41,7 +43,7 @@ export default function Canteen_header() {
 
       {/* User Section */}
       <div className="user_section">
-        <h2 className="canteen-name">Canteen Name</h2>
+        <h2 className="canteen-name">{canteenName}</h2>
         <div className="user-icon-container" ref={dropdownRef}>
           <img
             src={user_icon}
