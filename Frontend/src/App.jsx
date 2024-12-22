@@ -13,6 +13,7 @@ import CivilCanteen from './Pages/CivilCanteen';
 import Home from './Canteen_Level/Home/home';
 import Login from './Pages/Login';
 import Menu from './Pages/Menu';
+import EditAccount from './Canteen_Level/account/account';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           {/*----------------------canteeen level----------------------*/}
           <Route path="/login" element={<Login/>} />
           <Route path= "/canteen/home" element = {<Home/>} />
+          <Route path="/canteen/account/:id" element={<EditAccount/>} />
 
         </Routes>
       </main>

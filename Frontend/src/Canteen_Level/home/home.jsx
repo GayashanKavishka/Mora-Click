@@ -37,7 +37,7 @@ const Home = () => {
   return (
     <div>
       <ProtectedCanteenRoute/>
-      <Canteen_header canteenName={canteenName}/>
+      <Canteen_header canteenName={canteenName} canteenId = {canteenid}/>
       <div className = "he" style={{backgroundImage: `url(${cover})`}}>
           <div className='mas'>
             <div><h3 className='h'>Cheack  your menu and update it before open the canteen </h3></div>

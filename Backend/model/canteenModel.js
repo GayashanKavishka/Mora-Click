@@ -6,6 +6,7 @@ const canteens = new mongoose.Schema({
     username:{type:String, required:true},
     password:{type:String, required:true},
     open:{type:Boolean, required:true, default:true},
+    cover:{type:String, required:true},
 })
 
 module.exports = mongoose.model.canteens ||mongoose.model('canteens', canteens);
