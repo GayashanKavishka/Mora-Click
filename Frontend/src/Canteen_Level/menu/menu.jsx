@@ -3,77 +3,9 @@ import { useState ,useEffect } from 'react'
 import './menu.css'
 import axios from 'axios'
 
-const Menu = () => {
+const Menu = ({canteenId}) => {
 
-//  const main = [
-//     {
-//         name: "Chicken Buriyani",
-//         price: "Rs. 250.00",
-//         available: true
-//     },
-//     {
-//         name: "Chicken Fried Rice",
-//         price: "Rs. 200.00",
-//         available: true
-//     },
-//     {
-//         name: "Chicken Noodles",
-//         price: "Rs. 200.00",
-//         available: false
-//     },
-//     {
-//         name: "Chicken Kottu",
-//         price: "Rs. 200.00",
-//         available: true
-//     }
-//  ]
 
-//  const short = [
-//     {
-//         name: "Chicken Roll",
-//         price: "Rs. 100.00",
-//         available: true
-//     },
-//     {
-//         name: "Vegetable Roll",
-//         price: "Rs. 100.00",
-//         available: true
-//     },
-//     {
-//         name: "Fish Bun",
-//         price: "Rs. 50.00",
-//         available: true
-//     },
-//     {
-//         name: "Fish Roll",
-//         price: "Rs. 100.00",
-//         available: false
-//     }
-//  ]
-
-//  const drinks =[
-//     {
-//         name: "Mango Juice",
-//         price: "Rs. 50.00",
-//         available: true
-//     },
-//     {
-//         name: "Papaya Juice",
-//         price: "Rs. 50.00",
-//         available: true
-//     },
-//     {
-//         name: "Orange Juice",
-//         price: "Rs. 50.00",
-//         available: true
-//     },
-//     {
-//         name: "Pineapple Juice",
-//         price: "Rs. 50.00",
-//         available: true
-//     }
-//  ]
- 
  const [main, setMain] = useState([]);
  const [short, setShort] = useState([]);
  const [drinks, setDrinks] = useState([]);
@@ -81,7 +13,7 @@ const Menu = () => {
     useEffect(() => {
         const fetchMenu = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef');
+                const response = await axios.get(`http://localhost:5000/menu/getmenu?canteen_id=${canteenId}`);
                 const menu = response.data.data[0];
                 setMain(menu.main);
                 setShort(menu.short_eat);
@@ -119,6 +51,9 @@ return (
                     </div>
                 </div>
             ))}
+            <div className='addButton'>
+                <button className='add'> + Add main meals</button>
+            </div>
             </div>
             <div className="line">
                 <hr/>
@@ -144,6 +79,9 @@ return (
                         </div>
                     </div>
                 ))}
+                <div className='addButton'>
+                <button className='add'> + Add short eats</button>
+                </div>
         </div>
         <div className="line">
                 <hr/>
@@ -168,6 +106,9 @@ return (
                     </div>
                 </div>
             ))}
+            <div className='addButton'>
+                <button className='add'> + Add beverage</button>
+            </div>
 
         </div>
         <div className="line">
