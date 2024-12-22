@@ -26,6 +26,7 @@ export default function GodaUda() {
       try {
         const response = await axios.get(MENU_API_URL);
         const menu = response.data.data[0];
+
         const reshapedData = {
           mainMeals: menu.main.map(item => ({
             id: item._id,
@@ -33,20 +34,24 @@ export default function GodaUda() {
             price: item.price,
             available: item.available,
             description: item.description || '',
+            image: item.image || '', // Include image URL
           })),
           shortEats: menu.short_eat.map(item => ({
             id: item._id,
             name: item.name,
             price: item.price,
             available: item.available,
+            image: item.image || '', // Include image URL
           })),
           beverages: menu.beverag.map(item => ({
             id: item._id,
             name: item.name,
             price: item.price,
             available: item.available,
+            image: item.image || '', // Include image URL
           })),
         };
+
         setFoodData(reshapedData);
       } catch (error) {
         console.error('Error fetching menu:', error);
@@ -66,10 +71,12 @@ export default function GodaUda() {
           <p>Enjoy our variety of delicious meals, refreshing beverages, and tasty short eats.</p>
         </div>
       </section>
+
       <div className={`canteen-status ${isCanteenOpen ? 'open' : 'closed'}`}>
         <h2>{isCanteenOpen ? 'Canteen is Open' : 'Canteen is Closed'}</h2>
         <p>{isCanteenOpen ? 'Come in and enjoy your meal!' : 'Sorry, we are currently closed. Please visit later!'}</p>
       </div>
+
       {isCanteenOpen && foodData && (
         <div className="categories-container">
           {Object.entries(foodData).map(([category, items]) => (
@@ -78,6 +85,12 @@ export default function GodaUda() {
               <div className="food-items">
                 {items.map((food) => (
                   <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
+                    <img
+                      src={food.image}
+                      alt={food.name}
+                      className="food-image"
+                      onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
+                    />
                     <h3 className="food-name">{food.name}</h3>
                     <p className="food-price">Rs. {food.price}</p>
                     <p className="food-availability">
@@ -91,6 +104,7 @@ export default function GodaUda() {
           ))}
         </div>
       )}
+
       <Footer />
     </>
   );

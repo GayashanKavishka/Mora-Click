@@ -14,6 +14,7 @@ const getcanteen = (_id)=>{
 };
 
 
+
 const updatecanteen =(canteen)=>
 {
     return new Promise((resolve,reject)=>{
@@ -25,7 +26,26 @@ const updatecanteen =(canteen)=>
     });
 };
 
+
+
+const updateCanteenStatus = (_id) => {
+    return new Promise((resolve, reject) => {
+        const objectId = new mongo.Types.ObjectId(_id);
+        canteens.updateOne({_id: objectId}, {open: true}).then((data) => {
+            if (data.nModified > 0) {
+                return resolve({status: 200, message: 'Canteen status updated to open'});
+            } else {
+                return reject({status: 404, message: 'Canteen not found'});
+            }
+        }).catch((err) => {
+            return reject(err);
+        });
+    });
+};
+
+
 module.exports={
     getcanteen,
-    updatecanteen
+    updatecanteen,
+    updateCanteenStatus
 };
