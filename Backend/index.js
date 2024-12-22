@@ -8,9 +8,14 @@ const db = require('./config/db');
 const users = require('./model/userModel');
 
 const app = express();
+const bodyParser = require('body-parser');
 
+
+app.use(bodyParser.json({ limit: '10mb' })); // Adjust the limit as needed
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
 app.use(express.json());
+
 
 // const func = async (users) => {
 //      const a = await users.find({username:"john.doe"}).then((data) => {

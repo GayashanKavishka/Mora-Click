@@ -3,8 +3,9 @@ import './header.css';
 import logo from '../../assets/logo.jpg';
 import user_icon from '../../assets/user.png';
 import { useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-export default function Canteen_header({canteenName}) {
+export default function Canteen_header({canteenName, canteenId}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -41,7 +42,7 @@ export default function Canteen_header({canteenName}) {
 
       {/* User Section */}
       <div className="user_section">
-        <h2 className="canteen-name">{canteenName}</h2>
+        <h2 className="canteen-name"><span style={{color :"yellow"}}>Logged as:</span> {canteenName}</h2>
         <div className="user-icon-container" ref={dropdownRef}>
           <img
             src={user_icon}
@@ -52,8 +53,8 @@ export default function Canteen_header({canteenName}) {
           {isDropdownOpen && (
             <div className="dropdown-menu">
               <ul>
-                <li>Account Details</li>
-                <li>About Us</li>
+                <li><Link to = { `/canteen/account/${canteenId}`}>Account Details</Link></li>
+                <li><Link to = "/about">About Us</Link></li>
               </ul>
             </div>
           )}

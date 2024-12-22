@@ -15,6 +15,19 @@ const getcanteen = (_id)=>{
 
 
 
+const updatecanteen =(canteen)=>
+{
+    return new Promise((resolve,reject)=>{
+        canteens.updateOne({_id:canteen._id},canteen).then((data)=>{
+            return resolve({status:200,data});
+        }).catch((err)=>{
+            return reject(err);
+        })
+    });
+};
+
+
+
 const updateCanteenStatus = (_id) => {
     return new Promise((resolve, reject) => {
         const objectId = new mongo.Types.ObjectId(_id);
@@ -33,6 +46,6 @@ const updateCanteenStatus = (_id) => {
 
 module.exports={
     getcanteen,
-    
+    updatecanteen,
     updateCanteenStatus
 };

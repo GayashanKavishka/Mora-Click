@@ -165,3 +165,8 @@
     background-color: #f1c40f;
     color: #2c3e50;
 }
+
+.imgage img
+{
+    border-radius: 50%;
+}

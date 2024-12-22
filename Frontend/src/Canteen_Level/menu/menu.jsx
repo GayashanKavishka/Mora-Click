@@ -2,6 +2,8 @@ import React from 'react'
 import { useState ,useEffect } from 'react'
 import './menu.css'
 import axios from 'axios'
+import placeholder from "../../assets/placeholderimage.png"
+
 
 const Menu = ({canteenId}) => {
 
@@ -36,7 +38,7 @@ return (
             {main.map((item, index) => (
                 <div className='boxs' key={index}>
                     <div className='details'>
-                        <div className="imgage"><h1>image</h1></div>
+                        <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
                         <div className='name'><h2>{item.name}</h2></div>
                         <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
@@ -64,7 +66,7 @@ return (
                 {short.map((item, index) => (
                     <div className='boxs' key={index}>
                         <div className='details'>
-                            <div className="imgage"><h1>image</h1></div>
+                            <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
                             <div className='name'><h2>{item.name}</h2></div>
                             <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                             <div className='available'>
@@ -91,7 +93,7 @@ return (
             {drinks.map((item, index) => (
                 <div className='boxs' key={index}>
                     <div className='details'>
-                        <div className="imgage"><h1>image</h1></div>
+                        <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
                         <div className='name'><h2>{item.name}</h2></div>
                         <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
