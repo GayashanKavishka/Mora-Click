@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const {getcanteen} = require('../controllers/canteencontroll.js');
+
+const { getcanteen  , updateCanteenStatus } = require('../controllers/canteencontroll.js');
+
 
 router.get('/getcanteen', async (req, res) => {
     try {
@@ -13,6 +15,23 @@ router.get('/getcanteen', async (req, res) => {
     }
 }
 );
+
+    
+
+
+router.put('/updatecanteenstatus',)
+async (req, res) => {
+    try {
+        const _id = req.query._id;
+        const newStatus = req.body.status;
+        const result = await updateCanteenStatus(_id, newStatus);
+        if(result.status === 200) return res.status(200).json({ message: 'Canteen status updated successfully' });
+        if(result.status === 404) return res.status(404).json({ message: 'Canteen not found' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "ERROR" });
+    }
+}
 
 module.exports = router;
 

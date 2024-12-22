@@ -40,7 +40,7 @@ const Home = () => {
       <Canteen_header canteenName={canteenName}/>
       <div className = "he" style={{backgroundImage: `url(${cover})`}}>
           <div className='mas'>
-            <div><h3 className='h'>Cheack  your menu and update it before open the canteen </h3></div>
+            <div><h3 className='h'>Check  your menu and update it before open the canteen </h3></div>
             <div className='box'>
                 <div style={{marginTop:"6px"}}><h2 className = "tag" >Set your canteen : </h2></div>
                 <button className='buttonOpenClose'
