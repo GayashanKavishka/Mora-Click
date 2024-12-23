@@ -32,7 +32,7 @@ function App() {
 
           {/*----------------------canteeen level----------------------*/}
           <Route path="/login" element={<Login/>} />
-          <Route path= "/canteen/home" element = {<Home/>} />
+          <Route path= "/canteen/Home" element = {<ProtectedCanteenRoute><Home/></ProtectedCanteenRoute>} />
           <Route path="/canteen/account/:id" element={<ProtectedCanteenRoute><EditAccount/></ProtectedCanteenRoute>} />
 
         </Routes>
