@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 
-const { getcanteen  , updateCanteenStatus,updatecanteen } = require('../controllers/canteencontroll.js');
+const { getcanteen  , updateCanteenStatus,updatecanteen ,} = require('../controllers/canteencontroll.js');
 
 
 
@@ -48,6 +48,8 @@ async (req, res) => {
         res.status(400).json({ error: "ERROR" });
     }
 }
+
+
 
 
 module.exports = router;
