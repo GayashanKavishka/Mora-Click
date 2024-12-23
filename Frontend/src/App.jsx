@@ -10,7 +10,7 @@ import GodaYata from './Pages/GodaYata';
 import GodaUda from './Pages/GodaUda';
 import StaffCanteen from './Pages/StaffCanteen';
 import CivilCanteen from './Pages/CivilCanteen';
-import Home from './Canteen_Level/Home/home';
+import Home from './Canteen_Level/home/home';
 import Login from './Pages/Login';
 import Menu from './Pages/Menu';
 import EditAccount from './Canteen_Level/account/account';
