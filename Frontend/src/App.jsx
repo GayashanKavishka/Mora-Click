@@ -10,10 +10,11 @@ import GodaYata from './Pages/GodaYata';
 import GodaUda from './Pages/GodaUda';
 import StaffCanteen from './Pages/StaffCanteen';
 import CivilCanteen from './Pages/CivilCanteen';
-import Home from './Canteen_Level/home/home';
+import Home from './Canteen_Level/Home/home';
 import Login from './Pages/Login';
 import Menu from './Pages/Menu';
 import EditAccount from './Canteen_Level/account/account';
+import ProtectedCanteenRoute from './Auth/protectedCanteenRoutes';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           {/*----------------------canteeen level----------------------*/}
           <Route path="/login" element={<Login/>} />
           <Route path= "/canteen/home" element = {<Home/>} />
-          <Route path="/canteen/account/:id" element={<EditAccount/>} />
+          <Route path="/canteen/account/:id" element={<ProtectedCanteenRoute><EditAccount/></ProtectedCanteenRoute>} />
 
         </Routes>
       </main>

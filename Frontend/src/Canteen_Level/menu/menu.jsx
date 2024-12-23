@@ -3,6 +3,7 @@ import { useState ,useEffect } from 'react'
 import './menu.css'
 import axios from 'axios'
 import placeholder from "../../assets/placeholderimage.png"
+import Additem from '../additem/additem'
 
 
 const Menu = ({canteenId}) => {
@@ -11,6 +12,8 @@ const Menu = ({canteenId}) => {
  const [main, setMain] = useState([]);
  const [short, setShort] = useState([]);
  const [drinks, setDrinks] = useState([]);
+
+ const [trigger, setTrigger] = useState(false);
 
     useEffect(() => {
         const fetchMenu = async () => {
@@ -29,6 +32,49 @@ const Menu = ({canteenId}) => {
     }, []);
 
 
+ const AddItem = () => {
+        setTrigger(true);
+    }  
+ 
+const handleToggleDrinks = (Item) => {
+    setDrinks(
+        drinks.map((item) => {
+            if (item.name === Item.name) {
+                return { ...item, available: !item.available };
+            }
+            return item; 
+        })
+    );
+};
+
+const handleToggleShort = (Item) => {
+    setShort(
+        short.map((item) => {
+            if (item.name === Item.name) {
+                return { ...item, available: !item.available };
+            }
+            return item; 
+        })
+    );
+};
+
+const handleToggleMain = (Item) => {
+    setMain(
+        main.map((item) => {
+            if (item.name === Item.name) {
+                return { ...item, available: !item.available };
+            }
+            return item; 
+        })
+    );
+};
+
+
+       
+    
+    
+
+
 
 
 return (
@@ -42,9 +88,23 @@ return (
                         <div className='name'><h2>{item.name}</h2></div>
                         <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
-                            <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
+                            {/* <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
                                 {item.available ? "Available" : "Unavailable"}
-                            </button>
+                            </button> */}
+                            <div className="toggle-switch">
+                                <input
+                                type="checkbox"
+                                id ={`toggle-${item.name}`}
+                                className="toggle-input"
+                                checked={item.available}
+                                onChange={() => handleToggleMain(item)}
+                                />
+                                <label htmlFor={`toggle-${item.name}`} className="toggle-label">
+                                <span className={`toggle-slider ${item.available ? 'on' : 'off'}`}></span>
+                                </label>
+                            </div>
+                            <br></br>
+                            <lable className = "t" style = {{textTransform:'none'}}>{item.available ? "Available":"Unavailable"}</lable>
                         </div>
                     </div>
                     <div className='control-sec'>
@@ -60,7 +120,7 @@ return (
             <div className="line">
                 <hr/>
             </div>
-            {/* <div cl</div>assName='short'></div> */}
+            {/* <div cl</div>assN</div>ame='short'></div> */}
         <div className='short'>
             <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold",textDecoration: "underline"}} >Short Eats</h1></div>
                 {short.map((item, index) => (
@@ -70,9 +130,23 @@ return (
                             <div className='name'><h2>{item.name}</h2></div>
                             <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                             <div className='available'>
-                                <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
+                                {/* <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
                                     {item.available ? "Available" : "Unavailable"}
-                                </button>
+                                </button> */}
+                                <div className="toggle-switch">
+                                <input
+                                type="checkbox"
+                                id ={`toggle-${item.name}`}
+                                className="toggle-input"
+                                checked={item.available}
+                                onChange={() => handleToggleShort(item)}
+                                />
+                                <label htmlFor={`toggle-${item.name}`} className="toggle-label">
+                                <span className={`toggle-slider ${item.available ? 'on' : 'off'}`}></span>
+                                </label>
+                                </div>
+                                <br></br>
+                                <lable className = "t" style = {{textTransform:'none'}}>{item.available ? "Available":"Unavailable"}</lable>
                             </div>
                         </div>
                         <div className='control-sec'>
@@ -97,9 +171,21 @@ return (
                         <div className='name'><h2>{item.name}</h2></div>
                         <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
-                            <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
-                                {item.available ? "Available" : "Unavailable"}
-                            </button>
+                            <div className="toggle-switch">
+                                <input
+                                type="checkbox"
+                                id ={`toggle-${item.name}`}
+                                className="toggle-input"
+                                checked={item.available}
+                                onChange={() => handleToggleDrinks(item)}
+                                />
+                                <label htmlFor={`toggle-${item.name}`} className="toggle-label">
+                                <span className={`toggle-slider ${item.available ? 'on' : 'off'}`}></span>
+                                </label>
+                            </div>
+                            <br></br>
+                            <lable className = "t" style = {{textTransform:'none'}}>{item.available ? "Available":"Unavailable"}</lable>
+                
                         </div>
                     </div>
                     <div className='control-sec'>
@@ -109,8 +195,9 @@ return (
                 </div>
             ))}
             <div className='addButton'>
-                <button className='add'> + Add beverage</button>
+                <button className='add' onClick={AddItem}> + Add beverage</button>
             </div>
+            <Additem trigger = {trigger}  setTrigger ={setTrigger}  />
 
         </div>
         <div className="line">
