@@ -36,7 +36,6 @@ const Home = () => {
 
   return (
     <div>
-      <ProtectedCanteenRoute/>
       <Canteen_header   canteenName={canteenName} canteenId = {canteenid}/>
       <div className = "he" style={{backgroundImage: `url(${cover})`}}>
           <div className='mas'>

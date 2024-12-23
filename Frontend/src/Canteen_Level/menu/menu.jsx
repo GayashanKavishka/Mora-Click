@@ -15,6 +15,27 @@ const Menu = ({canteenId}) => {
 
  const [trigger, setTrigger] = useState(false);
 
+ const[mainTrigger, setMainTrigger] = useState(false);
+ const[shortTrigger, setShortTrigger] = useState(false);
+ const[drinksTrigger, setDrinksTrigger] = useState(false);
+
+
+ const AddMainItem =()=>
+ {
+        setMainTrigger(true);
+ }
+
+const AddShortItem =()=>
+{
+    setShortTrigger(true);
+}
+
+const AddDrinksItem =()=>
+{
+    setDrinksTrigger(true);
+}
+
+
     useEffect(() => {
         const fetchMenu = async () => {
             try {
@@ -22,7 +43,7 @@ const Menu = ({canteenId}) => {
                 const menu = response.data.data[0];
                 setMain(menu.main);
                 setShort(menu.short_eat);
-                setDrinks(menu.beverag);
+                setDrinks(menu.beverage);
             } catch (error) {
                 console.error('Error fetching menu:', error);
             }
@@ -45,6 +66,18 @@ const handleToggleDrinks = (Item) => {
             return item; 
         })
     );
+
+    const it = drinks.find((item) => item.name === Item.name); 
+    console.log(it.name);
+    
+    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=beverage&meal_name=${it.name}`, {
+    })
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 };
 
 const handleToggleShort = (Item) => {
@@ -56,9 +89,21 @@ const handleToggleShort = (Item) => {
             return item; 
         })
     );
+
+    const it = short.find((item) => item.name === Item.name); 
+    console.log(it.name);
+    
+    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=short_eat&meal_name=${it.name}`, {
+    })
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 };
 
-const handleToggleMain = (Item) => {
+const handleToggleMain =(Item) => {
     setMain(
         main.map((item) => {
             if (item.name === Item.name) {
@@ -67,6 +112,21 @@ const handleToggleMain = (Item) => {
             return item; 
         })
     );
+
+    const it = main.find((item) => item.name === Item.name); 
+    console.log(it.name);
+    
+    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=main&meal_name=${it.name}`, {
+    })
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+    
 };
 
 
@@ -114,8 +174,9 @@ return (
                 </div>
             ))}
             <div className='addButton'>
-                <button className='add'> + Add main meals</button>
+                <button className='add' onClick={AddMainItem}> + Add main meals</button>
             </div>
+            <Additem trigger = {mainTrigger} type = {"main"} canteenId={canteenId} setTrigger ={setMainTrigger}  />
             </div>
             <div className="line">
                 <hr/>
@@ -156,8 +217,9 @@ return (
                     </div>
                 ))}
                 <div className='addButton'>
-                <button className='add'> + Add short eats</button>
+                <button className='add' onClick={AddShortItem}> + Add short eats</button>
                 </div>
+                <Additem trigger = {shortTrigger} type = {"short_eat"} canteenId={canteenId} setTrigger ={setShortTrigger}  />
         </div>
         <div className="line">
                 <hr/>
@@ -195,9 +257,9 @@ return (
                 </div>
             ))}
             <div className='addButton'>
-                <button className='add' onClick={AddItem}> + Add beverage</button>
+                <button className='add' onClick={AddDrinksItem}> + Add beverage</button>
             </div>
-            <Additem trigger = {trigger}  setTrigger ={setTrigger}  />
+            <Additem trigger = {drinksTrigger} type = {"beverage"} canteenId={canteenId} setTrigger ={setDrinksTrigger}  />
 
         </div>
         <div className="line">
