@@ -30,16 +30,23 @@ const Additem = ({trigger,setTrigger,type,canteenId}) => {
   const AddItem = (e) => {
     e.preventDefault();
     console.log(data);
-    axios.put(`http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, data)
-    .then((res) => {
-      console.log(res);
-      setTrigger(false);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    if(type ==='specials'){
+      //Logic to add special items
+    }
+    else{
+      axios.put(`http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, data)
+      .then((res) => {
+        console.log(res);
+        setTrigger(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
     
   }
+
+
 
 
   return (trigger) ?(

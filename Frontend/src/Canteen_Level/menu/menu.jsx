@@ -18,6 +18,36 @@ const Menu = ({canteenId}) => {
  const[mainTrigger, setMainTrigger] = useState(false);
  const[shortTrigger, setShortTrigger] = useState(false);
  const[drinksTrigger, setDrinksTrigger] = useState(false);
+ const[specialTrigger, setSpecialTrigger] = useState(false);
+
+ const [special, setSpecial] = useState([]);
+
+
+//  const special = [
+//     {
+//         name:"chicken buriyani",    
+//         price:200,
+//         available:true,
+//         description:"chicken buriyani",
+//     },
+
+//  ]
+
+ const handleToggleSpecial = (Item) =>{
+        special.map((item) => {
+            if (item.name === Item.name) {
+                 item.available = !Item.available;
+            }
+        }
+    );
+
+ }
+
+ const AddSpecialItem =()=>{
+    setSpecialTrigger(true);
+ }
+
+
 
 
  const AddMainItem =()=>
@@ -35,22 +65,39 @@ const AddDrinksItem =()=>
     setDrinksTrigger(true);
 }
 
+const fetchMenu = async () => {
+    try {
+        const response = await axios.get(`http://localhost:5000/menu/getmenu?canteen_id=${canteenId}`);
+        const menu = response.data.data[0];
+        setMain(menu.main);
+        console.log(menu.main);
+        setShort(menu.short_eat);
+        setDrinks(menu.beverage);
+    } catch (error) {
+        console.error('Error fetching menu:', error);
+    }
+};
+
+
+const fetchSpecial = async () => {
+    try {
+        const response = await axios.get(`http://localhost:5000/special/getItembyId?canteen_id=${canteenId}`);
+        const spec = response.data.data;
+        console.log(spec);
+        setSpecial(spec);
+        
+    }
+    catch (error) {
+        console.error('Error fetching special:', error);
+    }
+}
+
 
     useEffect(() => {
-        const fetchMenu = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5000/menu/getmenu?canteen_id=${canteenId}`);
-                const menu = response.data.data[0];
-                setMain(menu.main);
-                setShort(menu.short_eat);
-                setDrinks(menu.beverage);
-            } catch (error) {
-                console.error('Error fetching menu:', error);
-            }
-        };
-
         fetchMenu();
+        fetchSpecial();
     }, []);
+
 
 
  const AddItem = () => {
@@ -191,9 +238,6 @@ return (
                             <div className='name'><h2>{item.name}</h2></div>
                             <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
                             <div className='available'>
-                                {/* <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
-                                    {item.available ? "Available" : "Unavailable"}
-                                </button> */}
                                 <div className="toggle-switch">
                                 <input
                                 type="checkbox"
@@ -265,7 +309,47 @@ return (
         <div className="line">
                 <hr/>
         </div>
-    </div>
+        <div className='main-meal'>
+        <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold", textDecoration: "underline"}}>Today's Specials</h1></div>
+            {special.map((item, index) => (
+                <div className='boxs' key={index}>
+                    <div className='details'>
+                        <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
+                        <div className='name'><h2>{item.name}</h2></div>
+                        <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
+                        <div className='available'>
+                            {/* <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
+                                {item.available ? "Available" : "Unavailable"}
+                            </button> */}
+                            <div className="toggle-switch">
+                                <input
+                                type="checkbox"
+                                id ={`toggle-${item.name}`}
+                                className="toggle-input"
+                                checked={item.available}
+                                onChange={() =>  handleToggleSpecial(item)}
+                                />
+                                <label htmlFor={`toggle-${item.name}`} className="toggle-label">
+                                <span className={`toggle-slider ${item.available ? 'on' : 'off'}`}></span>
+                                </label>
+                            </div>
+                            <br></br>
+                            <lable className = "t" style = {{textTransform:'none'}}>{item.available ? "Available":"Unavailable"}</lable>
+                        </div>
+                    </div>
+                    <div className='control-sec'>
+                        <button className='edit'>Edit</button>
+                        <button className='delete'>Delete</button>
+                    </div>
+                </div>
+            ))}
+            <div className='addButton'>
+                <button className='add' onClick={AddSpecialItem}> + Add Special Item</button>
+
+            </div>
+            <Additem trigger = {specialTrigger} type = {"specials"} canteenId={canteenId} setTrigger ={setSpecialTrigger} />
+        </div>
+        </div>
   )
 }
 
