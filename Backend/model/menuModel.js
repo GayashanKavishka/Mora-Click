@@ -8,21 +8,21 @@ const menus = new mongoose.Schema({
     main:[{
         name:{type:String, required:true},
         price:{type:Number, required:true},
-        available:{type:Boolean , default:true},
+        available:{type:Boolean , default:false},
         time_be_ua:{type:String , default:null},
         image : {type:String}
     }],
     short_eat:[{
         name:{type:String, required:true},
         price:{type:Number, required:true},
-        available:{type:Boolean,  default:true},
+        available:{type:Boolean,  default:false},
         time_be_ua:{type:String, default:null},
         image : {type:String}
     }],
     beverage:[{
         name:{type:String, required:true},
         price:{type:Number, required:true},
-        available:{type:Boolean,  default:true},
+        available:{type:Boolean,  default:false},
         time_be_ua:{type:String,  default:null},
         image : {type:String}
     }]
