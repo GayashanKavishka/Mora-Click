@@ -6,9 +6,11 @@ import Footer from '../Components/Footer';
 
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f1';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9f1';
+const SPECIAL_API_URL = 'http://localhost:5000/special/getItembyId?canteen_id=6761446355efca0108f8d9f1';
 
 export default function CivilCanteen() {
   const [foodData, setFoodData] = useState(null);
+  const [specialItems, setSpecialItems] = useState([]);
   const [isCanteenOpen, setIsCanteenOpen] = useState(true);
 
   useEffect(() => {
@@ -58,8 +60,26 @@ export default function CivilCanteen() {
       }
     };
 
+    const fetchSpecialItems = async () => {
+      try {
+        const response = await axios.get(SPECIAL_API_URL);
+        const specialData = response.data.data.map(item => ({
+          id: item._id,
+          name: item.name,
+          price: item.price,
+          description: item.description || '',
+          image: item.image || '',
+          available: item.available,
+        }));
+        setSpecialItems(specialData);
+      } catch (error) {
+        console.error('Error fetching special items:', error);
+      }
+    };
+
     fetchCanteenStatus();
     fetchMenu();
+    fetchSpecialItems();
   }, []);
 
   return (
@@ -77,22 +97,19 @@ export default function CivilCanteen() {
         <p>{isCanteenOpen ? 'Join us for a delightful meal!' : 'Please visit us during our open hours.'}</p>
       </div>
 
-      {isCanteenOpen && foodData && (
+      {isCanteenOpen && (
         <div className="categories-container">
-          {Object.entries(foodData).map(([category, items]) => (
-            <div key={category} className="category">
-              <h2 className="category-title">{category.replace(/([A-Z])/g, ' $1')}</h2>
+          {specialItems.length > 0 && (
+            <div className="category">
+              <h2 className="category-title">Special Items</h2>
               <div className="food-items">
-                {items.map((food) => (
+                {specialItems.map((food) => (
                   <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
                     <img
                       src={food.image}
                       alt={food.name}
                       className="food-image"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = '/default-image.jpg'; // Fallback image
-                      }}
+                      onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
                     />
                     <h3 className="food-name">{food.name}</h3>
                     <p className="food-price">Rs. {food.price}</p>
@@ -104,7 +121,32 @@ export default function CivilCanteen() {
                 ))}
               </div>
             </div>
-          ))}
+          )}
+
+          {foodData &&
+            Object.entries(foodData).map(([category, items]) => (
+              <div key={category} className="category">
+                <h2 className="category-title">{category.replace(/([A-Z])/g, ' $1')}</h2>
+                <div className="food-items">
+                  {items.map((food) => (
+                    <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
+                      <img
+                        src={food.image}
+                        alt={food.name}
+                        className="food-image"
+                        onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
+                      />
+                      <h3 className="food-name">{food.name}</h3>
+                      <p className="food-price">Rs. {food.price}</p>
+                      <p className="food-availability">
+                        {food.available ? 'Available' : 'Not Available'}
+                      </p>
+                      {food.description && <p className="food-description">{food.description}</p>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
         </div>
       )}
 
