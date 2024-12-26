@@ -43,7 +43,7 @@ export default function GodaYata() {
             available: item.available,
             image: item.image || '', // Include image URL
           })),
-          beverages: menu.beverag.map(item => ({
+          beverages: menu.beverage.map(item => ({
             id: item._id,
             name: item.name,
             price: item.price,
