@@ -3,6 +3,7 @@ import "./Menu.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import axios from "axios";
+import { use } from "react";
 
 // Define canteen IDs for fetching menu data
 // const canteenIds = [
@@ -104,6 +105,7 @@ const canteenname = (canteen_Id)=>
   
       setMenuData({ main: mainMeals, shortEat: shortEats, beverage: beverages });
       setLoading(false);
+      console.log("Menu data:", menuData);
     } catch (error) {
       console.error("Error fetching menu data:", error);
       setError("There was an issue fetching the menu data. Please try again later.");
@@ -112,39 +114,52 @@ const canteenname = (canteen_Id)=>
   };
   
   
+  useEffect(() => {
+    const fetchIds = async () => {
+       GetCanteenIds(); 
+    };
+    fetchIds();
+  }, []);
+  
+  useEffect(() => {
+    if (canteenIds.length > 0) {
+      fetchMenuData(); 
+    }
+  }, [canteenIds]);
+
   // useEffect(() => {
+     
   //   const fetchIds = async () => {
-  //     try {
-  //        await GetCanteenIds();
-  //     } catch (error) {
-  //       console.error("Error fetching canteen data:", error);
+  //     await GetCanteenIds();
+  //     if(canteenIds.length > 0)
+  //     {
+  //       fetchMenuData();
   //     }
   //   };
-
-  //   fetchIds();
-  //   fetchMenuData();
-  //   console.log("hello",menuData);
-  //   // console.log("hello",menuData);
+  //   fetchIds()
+    
+  // }, []);
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await GetCanteenIds(); // Wait for canteen IDs to be fetched
+  //     fetchMenuData(); // Fetch menu data only after canteen IDs are ready
+  //   };
+  
+  //   fetchData();
   // }, []);
 
-  useEffect(() => {
-    const fetchIdsAndMenu = async () => {
-      try {
-        // Fetch the canteen IDs first
-        await GetCanteenIds();
-        
-        // After fetching IDs, ensure the menu data is fetched
-        if (canteenIds.length > 0) {
-          await fetchMenuData();
-        }
-      } catch (error) {
-        console.error("Error during fetching process:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await GetCanteenIds();
+  //     if (canteenIds.length > 0) {
+  //       fetchMenuData();
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   
-    fetchIdsAndMenu();
-  }, [canteenIds]);
-  
+
 
   if (loading) {
     return <p>Loading menu items...</p>;
@@ -180,7 +195,7 @@ const canteenname = (canteen_Id)=>
                 <h3 className="item-name">{item.name}</h3>
                 <p className="item-price">Rs. {item.price}</p>
                 <p className="item-description">{item.description}</p>
-                <p className="item-canteen">Available at:{canteenname(item.canteen_id)} </p>
+                <p className="item-canteen">Available at: {canteenname(item.canteen_id)} </p>
               </div>
             ))}
           </div>
