@@ -14,6 +14,17 @@ const getcanteen = (_id)=>{
 };
 
 
+const getAllCanteens = () => {
+    return new Promise((resolve, reject) => {
+        canteens.find({}, {name:1,_id:1}).then((data) => {
+            return resolve({status: 200, data});
+        }).catch((err) => {
+            return reject(err);
+        });
+    });
+};
+
+
 
 const updatecanteen =(canteen)=>
 {
@@ -50,5 +61,6 @@ const updateCanteenStatus = (_id) => {
 module.exports={
     getcanteen,
     updatecanteen,
-    updateCanteenStatus
+    updateCanteenStatus,
+    getAllCanteens
 };
