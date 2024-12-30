@@ -15,7 +15,12 @@ import Login from './Pages/Login';
 import Menu from './Pages/Menu';
 import EditAccount from './Canteen_Level/account/account';
 import ProtectedCanteenRoute from './Auth/protectedCanteenRoutes';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 function App() {

@@ -1,19 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import './Welcome.css';
-import main from "../assets/main.jpg"; // Main image
-import Food1Image from "../assets/food1.jpg"; // Food image 1
-import Food2Image from "../assets/food2.jpg"; // Food image 2
-import Food3Image from "../assets/food3.jpeg"; // Food image 3
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
+import { Carousel } from 'react-bootstrap'; // Import Carousel from react-bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+
+import main from "../assets/main.jpg";
+import Food1Image from "../assets/food 1.jpg";
+import Food2Image from "../assets/food 2.png";
+import Food3Image from "../assets/food 3.jpg";
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 export default function Welcome() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleContactUsClick = () => {
-    navigate('/contact'); // Navigate to the Contact Us page
+    navigate('/contact');
   };
 
   return (
@@ -35,22 +38,34 @@ export default function Welcome() {
         </div>
       </section>
 
-      {/* Food Sections */}
-      <section className="food-sections">
-        <div className="food-category">
-          <h2>Main Meals</h2>
-          <Link to="/menu"><img src={Food1Image} alt="Main Meal" /></Link>
-        </div>
-        <div className="food-category">
-          <h2>Beverages</h2>
-          <Link to="/menu"><img src={Food2Image} alt="Beverages" /></Link>
-        </div>
-        <div className="food-category">
-          <h2>Short Eats</h2>
-          <Link to="/menu"><img src={Food3Image} alt="Short Eats" /></Link>
-        </div>
+      {/* Food Carousel Section */}
+      <section className="food-carousel">
+        <h2>Our Menu</h2>
+        <Carousel>
+          <Carousel.Item>
+            <Link to="/menu"><img className="d-block w-100" src={Food1Image} alt="Main Meals" /></Link>
+            <Carousel.Caption>
+              <h3>Main Meals</h3>
+              <p>Delicious main courses crafted for every taste!</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Link to="/menu"><img className="d-block w-100" src={Food2Image} alt="Beverages" /></Link>
+            <Carousel.Caption>
+              <h3>Beverages</h3>
+              <p>Refreshing drinks to complement your meal.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Link to="/menu"><img className="d-block w-100" src={Food3Image} alt="Short Eats" /></Link>
+            <Carousel.Caption>
+              <h3>Short Eats</h3>
+              <p>Perfect snacks for a quick bite!</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
       </section>
-      
+
       <Footer />
     </div>
   );
