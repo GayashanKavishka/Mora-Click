@@ -17,7 +17,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 50px 80px;
-  background-image: url("../assets/bg.jpg"); /* Path to your background image */
+  background-image: url("../assets/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -32,13 +32,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
 .welcomehero .content,
 .welcomehero .hero-image {
-  position: relative; /* Content above overlay */
+  position: relative;
   z-index: 2;
 }
 
@@ -86,41 +86,73 @@ body {
   animation: zoomIn 1s ease-in-out;
 }
 
-/* Food Sections */
-.food-sections {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
+/* Food Carousel Section */
+.food-carousel {
   padding: 40px 20px;
   background-color: #f7f8fc;
-}
-
-.food-category {
   text-align: center;
-  max-width: 250px;
 }
 
-.food-category h2 {
-  margin-bottom: 15px;
-  font-size: 1.5rem;
+.food-carousel h2 {
+  font-size: 3rem; /* Increase font size for modern, bold appearance */
+  margin-bottom: 30px; /* More spacing for balance */
   color: #2c3e50;
+  font-weight: 700; /* Bold the text */
+  letter-spacing: 2px; /* Increased letter spacing for more modern look */
+  text-transform: uppercase; /* Transform text to uppercase for a modern feel */
+  position: relative;
+  display: inline-block;
 }
 
-/* Uniform Size and Animation for Images */
-.food-category img {
-  width: 250px;
-  height: 200px;
+/* Modern Text Effect */
+.food-carousel h2::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #f1c40f, #e67e22); /* Gradient underline */
+  border-radius: 5px;
+}
+
+/* Optional: Add a subtle shadow to the text */
+.food-carousel h2 {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+}
+
+/* Food Carousel Description */
+.food-carousel p {
+  font-size: 1.2rem; /* Increase the font size for readability */
+  line-height: 1.8;
+  color: #555; /* Softer gray color for body text */
+  margin-bottom: 30px; /* Add some space below the description */
+  font-weight: 400; /* Regular font weight for the description */
+  max-width: 800px; /* Limit the width for better alignment */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Bootstrap Carousel Styling */
+.carousel-item img {
+  height: 350px;
   object-fit: cover;
   border-radius: 15px;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: floatIn 1s ease-in-out;
 }
 
-/* Hover Effect */
-.food-category img:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+.carousel-caption h3 {
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: 600; /* Bold captions for better visibility */
+  text-transform: uppercase; /* Transform to uppercase for style consistency */
+}
+
+.carousel-caption p {
+  font-size: 2rem;
+  color: yellow;
+  font-weight: 600; /* Regular weight for description text */
 }
 
 /* Keyframe Animations */
@@ -151,17 +183,6 @@ body {
   }
   to {
     transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes floatIn {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
     opacity: 1;
   }
 }
