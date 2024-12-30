@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Welcome.css';
 import main from "../assets/main.jpg"; // Main image
 import Food1Image from "../assets/food1.jpg"; // Food image 1
@@ -9,9 +10,15 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 export default function Welcome() {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleContactUsClick = () => {
+    navigate('/contact'); // Navigate to the Contact Us page
+  };
+
   return (
     <div className="main-container">
-      <Header/>
+      <Header />
       {/* Hero Section */}
       <section className="welcomehero">
         <div className="content">
@@ -20,7 +27,7 @@ export default function Welcome() {
             "Welcome to Mora Click, your ultimate destination for delicious, mouth-watering dishes crafted with passion and fresh ingredients. From classic Italian cuisines to global favorites, we bring you flavors that delight every palate. Explore our menu, order online, or reserve a table to indulge in an unforgettable dining experience today!"
           </p>
           <div className="buttons">
-            <button className="btn-order">Contact us</button>
+            <button className="btn-order" onClick={handleContactUsClick}>Contact us</button>
           </div>
         </div>
         <div className="hero-image">
@@ -44,7 +51,7 @@ export default function Welcome() {
         </div>
       </section>
       
-      <Footer/>
+      <Footer />
     </div>
   );
 }

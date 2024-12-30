@@ -22,7 +22,7 @@ export default function AboutUs() {
             <div className="about-text">
               <h1>Our Story</h1>
               <p>
-                At Moea Click, we believe that food brings people together. Our journey started with a shared passion
+                At Mora Click, we believe that food brings people together. Our journey started with a shared passion
                 for high-quality, delicious meals. From humble beginnings to becoming a well-known name in the food industry,
                 we've always focused on quality, service, and community.
               </p>
