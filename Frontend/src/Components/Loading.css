@@ -1,0 +1,41 @@
+.loader {
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #18181b; /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-wrapper {
+    text-align: center;
+}
+
+.shark-logo {
+    width: 150px; /* Adjust the size of the shark logo */
+    height: auto;
+    animation: spin 2s linear infinite; /* Rotating animation for dynamic effect */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+}
