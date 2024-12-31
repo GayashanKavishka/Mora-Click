@@ -1,10 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Welcome from './Pages/Welcome';
 import AboutUs from './Pages/AboutUs';
-import Footer from './Components/Footer';
-import Header from './Components/Header';
 import ContactUs from './Pages/ContactUs';
 import GodaYata from './Pages/GodaYata';
 import GodaUda from './Pages/GodaUda';
@@ -19,31 +17,56 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Loading from './Components/Loading';
 
+// This component handles navigation with loading
+function AppContent() {
+  const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation(); // Use location inside Router context
 
+  useEffect(() => {
+    // Trigger loading effect on route change
+    setIsLoading(true);
+    const timer = setTimeout(() => setIsLoading(false), 1000); // Adjust loading duration
+    return () => clearTimeout(timer);
+  }, [location]);
 
+  return (
+    <>
+      {isLoading && <Loading />} {/* Show loading only when isLoading is true */}
+      {!isLoading && (
+        <main>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/godayata" element={<GodaYata />} />
+            <Route path="/godauda" element={<GodaUda />} />
+            <Route path="/staff" element={<StaffCanteen />} />
+            <Route path="/civil" element={<CivilCanteen />} />
+            <Route path="/menu" element={<Menu />} />
+
+            {/*----------------------canteeen level----------------------*/}
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/canteen/Home"
+              element={<ProtectedCanteenRoute><Home /></ProtectedCanteenRoute>}
+            />
+            <Route
+              path="/canteen/account/:id"
+              element={<ProtectedCanteenRoute><EditAccount /></ProtectedCanteenRoute>}
+            />
+          </Routes>
+        </main>
+      )}
+    </>
+  );
+}
 
 function App() {
   return (
     <Router>
-      <main>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/contact" element={<ContactUs/>} />
-          <Route path="/godayata" element={<GodaYata/>} />
-          <Route path="/godauda" element={<GodaUda/>} />
-          <Route path="/staff" element={<StaffCanteen/>} />
-          <Route path="/civil" element={<CivilCanteen/>} />
-          <Route path="/menu" element={<Menu/>} />
-
-          {/*----------------------canteeen level----------------------*/}
-          <Route path="/login" element={<Login/>} />
-          <Route path= "/canteen/Home" element = {<ProtectedCanteenRoute><Home/></ProtectedCanteenRoute>} />
-          <Route path="/canteen/account/:id" element={<ProtectedCanteenRoute><EditAccount/></ProtectedCanteenRoute>} />
-
-        </Routes>
-      </main>
+      <AppContent />
     </Router>
   );
 }
