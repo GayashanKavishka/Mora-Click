@@ -175,6 +175,8 @@
 .imgage img
 {
     border-radius: 50%;
+    width: 300px;
+    height: 190px;
 }
 
 .toggle-switch {
