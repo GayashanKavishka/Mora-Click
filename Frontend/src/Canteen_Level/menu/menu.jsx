@@ -192,8 +192,8 @@ return (
                 <div className='boxs' key={index}>
                     <div className='details'>
                         <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
-                        <div className='name'><h2>{item.name}</h2></div>
-                        <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
+                        <div className='name'><h2 className = "name-h2">{item.name}</h2></div>
+                        <div className='price' style={{textTransform:'none'}}><h2 className = "name-h2" >{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
                             {/* <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
                                 {item.available ? "Available" : "Unavailable"}
@@ -235,8 +235,8 @@ return (
                     <div className='boxs' key={index}>
                         <div className='details'>
                             <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
-                            <div className='name'><h2>{item.name}</h2></div>
-                            <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
+                            <div className='name'><h2 className = "name-h2">{item.name}</h2></div>
+                            <div className='price' style={{textTransform:'none'}}><h2 className = "name-h2">{"Rs."+item.price+".00"}</h2></div>
                             <div className='available'>
                                 <div className="toggle-switch">
                                 <input
@@ -274,8 +274,8 @@ return (
                 <div className='boxs' key={index}>
                     <div className='details'>
                         <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
-                        <div className='name'><h2>{item.name}</h2></div>
-                        <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
+                        <div className='name'><h2 className = "name-h2">{item.name}</h2></div>
+                        <div className='price' style={{textTransform:'none'}}><h2 className = "name-h2" >{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
                             <div className="toggle-switch">
                                 <input
@@ -315,8 +315,8 @@ return (
                 <div className='boxs' key={index}>
                     <div className='details'>
                         <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
-                        <div className='name'><h2>{item.name}</h2></div>
-                        <div className='price' style={{textTransform:'none'}}><h2>{"Rs."+item.price+".00"}</h2></div>
+                        <div className='name'><h2 className = "name-h2">{item.name}</h2></div>
+                        <div className='price' style={{textTransform:'none'}}><h2 className = "name-h2" >{"Rs."+item.price+".00"}</h2></div>
                         <div className='available'>
                             {/* <button className="available" style={{backgroundColor: item.available ? "green" : "red"}}>
                                 {item.available ? "Available" : "Unavailable"}

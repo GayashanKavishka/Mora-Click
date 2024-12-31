@@ -44,7 +44,7 @@
   }
   
   /* Dropdown Menu */
-  .dropdown-menu {
+  .dropdown-menus {
     position: absolute;
     top: 50px; /* Positioned below the user icon */
     right: 0;
@@ -56,19 +56,20 @@
     z-index: 1000;
   }
   
-  .dropdown-menu ul {
+  .dropdown-menus ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .dropdown-menu li {
+  .dropdown-menus li {
     padding: 10px 15px;
+    color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .dropdown-menu li:hover {
+  .dropdown-menus li:hover {
     background-color: #f1c40f;
     color: #2c3e50;
   }
