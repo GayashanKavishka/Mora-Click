@@ -3,6 +3,7 @@ import "./Menu.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import axios from "axios";
+import { use } from "react";
 
 const Menu = () => {
   const [menuData, setMenuData] = useState({
@@ -65,11 +66,17 @@ const Menu = () => {
       );
 
       setMenuData({ main: mainMeals, shortEat: shortEats, beverage: beverages });
+< y8
+
+      setLoading(false);
+      console.log("Menu data:", menuData);
+ main
     } catch (error) {
       console.error("Error fetching menu data:", error);
       setError("There was an issue fetching the menu data. Please try again later.");
     }
   };
+ y8
 
   useEffect(() => {
     const fetchIdsAndMenu = async () => {
@@ -88,6 +95,60 @@ const Menu = () => {
 
     fetchIdsAndMenu();
   }, [canteenIds]);
+
+  
+  
+  useEffect(() => {
+    const fetchIds = async () => {
+       GetCanteenIds(); 
+    };
+    fetchIds();
+  }, []);
+  
+  useEffect(() => {
+    if (canteenIds.length > 0) {
+      fetchMenuData(); 
+    }
+  }, [canteenIds]);
+
+  // useEffect(() => {
+     
+  //   const fetchIds = async () => {
+  //     await GetCanteenIds();
+  //     if(canteenIds.length > 0)
+  //     {
+  //       fetchMenuData();
+  //     }
+  //   };
+  //   fetchIds()
+    
+  // }, []);
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await GetCanteenIds(); // Wait for canteen IDs to be fetched
+  //     fetchMenuData(); // Fetch menu data only after canteen IDs are ready
+  //   };
+  
+  //   fetchData();
+  // }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await GetCanteenIds();
+  //     if (canteenIds.length > 0) {
+  //       fetchMenuData();
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+  
+
+
+  if (loading) {
+    return <p>Loading menu items...</p>;
+  }
+main
 
   if (error) {
     return <p>{error}</p>; // Display error message if there was an error
@@ -119,7 +180,11 @@ const Menu = () => {
                 <h3 className="item-name">{item.name}</h3>
                 <p className="item-price">Rs. {item.price}</p>
                 <p className="item-description">{item.description}</p>
+ y8
                 <p className="item-canteen">Available at: {canteenname(item.canteen_id)}</p>
+
+                <p className="item-canteen">Available at: {canteenname(item.canteen_id)} </p>
+main
               </div>
             ))}
           </div>
