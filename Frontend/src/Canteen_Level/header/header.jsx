@@ -51,10 +51,10 @@ export default function Canteen_header({canteenName, canteenId}) {
             onClick={toggleDropdown}
           />
           {isDropdownOpen && (
-            <div className="dropdown-menu">
+            <div className="dropdown-menus">
               <ul>
-                <li><Link to = { `/canteen/account/${canteenId}`}>Account Details</Link></li>
-                <li><Link to = "/about">About Us</Link></li>
+                <li><Link to = { `/canteen/account/${canteenId}`}  style={{color:"#ffff",textDecoration:"none"}}>Account Details</Link></li>
+                <li><Link to = "/about" style={{color:"#ffff",textDecoration:"none"}} >About Us</Link></li>
               </ul>
             </div>
           )}

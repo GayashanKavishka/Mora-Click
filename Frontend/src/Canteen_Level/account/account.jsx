@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './account.css'; // Add styles for better presentation
 import user from '../../assets/user.png';
@@ -12,6 +12,8 @@ const EditAccount = () => {
   const [coverPhoto, setCoverPhoto] = useState(null);
 
   const { id: canteenId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:5000/canteen/getcanteen/?_id=${canteenId}`)
@@ -61,7 +63,11 @@ const EditAccount = () => {
         username : username,
         password : password,
         cover: coverPhoto,
-    })
+    }).then((res) => {
+        navigate(`/canteen/account/${canteenId}`);
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   return (

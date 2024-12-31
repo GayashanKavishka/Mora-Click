@@ -4,6 +4,10 @@ import './Welcome.css';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap'; // Import Carousel from react-bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import main from "../assets/main.jpg";
 import Food1Image from "../assets/food 1.jpg";
