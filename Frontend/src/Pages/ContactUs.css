@@ -93,15 +93,21 @@ body {
     background-color: #e67e22;
 }
 
-/* Contact Details with Background */
+/* Contact Details */
 .contact-details {
     background-image: url('../assets/contact.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
     position: relative;
-    border-radius: 15px; /* Add border radius */
-    overflow: hidden; /* Ensure the border-radius applies to the background */
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 30px; /* Ensure content has adequate spacing */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Add spacing between elements */
+    align-items: flex-start; /* Align text to the left for consistency */
+    justify-content: center; /* Center content vertically */
 }
 
 .contact-details::before {
@@ -119,17 +125,18 @@ body {
 .contact-details p {
     position: relative;
     z-index: 2;
+    margin: 0;
 }
 
 .contact-details h2 {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    color: #f39c12;
+    font-size: 1.8rem; /* Match header font size */
+    font-weight: bold; /* Emphasize header text */
+    color: #f39c12; /* Consistent with button and focus colors */
 }
 
 .contact-details p {
-    font-size: 1rem;
-    color: #fff;
+    font-size: 1.2rem; /* Slightly larger for better readability */
+    color: #fff; /* Keep contrast high */
 }
 
 /* Media Queries for Responsiveness */
@@ -139,6 +146,7 @@ body {
     }
 
     .contact-details {
-        background-size: contain;
+        align-items: center; /* Center align for smaller screens */
+        text-align: center; /* Center text */
     }
 }
