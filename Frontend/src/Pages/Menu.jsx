@@ -146,13 +146,7 @@ const canteenname = (canteen_Id)=>
   }, [canteenIds]);
   
 
-  if (loading) {
-    return <p>loading</p>;
-  }
 
-  if (error) {
-    return <p>{error}</p>; // Display error message if there was an error
-  }
 
   return (
     <>

@@ -21,13 +21,16 @@ import Loading from './Components/Loading';
 
 // This component handles navigation with loading
 function AppContent() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation(); // Use location inside Router context
 
   useEffect(() => {
     // Trigger loading effect on route change
     setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 1000); // Adjust loading duration
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Set loading to false after the backend data is simulated loaded
+    }, 2000); // Adjust this timer to fit your backend response time (or use data fetching logic here)
+    
     return () => clearTimeout(timer);
   }, [location]);
 
@@ -46,7 +49,7 @@ function AppContent() {
             <Route path="/civil" element={<CivilCanteen />} />
             <Route path="/menu" element={<Menu />} />
 
-            {/*----------------------canteeen level----------------------*/}
+            {/*----------------------canteen level----------------------*/}
             <Route path="/login" element={<Login />} />
             <Route
               path="/canteen/Home"
