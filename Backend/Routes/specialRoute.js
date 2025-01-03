@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {getItembyId} = require('../controllers/specialcontroll.js');
+const {getItembyId,addSpecial} = require('../controllers/specialcontroll.js');
 
 
 router.get('/getItembyId', async (req, res) => {
@@ -13,6 +13,19 @@ router.get('/getItembyId', async (req, res) => {
         res.status(400).json({ error:"ERROR " });
     }
 
+});
+
+
+router.post('/addspecial', async (req, res) => {
+    try {
+        const { canteen_id, name, price, image, description } = req.body;
+        const result = await addSpecial(canteen_id, name, price, image, description);
+        if(result.status === 201) return res.status(201).json({ message: 'Special added successfully' });
+        if(result.status === 400) return res.status(400).json({ message: 'Special not added' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error:"ERROR " });
+    }
 });
 
 

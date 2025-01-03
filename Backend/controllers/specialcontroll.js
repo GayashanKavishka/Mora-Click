@@ -12,6 +12,28 @@ const getItembyId = (canteen_id) => {
 };
 
 
+const addSpecial = (canteen_id, name, price, image, description) => {
+    return new Promise((resolve, reject) => {
+        specials.create({
+            canteen_id: canteen_id,
+            name: name,
+            price: price,
+            image: image,
+            description: description
+        }).then(() => {
+            return resolve({ status: 201 });
+        }).catch((err) => {
+            return reject(err);
+        });
+    });
+
+};
+
+
+
+
+
 module.exports ={
-    getItembyId
+    getItembyId,
+    addSpecial
 };

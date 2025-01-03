@@ -1,9 +1,13 @@
 import React from 'react'
 import{useState} from 'react'
+import { useNavigate ,useLocation} from 'react-router-dom'
 import axios from 'axios'
 import './additem.css'
 
-const Additem = ({trigger,setTrigger,type,canteenId}) => {
+const Additem = ({trigger,setTrigger,type,canteenId,scrolly}) => {
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const close = () => {
      setTrigger(false);
@@ -32,12 +36,28 @@ const Additem = ({trigger,setTrigger,type,canteenId}) => {
     console.log(data);
     if(type ==='specials'){
       //Logic to add special items
-    }
+      axios.post(`http://localhost:5000/special/addspecial`,{
+        canteen_id:canteenId,
+        name:data.name,
+        price:data.price,
+        image:data.image,
+        description:data.description
+        }).then((res) => {
+          console.log(res);
+          // setTrigger(false);
+          navigate('/canteen/home',{state:{ scrolly: scrolly }})
+
+        }
+        ).catch((err) => {
+          console.log(err);
+        });
+        }
     else{
       axios.put(`http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, data)
       .then((res) => {
         console.log(res);
-        setTrigger(false);
+        // setTrigger(false);
+        navigate('/canteen/home' ,{state:{ scrolly: scrolly }})
       })
       .catch((err) => {
         console.log(err);
