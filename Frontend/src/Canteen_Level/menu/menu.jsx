@@ -1,9 +1,11 @@
 import React from 'react'
-import { useState ,useEffect } from 'react'
+import { useState ,useEffect,useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import './menu.css'
 import axios from 'axios'
 import placeholder from "../../assets/placeholderimage.png"
 import Additem from '../additem/additem'
+
 
 
 const Menu = ({canteenId}) => {
@@ -21,6 +23,15 @@ const Menu = ({canteenId}) => {
  const[specialTrigger, setSpecialTrigger] = useState(false);
 
  const [special, setSpecial] = useState([]);
+ const [scrollPosition, setScrollPosition] = useState(0);
+ const buttonRef = useRef(null);
+
+
+
+
+ const location = useLocation();
+
+// var location = '';
 
 
 //  const special = [
@@ -32,6 +43,21 @@ const Menu = ({canteenId}) => {
 //     },
 
 //  ]
+
+
+
+
+
+const func = () => {
+    if (location.state && location.state.scrolly) {
+              console.log(location.state.scrolly);
+              const button = document.getElementById(location.state.scrolly);
+              if (button) {
+                button.scrollIntoView({ behavior: 'smooth' });
+                location.state.scrolly = null;
+              }
+    }
+}
 
  const handleToggleSpecial = (Item) =>{
         special.map((item) => {
@@ -45,6 +71,7 @@ const Menu = ({canteenId}) => {
 
  const AddSpecialItem =()=>{
     setSpecialTrigger(true);
+    setScrollPosition(window.scrollY);
  }
 
 
@@ -53,16 +80,19 @@ const Menu = ({canteenId}) => {
  const AddMainItem =()=>
  {
         setMainTrigger(true);
+        setScrollPosition(window.scrollY);
  }
 
 const AddShortItem =()=>
 {
     setShortTrigger(true);
+    setScrollPosition(window.scrollY);
 }
 
 const AddDrinksItem =()=>
 {
     setDrinksTrigger(true);
+    setScrollPosition(window.scrollY);
 }
 
 const fetchMenu = async () => {
@@ -93,10 +123,24 @@ const fetchSpecial = async () => {
 }
 
 
+
     useEffect(() => {
-        fetchMenu();
-        fetchSpecial();
-    }, []);
+        const fetchData = async () => {
+            try {
+                // Fetch menu data
+                await fetchMenu();
+                await fetchSpecial();
+    
+                // Call func() after fetching
+                func();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+    
+        fetchData();
+    }, []); // The empty dependency array ensures this runs only once when the component is mounted.
+    
 
 
 
@@ -187,7 +231,7 @@ const handleToggleMain =(Item) => {
 return (
     <div>
             <div className='main-meal'>
-            <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold", textDecoration: "underline"}}>Main Meals</h1></div>
+            <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold", textDecoration: "underline"}} id = "main">Main Meals</h1></div>
             {main.map((item, index) => (
                 <div className='boxs' key={index}>
                     <div className='details'>
@@ -221,16 +265,16 @@ return (
                 </div>
             ))}
             <div className='addButton'>
-                <button className='add' onClick={AddMainItem}> + Add main meals</button>
+                <button className='add' onClick={AddMainItem} > + Add main meals</button>
             </div>
-            <Additem trigger = {mainTrigger} type = {"main"} canteenId={canteenId} setTrigger ={setMainTrigger}  />
+            <Additem trigger = {mainTrigger} type = {"main"} canteenId={canteenId} setTrigger ={setMainTrigger} scrolly= {"main"} />
             </div>
             <div className="line">
                 <hr/>
             </div>
             {/* <div cl</div>assN</div>ame='short'></div> */}
         <div className='short'>
-            <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold",textDecoration: "underline"}} >Short Eats</h1></div>
+            <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold",textDecoration: "underline"}}  id = "short">Short Eats</h1></div>
                 {short.map((item, index) => (
                     <div className='boxs' key={index}>
                         <div className='details'>
@@ -261,17 +305,17 @@ return (
                     </div>
                 ))}
                 <div className='addButton'>
-                <button className='add' onClick={AddShortItem}> + Add short eats</button>
+                <button className='add' onClick={AddShortItem} id = "short"> + Add short eats</button>
                 </div>
-                <Additem trigger = {shortTrigger} type = {"short_eat"} canteenId={canteenId} setTrigger ={setShortTrigger}  />
+                <Additem trigger = {shortTrigger} type = {"short_eat"} canteenId={canteenId} setTrigger ={setShortTrigger} scrolly= {"short"} />
         </div>
         <div className="line">
                 <hr/>
         </div>
         <div className='drinks'>
-            <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold",textDecoration: "underline"}} >Drinks</h1></div>
+            <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold",textDecoration: "underline"}}  id = "beverage" >Drinks</h1></div>
             {drinks.map((item, index) => (
-                <div className='boxs' key={index}>
+        <div className='boxs' key={index} >
                     <div className='details'>
                         <div className="imgage"><img src = {!item.image? placeholder : item.image}></img></div>
                         <div className='name'><h2 className = "name-h2">{item.name}</h2></div>
@@ -303,14 +347,14 @@ return (
             <div className='addButton'>
                 <button className='add' onClick={AddDrinksItem}> + Add beverage</button>
             </div>
-            <Additem trigger = {drinksTrigger} type = {"beverage"} canteenId={canteenId} setTrigger ={setDrinksTrigger}  />
+            <Additem trigger = {drinksTrigger} type = {"beverage"} canteenId={canteenId} setTrigger ={setDrinksTrigger} scrolly= {"beverage"} />
 
         </div>
         <div className="line">
                 <hr/>
         </div>
         <div className='main-meal'>
-        <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold", textDecoration: "underline"}}>Today's Specials</h1></div>
+        <div><h1 style={{textAlign:"center",fontSize:"40px",fontWeight:"bold", textDecoration: "underline"}} id = "special" >Today's Specials</h1></div>
             {special.map((item, index) => (
                 <div className='boxs' key={index}>
                     <div className='details'>
@@ -344,10 +388,10 @@ return (
                 </div>
             ))}
             <div className='addButton'>
-                <button className='add' onClick={AddSpecialItem}> + Add Special Item</button>
+                <button className='add' onClick={AddSpecialItem} ref ={buttonRef} > + Add Special Item</button>
 
             </div>
-            <Additem trigger = {specialTrigger} type = {"specials"} canteenId={canteenId} setTrigger ={setSpecialTrigger} />
+            <Additem trigger = {specialTrigger} type = {"specials"} canteenId={canteenId} setTrigger ={setSpecialTrigger} scrolly= {"special"}/>
         </div>
         </div>
   )
