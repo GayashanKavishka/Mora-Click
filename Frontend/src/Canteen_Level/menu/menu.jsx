@@ -34,15 +34,8 @@ const Menu = ({canteenId}) => {
 // var location = '';
 
 
-//  const special = [
-//     {
-//         name:"chicken buriyani",    
-//         price:200,
-//         available:true,
-//         description:"chicken buriyani",
-//     },
 
-//  ]
+
 
 
 
@@ -60,14 +53,29 @@ const func = () => {
 }
 
  const handleToggleSpecial = (Item) =>{
-        special.map((item) => {
-            if (item.name === Item.name) {
-                 item.available = !Item.available;
+        setSpecial(
+            special.map((item) => {
+                if (item.name === Item.name){
+                     return { ...item, available: !item.available };
+                }
+                return item;
             }
-        }
+        )
+
     );
 
- }
+    const it = special.find((item) => item.name === Item.name);
+    console.log(it._id);
+
+
+    axios.put(`http://localhost:5000/special/updateSpecialAvailable?_id=${it._id}`)
+    .then((res) => {
+        console.log(res);
+    }).catch((err)=>{
+        console.log(err);
+    }
+    )   
+ };
 
  const AddSpecialItem =()=>{
     setSpecialTrigger(true);
@@ -151,17 +159,17 @@ const fetchSpecial = async () => {
 const handleToggleDrinks = (Item) => {
     setDrinks(
         drinks.map((item) => {
-            if (item.name === Item.name) {
+            if (item._id === Item._id) {
                 return { ...item, available: !item.available };
             }
             return item; 
         })
     );
 
-    const it = drinks.find((item) => item.name === Item.name); 
-    console.log(it.name);
+    const it = drinks.find((item) => item._id === Item._id); 
+    console.log(it._id);
     
-    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=beverage&meal_name=${it.name}`, {
+    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=beverage&_id=${it._id}`, {
     })
     .then((res) => {
         console.log(res);
@@ -174,17 +182,17 @@ const handleToggleDrinks = (Item) => {
 const handleToggleShort = (Item) => {
     setShort(
         short.map((item) => {
-            if (item.name === Item.name) {
+            if (item._id === Item._id) {
                 return { ...item, available: !item.available };
             }
             return item; 
         })
     );
 
-    const it = short.find((item) => item.name === Item.name); 
-    console.log(it.name);
+    const it = short.find((item) => item._id === Item._id); 
+    console.log(it._id);
     
-    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=short_eat&meal_name=${it.name}`, {
+    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=short_eat&_id=${it._id}`, {
     })
     .then((res) => {
         console.log(res);
@@ -197,18 +205,17 @@ const handleToggleShort = (Item) => {
 const handleToggleMain =(Item) => {
     setMain(
         main.map((item) => {
-            if (item.name === Item.name) {
+            if (item._id === Item._id) {
                 return { ...item, available: !item.available };
             }
             return item; 
         })
     );
 
-    const it = main.find((item) => item.name === Item.name); 
-    console.log(it.name);
+    const it = main.find((item) => item._id === Item._id); 
+    console.log(it._id);
     
-    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=main&meal_name=${it.name}`, {
-    })
+    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=main&_id=${it._id}`)
     .then((res) => {
         console.log(res);
     })

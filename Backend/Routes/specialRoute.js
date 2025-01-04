@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {getItembyId,addSpecial} = require('../controllers/specialcontroll.js');
+const {getItembyId,addSpecial,updateSpecialAvailable} = require('../controllers/specialcontroll.js');
 
 
 router.get('/getItembyId', async (req, res) => {
@@ -27,6 +27,22 @@ router.post('/addspecial', async (req, res) => {
         res.status(400).json({ error:"ERROR " });
     }
 });
+
+
+
+router.put('/updateSpecialAvailable', async (req, res) => {
+    try{
+        const _id = req.query._id;
+        const result = await updateSpecialAvailable(_id);
+        if(result.status === 200) return res.status(200).json({ message : 'Special availability updated successfully' });
+    }
+    catch(error){
+        console.log(error);
+        res.status(400).json({ error:"ERROR " });
+    }
+}
+);
+
 
 
 module.exports = router; 

@@ -78,10 +78,11 @@ const updateCanteenMenu =(canteen_id,catogery,obj)=>
 // };
 
 
-const updateavailable = (canteen_id, category, meal_name) => {
+const updateavailable = (canteen_id, category, _id) => {
     return new Promise((resolve, reject) => {
         const objectId = new mongo.Types.ObjectId(canteen_id);
-        console.log(objectId, category, meal_name);
+        const mealId = new mongo.Types.ObjectId(_id);
+        console.log(objectId, category, mealId);
 
         // Find the current availability status of the meal
         menus
@@ -91,7 +92,11 @@ const updateavailable = (canteen_id, category, meal_name) => {
                     return reject({ status: 404, message: "Category not found" });
                 }
 
-                const item = result[category].find((meal) => meal.name === meal_name);
+                console.log(result[category][0]._id);
+
+                
+
+                const item = result[category].find((meal) => meal._id == _id);
                 if (!item) {
                     return reject({ status: 404, message: "Meal not found" });
                 }
@@ -114,7 +119,7 @@ const updateavailable = (canteen_id, category, meal_name) => {
                 // Perform the update operation
                 menus
                     .updateOne(
-                        { canteen_id: objectId, [`${category}.name`]: meal_name },
+                        { canteen_id: objectId, [`${category}._id`]: _id },
                         { $set: updateFields }
                     )
                     .then((data) => {

@@ -30,10 +30,30 @@ const addSpecial = (canteen_id, name, price, image, description) => {
 };
 
 
+const updateSpecialAvailable = (_id) => {
+    return new Promise((Resolve,Reject)=>{
+    specials.findOne({_id:_id}).then((data)=>{
+        specials.updateOne({_id:_id},{available:!data.available}).then((data)=>{
+            return Resolve({status:200,data});
+        }).catch((err)=>{
+            return Reject(err);
+        })
+    })
+    .catch((err)=>{
+        return Reject(err);
+    }
+)
+
+
+}
+    )};
+
+
 
 
 
 module.exports ={
     getItembyId,
-    addSpecial
+    addSpecial,
+    updateSpecialAvailable
 };
