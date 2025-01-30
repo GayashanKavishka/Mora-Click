@@ -63,7 +63,7 @@ const LoginPage = () => {
         <h2>LOGIN</h2>
         <form className="login-form">
           <div className="form-group">
-            <label htmlFor="username" className=" te">Username</label>
+            <label htmlFor="username" className=" te">Email</label>
             <input
               type="text"
               id="username"
@@ -89,7 +89,7 @@ const LoginPage = () => {
           </button>
         </form>
         <p className="signup-text">
-          Do you haven’t account? <a href="/signup">Sign up</a>
+          Do you haven’t account? <a href="/sign-up">Sign up</a>
         </p>
       </div>
     </div>
