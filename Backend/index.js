@@ -39,6 +39,9 @@ app.use('/canteen', canteenRouter);
 const specialRouter = require('./Routes/specialRoute');
 app.use('/special', specialRouter);
 
+const userRouter = require('./Routes/userRoute');
+app.use('/user', userRouter);
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 5000');

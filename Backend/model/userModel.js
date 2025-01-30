@@ -4,13 +4,15 @@ const users = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  dob: { type: Date, required: true },
-  index: { type: String, default: null }, // Optional for non-students
+  dob: { type: Date, required: true }, 
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['student', 'lecturer', 'officer'], required: true },
+  role: { type: String, enum: ['Student', 'Lecturer', 'Non Academic Staff'], required: true },
   faculty: { type: String, required: true },
-  batch: { type: String, default: null }, // Optional for non-students
+  e_mail: { type: String, default: null, required: true},
+  contact: { type: String, default: null },
+  gender: { type: String, default: null, required: true },
+  depernment: { type: String, default: null },
 });
 
 module.exports = mongoose.model.users||mongoose.model('users', users);

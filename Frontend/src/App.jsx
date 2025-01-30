@@ -11,6 +11,7 @@ import CivilCanteen from './Pages/CivilCanteen';
 import Home from './Canteen_Level/home/home';
 import Login from './Pages/Login';
 import Menu from './Pages/Menu';
+import SignUp from './Pages/SignUp';
 import EditAccount from './Canteen_Level/account/account';
 import ProtectedCanteenRoute from './Auth/protectedCanteenRoutes';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -48,6 +49,7 @@ function AppContent() {
             <Route path="/staff" element={<StaffCanteen />} />
             <Route path="/civil" element={<CivilCanteen />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/sign-up" element={<SignUp />} />
 
             {/*----------------------canteen level----------------------*/}
             <Route path="/login" element={<Login />} />
