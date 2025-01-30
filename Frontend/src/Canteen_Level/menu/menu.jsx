@@ -6,6 +6,7 @@ import axios from 'axios'
 import placeholder from "../../assets/placeholderimage.png"
 import Additem from '../additem/additem'
 import Edititem from '../Fooditemedit/EditItem'
+import DeleteConfirmation from '../deletionpopup/DeleteConfirmation'
 
 
 
@@ -27,7 +28,7 @@ const Menu = ({canteenId}) => {
  const [special, setSpecial] = useState([]);
  const [scrollPosition, setScrollPosition] = useState(0);
  const buttonRef = useRef(null);
-
+ const[deleteItem, setdeleteItem] = useState('');
 
  const[selectedItem, setSelectedItem] = useState({
     _id: '',
@@ -121,6 +122,12 @@ const updateSelectedItem = (item) => {
     });
 }
 
+const deleteselecteditem = (item) => {
+    return new Promise((resolve) => {
+        setdeleteItem(item._id);
+        resolve();
+    });
+}
 // const editfooditem =(item)=>
 // {
 //     updateSelectedItem(item)
@@ -142,6 +149,13 @@ const editfooditem = (item) => {
         setScrollPosition(window.scrollY);
     });
 };
+
+const deletefooditem = (item) => {
+    deleteselecteditem(item);
+    console.log("selected for delete", deleteItem);
+    setTrigger(true); // Show the deletion confirmation popup
+};
+
 
 
 
@@ -310,7 +324,9 @@ return (
                     <div className='control-sec'>
                         <button className='edit' onClick={() => editfooditem(item)}>Edit</button>
                         <Edititem trigger = {fooditemeditTrigger} type = {"main"} item = {selectedItem} canteenId={canteenId} setTrigger ={setFooditemeditTrigger} scrolly= {"main"} />
-                        <button className='delete'>Delete</button>
+                        <button className='delete' onClick={() => deletefooditem(item)}>Delete</button>
+                        <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem}  type={'main'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false)} /> 
+      
                     </div>
                 </div>
             ))}
@@ -449,7 +465,3 @@ return (
 }
 
 export default Menu
-
-
-
-

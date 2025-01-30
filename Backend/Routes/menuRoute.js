@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {getmenu,updateCanteenMenu,updateavailable,updatefooditem} = require('../controllers/menucontroll.js');
+const {getmenu,updateCanteenMenu,updateavailable,updatefooditem,deletefooditem} = require('../controllers/menucontroll.js');
 
 
 router.get('/getmenu', async (req, res) => {
@@ -63,6 +63,20 @@ router.put('/updatefooditem', async (req, res) => {
 }
 );
 
-
+router.delete('/deletefooditem', async (req, res) => {
+    try {
+        const canteen_id = req.query.canteen_id;
+        const catogery = req.query.catogery;
+        const obj = req.body;
+        console.log("data",obj);
+        const result = await deletefooditem(obj, canteen_id, catogery);
+        if(result.status === 200) return res.status(200).json({ message: 'Menu updated successfully' });
+        if(result.status === 404) return res.status(404).json({ message: 'Menu not found' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "ERROR" });
+    }
+}
+);
 
 module.exports = router;;
