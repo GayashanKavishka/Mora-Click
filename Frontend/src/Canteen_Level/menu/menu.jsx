@@ -5,6 +5,7 @@ import './menu.css'
 import axios from 'axios'
 import placeholder from "../../assets/placeholderimage.png"
 import Additem from '../additem/additem'
+import Edititem from '../Fooditemedit/EditItem'
 
 
 
@@ -21,10 +22,20 @@ const Menu = ({canteenId}) => {
  const[shortTrigger, setShortTrigger] = useState(false);
  const[drinksTrigger, setDrinksTrigger] = useState(false);
  const[specialTrigger, setSpecialTrigger] = useState(false);
+ const[fooditemeditTrigger, setFooditemeditTrigger] = useState(false);
 
  const [special, setSpecial] = useState([]);
  const [scrollPosition, setScrollPosition] = useState(0);
  const buttonRef = useRef(null);
+
+
+ const[selectedItem, setSelectedItem] = useState({
+    _id: '',
+    name: '',
+    price: '',
+    image: '',
+    description: '',
+ });
 
 
 
@@ -102,6 +113,37 @@ const AddDrinksItem =()=>
     setDrinksTrigger(true);
     setScrollPosition(window.scrollY);
 }
+
+const updateSelectedItem = (item) => {
+    return new Promise((resolve) => {
+        setSelectedItem(item);
+        resolve();
+    });
+}
+
+// const editfooditem =(item)=>
+// {
+//     updateSelectedItem(item)
+//     .then(()=>{
+//         console.log("selected",selectedItem);
+//         setFooditemeditTrigger(true);
+//         setScrollPosition(window.scrollY);
+//     }) 
+//     // setSelectedItem(item);
+//     // setFooditemeditTrigger(true);
+//     // setScrollPosition(window.scrollY);
+// }
+
+
+const editfooditem = (item) => {
+    updateSelectedItem(item).then(() => {
+        console.log("selected", selectedItem);  // This might log old data due to async state updates
+        setFooditemeditTrigger(true);
+        setScrollPosition(window.scrollY);
+    });
+};
+
+
 
 const fetchMenu = async () => {
     try {
@@ -266,7 +308,8 @@ return (
                         </div>
                     </div>
                     <div className='control-sec'>
-                        <button className='edit'>Edit</button>
+                        <button className='edit' onClick={() => editfooditem(item)}>Edit</button>
+                        <Edititem trigger = {fooditemeditTrigger} type = {"main"} item = {selectedItem} canteenId={canteenId} setTrigger ={setFooditemeditTrigger} scrolly= {"main"} />
                         <button className='delete'>Delete</button>
                     </div>
                 </div>
@@ -306,7 +349,8 @@ return (
                             </div>
                         </div>
                         <div className='control-sec'>
-                            <button className='edit'>Edit</button>
+                            <button className='edit' onClick={() => editfooditem(item)}>Edit</button>
+                            <Edititem trigger = {fooditemeditTrigger} type = {"short_eat"} item = {selectedItem} canteenId={canteenId} setTrigger ={setFooditemeditTrigger} scrolly= {"main"} />
                             <button className='delete'>Delete</button>
                         </div>
                     </div>
@@ -346,7 +390,8 @@ return (
                         </div>
                     </div>
                     <div className='control-sec'>
-                        <button className='edit'>Edit</button>
+                        <button className='edit' onClick={() => editfooditem(item)}>Edit</button>
+                        <Edititem trigger = {fooditemeditTrigger} type = {"beverage"} item = {selectedItem} canteenId={canteenId} setTrigger ={setFooditemeditTrigger} scrolly= {"main"} />
                         <button className='delete'>Delete</button>
                     </div>
                 </div>
@@ -355,7 +400,6 @@ return (
                 <button className='add' onClick={AddDrinksItem}> + Add beverage</button>
             </div>
             <Additem trigger = {drinksTrigger} type = {"beverage"} canteenId={canteenId} setTrigger ={setDrinksTrigger} scrolly= {"beverage"} />
-
         </div>
         <div className="line">
                 <hr/>
@@ -405,3 +449,7 @@ return (
 }
 
 export default Menu
+
+
+
+

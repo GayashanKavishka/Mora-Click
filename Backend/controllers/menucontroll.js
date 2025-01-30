@@ -142,10 +142,46 @@ const updateavailable = (canteen_id, category, _id) => {
     });
 };
 
+const updatefooditem =(data,canteen_id,category) =>{
+    return new Promise((resolve,reject)=>{
+        const objectId = new mongo.Types.ObjectId(canteen_id);
+        const mealId = new mongo.Types.ObjectId(data._id);
+        console.log(objectId,category,data);
+        console.log("data",data);
 
+        menus.findOne({canteen_id:objectId}).then((result)=>{
+            if(!result || !result[category]){
+                return reject({status:404,message:"Category not found"});
+            }
+
+            const item = result[category].find((meal)=>meal._id == data._id);
+            if(!item){
+                return reject({status:404,message:"Meal not found"});
+            }
+
+            const updateFields = {
+                [`${category}.$.name`]: data.name,
+                [`${category}.$.price`]: data.price,
+                [`${category}.$.description`]: data.description,
+            };
+
+            if (data.image) {
+                updateFields[`${category}.$.image`] = data.image;
+            }
+
+            menus.updateOne({canteen_id:objectId, [`${category}._id`]: data._id}, {$set: updateFields}).then((data)=>{
+                if(data.matchedCount === 0){
+                    return resolve({status:404,message:"Update failed"});
+                }
+                return resolve({status:200,message:"Meal updated successfully",data});
+            }).catch((err)=>reject({status:500,message:"Database update failed",error:err}));
+        }).catch((err) => reject({ status: 500, message: "Database update failed", error: err }));
+    });
+};
 
 module.exports={
     getmenu,
     updateCanteenMenu,
-    updateavailable
+    updateavailable,
+    updatefooditem
 };
