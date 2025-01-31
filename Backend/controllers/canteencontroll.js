@@ -57,7 +57,6 @@ const updateCanteenStatus = (_id) => {
 
 
 
-
 module.exports={
     getcanteen,
     updatecanteen,

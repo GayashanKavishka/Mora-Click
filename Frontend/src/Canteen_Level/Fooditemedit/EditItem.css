@@ -1,0 +1,112 @@
+.additem {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.additem-container {
+  width: 90%; /* Adjust width for mobile screens */
+  max-width: 400px; /* Restrict width for larger screens */
+  height: auto; /* Automatically adjust height */
+  max-height: 90%; /* Restrict max height */
+  overflow-y: auto; /* Add scroll for overflow content */
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.additem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 24px; /* Adjust font size for mobile screens */
+  font-weight: bold;
+}
+
+.additem-header button.close {
+  font-size: 20px; /* Adjust button size */
+  padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.additem-body {
+  width: 100%; /* Ensure full width for smaller screens */
+  display: flex;
+  flex-direction: column; /* Stack form groups vertically */
+  gap: 15px; /* Add spacing between form groups */
+}
+
+.additem-body label {
+  font-size: 16px; /* Adjust font size for labels */
+  margin-bottom: 5px;
+}
+
+.additem-body .form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.additem-body input,
+.additem-body textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px; /* Adjust font size for input fields */
+  box-sizing: border-box; /* Prevent width overflow */
+}
+
+.additem-body .form-group .additem-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 16px; /* Adjust button font size */
+}
+
+.additem-body .form-group .additem-btn:hover {
+  background-color: #0056b3; /* Add hover effect */
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 600px) {
+  .additem-container {
+      width: 95%; /* Full width for very small screens */
+      padding: 15px; /* Reduce padding */
+  }
+
+  .additem-header {
+      font-size: 20px; /* Smaller font size */
+  }
+
+  .additem-body label {
+      font-size: 14px; /* Smaller label font */
+  }
+
+  .additem-body input,
+  .additem-body textarea {
+      font-size: 12px; /* Smaller input font */
+  }
+
+  .additem-body .form-group .additem-btn {
+      font-size: 14px; /* Smaller button font size */
+  }
+}
