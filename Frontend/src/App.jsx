@@ -19,6 +19,7 @@ import ProtectedCanteenRoute from './Auth/protectedCanteenRoutes';
 // import "slick-carousel/slick/slick-theme.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from './Components/Loading';
+import EditPage from './Canteen_Level/Editpage';
 
 
 // This component handles navigation with loading
@@ -51,6 +52,7 @@ function AppContent() {
             <Route path="/civil" element={<CivilCanteen />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path = "/editmenu" element ={<EditPage/>}/>
 
             {/*----------------------canteen level----------------------*/}
             <Route path="/login" element={<Login />} />

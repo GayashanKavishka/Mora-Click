@@ -92,8 +92,10 @@ const login = (username, password) => {
             users.findOne({ username: username }),
             canteens.findOne({ username: username })
         ]).then(async ([user, canteen]) => {
+            console.log(user,canteen)
             if (user) {
                 const passwordMatch = await bcrypt.compare(password, user.password);
+                console.log(passwordMatch)
                 if (passwordMatch) {
                     const token = jwt.sign(
                         { username: user.username, role: user.role }, 
@@ -105,8 +107,9 @@ const login = (username, password) => {
                     return resolve({ status: 401, message: "Invalid password" });
                 }
             } else if (canteen) {
-                const passwordMatch = await bcrypt.compare(password, canteen.password);
-                if (passwordMatch) {
+                // const passwordMatch = await bcrypt.compare(password, canteen.password);
+                // console.log(passwordMatch)
+                if (canteen.password === password) {
                     const token = jwt.sign(
                         { username: canteen.username, role: "canteen", canteen_id: canteen._id }, 
                         process.env.Secret_Key, 

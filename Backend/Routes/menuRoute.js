@@ -68,6 +68,7 @@ router.delete('/deletefooditem', async (req, res) => {
         const canteen_id = req.query.canteen_id;
         const catogery = req.query.catogery;
         const obj = req.body;
+        console.log("id",obj._id,catogery,canteen_id);
         console.log("data",obj);
         const result = await deletefooditem(obj, canteen_id, catogery);
         if(result.status === 200) return res.status(200).json({ message: 'Menu updated successfully' });

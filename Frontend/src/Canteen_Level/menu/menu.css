@@ -1,5 +1,5 @@
-.main-meal,.short ,.drinks
-{
+/* Main Containers */
+.main-meal, .short, .drinks {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -9,30 +9,11 @@
     margin-bottom: 20px;
 }
 
-
-
-
-/* .boxs
-{
-    display: flex;
-    justify-content: space-evenly;
-    height: 200px;
-    background-color: #d3d1cb;
-    color: #2c3e50;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 98%;
-} */
-
+/* Box Layout (PC View Unchanged) */
 .boxs {
     display: flex;
-    justify-content: space-between; /* Evenly space out children */
-    align-items: center; /* Align items vertically */
+    justify-content: space-between;
+    align-items: center;
     height: 200px;
     background-color: #f1efe8;
     box-shadow: 0 4px 8px rgba(3, 3, 3, 0.1);
@@ -43,87 +24,70 @@
     letter-spacing: 2px;
     border-radius: 20px;
     transition: background-color 0.3s ease;
-    width: 90%; /* Slightly reduce width for consistent layout */
-    margin: 0 auto; /* Center the container */
-}
-.boxs .control-sec {
-    display: flex;
-    margin: 30px;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center; /* Align buttons to the center */
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px;
 }
 
+/* Ensure PC Layout Stays the Same */
+@media screen and (min-width: 1025px) {
+    .boxs {
+        flex-direction: row; /* Keep row layout on PC */
+    }
+}
+
+/* Details Section */
 .details {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 20px; /* Add padding for consistent spacing */
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
-.details .name-h2{
+.details .name-h2 {
     font-size: 20px;
     font-weight: bold;
     margin: 0;
 }
-.control-sec
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    
-   
-} 
-/* .boxs .details .price
-{
-   margin-right: 160px;
-} */
 
-.boxs .details .price {
-    margin-right: 0; /* Remove margin */
+/* Image Styling */
+.imgage img {
+    border-radius: 50%;
+    width: 300px;
+    height: 190px;
 }
 
+/* Price & Availability */
+.name, .price, .available {
+    flex: 1;
+    text-align: center;
+}
 
-.boxs .available .available
-{
+/* Availability Toggle (No Change to PC View) */
+.boxs .available .available {
     background-color: green;
     padding: 15px;
     border-radius: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
     width: 180px;
     transition: 0.5s;
-
-    
 }
 
-.boxs .available .available:hover
-{
-    color:#ecf0f1;
+.boxs .available .available:hover {
+    color: #ecf0f1;
     transition: 0.5s;
 }
 
-/* .imgage
-{
-    margin-right: 300px;
-} */
-.imgage {
-    margin-right: 0; /* Remove unnecessary margin */
-    flex: 1; /* Make it flexible */
-    text-align: center; /* Center the content */
+/* Buttons */
+.boxs .control-sec {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }
 
-.name, .price, .available {
-    flex: 1; /* Equal spacing for all items */
-    text-align: center; /* Center align text */
-}
-
-.boxs .control-sec button
-{
+.boxs .control-sec button {
     background-color: #2c3e50;
     color: #ecf0f1;
     padding: 8px 15px;
@@ -134,14 +98,14 @@
     transition: background-color 0.3s ease;
     width: 100px;
 }
-.boxs .control-sec button:hover
-{
+
+.boxs .control-sec button:hover {
     background-color: #f1c40f;
     color: #2c3e50;
-} 
+}
 
-.line
-{
+/* Line Separator */
+.line {
     margin: 0 auto;
     width: 98%;
     height: 4px;
@@ -149,11 +113,13 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.addButton
-{
+
+/* Add Button */
+.addButton {
     margin: 10px;
 }
-.add{
+
+.add {
     background-color: #2c3e50;
     color: #ecf0f1;
     padding: 8px 15px;
@@ -166,35 +132,26 @@
     padding: 10px;
 }
 
-.add:hover
-{
+.add:hover {
     background-color: #f1c40f;
     color: #2c3e50;
 }
 
-.imgage img
-{
-    border-radius: 50%;
-    width: 300px;
-    height: 190px;
-}
-
+/* Toggle Switch */
 .toggle-switch {
     display: inline-block;
     position: relative;
     width: 60px;
     height: 34px;
-  }
-  
-  /* Hidden Checkbox */
-  .toggle-input {
+}
+
+.toggle-input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* Slider (Switch) */
-  .toggle-label {
+}
+
+.toggle-label {
     position: absolute;
     top: 0;
     left: 0;
@@ -204,10 +161,9 @@
     border-radius: 34px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  /* Circle Inside Slider */
-  .toggle-slider {
+}
+
+.toggle-slider {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -216,22 +172,100 @@
     background-color: white;
     border-radius: 50%;
     transition: transform 0.3s ease;
-  }
-  
-  /* When ON */
-  .toggle-input:checked + .toggle-label {
+}
+
+.toggle-input:checked + .toggle-label {
     background-color: #4caf50;
-  }
-  
-  .toggle-input:checked + .toggle-label .toggle-slider {
+}
+
+.toggle-input:checked + .toggle-label .toggle-slider {
     transform: translateX(26px);
-  }
-  
-  /* Optional: Additional ON/OFF Colors */
-  .toggle-slider.on {
-    box-shadow: 0 0 5px #4caf50;
-  }
-  
-  .toggle-slider.off {
-    box-shadow: 0 0 5px #ccc;
-  }
+}
+
+/* MEDIA QUERIES */
+
+/* Tablets (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .boxs {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+
+    .details {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .imgage img {
+        width: 250px;
+        height: 160px;
+    }
+
+    .name, .price, .available {
+        width: 100%;
+    }
+
+    .boxs .control-sec {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .boxs .control-sec button {
+        width: 90px;
+        padding: 6px 10px;
+    }
+
+    .add {
+        width: 180px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media screen and (max-width: 480px) {
+    .boxs {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .imgage img {
+        width: 180px;
+        height: 130px;
+    }
+
+    .details .name-h2 {
+        font-size: 16px;
+    }
+
+    .toggle-switch {
+        width: 50px;
+        height: 28px;
+    }
+
+    .toggle-slider {
+        width: 22px;
+        height: 22px;
+    }
+
+    .toggle-input:checked + .toggle-label .toggle-slider {
+        transform: translateX(22px);
+    }
+
+    .boxs .control-sec {
+        gap: 8px;
+    }
+
+    .boxs .control-sec button {
+        width: 80px;
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .add {
+        width: 150px;
+        padding: 6px;
+        font-size: 12px;
+    }
+}

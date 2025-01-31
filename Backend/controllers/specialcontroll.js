@@ -49,11 +49,35 @@ const updateSpecialAvailable = (_id) => {
     )};
 
 
+const deleteSpecial = (_id) => {
+    return new Promise((Resolve , Reject)=>{
+        specials.deleteOne({_id:_id}).then((data)=>{
+            return Resolve({status:200,data});
+        }).catch((err)=>{
+            return Reject(err);
+        })
+    })
+}
 
+
+const updateSpaecialItem = (data, id) => {
+    return new Promise((resolve, reject) => {
+        console.log("data",data);
+        console.log("id",id);
+        specials.updateOne({ _id: id }, data).then((data) => {
+            console.log("data",data);
+            return resolve({ status: 200, data });
+        }).catch((err) => {
+            return reject(err);
+        });
+    });
+}
 
 
 module.exports ={
     getItembyId,
     addSpecial,
-    updateSpecialAvailable
+    updateSpecialAvailable,
+    deleteSpecial,
+    updateSpaecialItem
 };

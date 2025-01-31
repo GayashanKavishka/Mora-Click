@@ -6,6 +6,7 @@ const {login} = require('../controllers/authcontroll.js');
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
+        console.log(username,password);
         const result = await login(username, password);
         if(result.status === 200) return res.status(200).json({ token: result.token, message: 'Login successful' });
         if(result.status === 401) return res.status(401).json({ message: 'Invalid password' });

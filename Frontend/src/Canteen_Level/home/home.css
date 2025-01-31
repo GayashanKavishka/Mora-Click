@@ -1,4 +1,5 @@
-.he{
+/* Background Section */
+.he {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,22 +8,24 @@
     background-position: center;
     width: 100%;
     height: 300px;
+    position: relative;
 }
 
+/* Overlay Effect */
 .he::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 390px;
+    height: 300px;
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     z-index: 1;
     border-radius: 10px;
 }
 
-.mas
-{
+/* Message Box */
+.mas {
     background-color: #dfdbdb;
     width: 500px;
     height: 150px;
@@ -34,40 +37,104 @@
     align-items: center;
     z-index: 2;
 }
- .h{
+
+/* Header Text */
+.h {
     margin-left: 10px;
     color: rgb(173, 2, 2);
     font-weight: 600;
-    font-size: 15px;    
-} 
+    font-size: 15px;
+    text-align: center;
+}
 
-.box
-{
+/* Box Section */
+.box {
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 20px;
-    
 }
 
-.tag
-{
+/* Label Text */
+.tag {
     font-size: 20px;
     font-weight: bold;
     margin-left: 10px;
     margin-right: 20px;
 }
- 
-.buttonOpenClose
-{
+
+/* Open/Close Button */
+.buttonOpenClose {
     background-color: green;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
-    width : 100px;
+    width: 100px;
     border-radius: 5px;
     cursor: pointer;
-} 
+}
+
+/* Responsive Design */
+
+/* Tablets (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .mas {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .box {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tag {
+        font-size: 18px;
+    }
+
+    .buttonOpenClose {
+        width: 120px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media screen and (max-width: 480px) {
+    .he {
+        height: 250px;
+    }
+
+    .mas {
+        width: 90%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .h {
+        font-size: 14px;
+    }
+
+    .tag {
+        font-size: 16px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .box {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .buttonOpenClose {
+        width: 100px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

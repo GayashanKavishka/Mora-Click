@@ -146,7 +146,8 @@ const updatefooditem =(data,canteen_id,category) =>{
     return new Promise((resolve,reject)=>{
         const objectId = new mongo.Types.ObjectId(canteen_id);
         const mealId = new mongo.Types.ObjectId(data._id);
-        console.log(objectId,category,data);
+        console.log("category",category);
+        console.log("can_id",canteen_id);
         console.log("data",data);
 
         menus.findOne({canteen_id:objectId}).then((result)=>{
@@ -183,7 +184,7 @@ const deletefooditem= (data,canteen_id,category) =>{
     return new Promise((resolve,reject)=>{
         const objectId = new mongo.Types.ObjectId(canteen_id);
         const mealId = new mongo.Types.ObjectId(data._id);
-        console.log(objectId,category,data);
+        console.log("category",category);
         console.log("data",data);
         console.log("id",data._id);
 
@@ -192,7 +193,10 @@ const deletefooditem= (data,canteen_id,category) =>{
                 return reject({status:404,message:"Category not found"});
             }
 
+            console.log(result[category]);
+
             const item = result[category].find((meal)=>meal._id == data._id);
+            console.log(item);
             if(!item){
                 return reject({status:404,message:"Meal not found"});
             }
