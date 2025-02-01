@@ -3,6 +3,7 @@ import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './account.css'; // Add styles for better presentation
 import user from '../../assets/user.png';
+import { toast } from 'react-toastify';
 
 const EditAccount = () => {
   const [canteenName, setCanteenName] = useState('');
@@ -64,11 +65,19 @@ const EditAccount = () => {
         password : password,
         cover: coverPhoto,
     }).then((res) => {
-        navigate(`/canteen/account/${canteenId}`);
+        toast.success('Account updated successfully',{autoClose: 2000});
+        setTimeout(() => {
+          navigate(`/canteen/account/${canteenId}`);
+        },2000);
     }).catch((err) => {
       console.log(err);
     });
   };
+
+
+  const back=()=>{
+    navigate(`/canteen/home`);
+  }
 
   return (
    <body className='edit-account-container'>
@@ -120,6 +129,9 @@ const EditAccount = () => {
         <button className="save-button" onClick={handleSave}>
           Save Changes
         </button>
+      </div>
+      <div className='flex justify-end items-center m-5 mt-2'>
+        <button onClick={()=> back()} className='bg-orange-500 p-2 rounded-lg font-bold text-white hover:bg-orange-700 hover:transition hover:duration-100'> Home <i class='fas fa-angle-double-left'></i></button>
       </div>
     </div>
     </body> 

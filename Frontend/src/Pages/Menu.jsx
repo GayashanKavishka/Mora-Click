@@ -3,6 +3,7 @@ import "./Menu.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import axios from "axios";
+import { use } from "react";
 
 // Define canteen IDs for fetching menu data
 // const canteenIds = [
@@ -127,26 +128,65 @@ const canteenname = (canteen_Id)=>
   //   // console.log("hello",menuData);
   // }, []);
 
-  useEffect(() => {
-    const fetchIdsAndMenu = async () => {
-      try {
-        // Fetch the canteen IDs first
-        await GetCanteenIds();
+  // useEffect(() => {
+  //   const fetchIdsAndMenu = async () => {
+  //     try {
+  //       // Fetch the canteen IDs first
+  //       await GetCanteenIds();
         
-        // After fetching IDs, ensure the menu data is fetched
-        if (canteenIds.length > 0) {
-          await fetchMenuData();
-        }
-      } catch (error) {
-        console.error("Error during fetching process:", error);
-      }
-    };
+  //       // After fetching IDs, ensure the menu data is fetched
+  //       if (canteenIds.length > 0) {
+  //         await fetchMenuData();
+  //       }
+  //     } catch (error) {
+  //       console.error("Error during fetching process:", error);
+  //     }
+  //   };
   
-    fetchIdsAndMenu();
-  }, [canteenIds]);
-  
+  //   fetchIdsAndMenu();
+  // }, []);
 
 
+
+  useEffect(()=>{
+     const fetchCanteenID = async () => {
+      try {
+              await GetCanteenIds();
+          } catch (error) {
+              console.error("Error fetching canteen data:", error);
+          }
+     }
+      fetchCanteenID();
+  },[]);
+
+  useEffect(()=>{
+    if(canteenIds.length > 0)
+    {
+      console.log("Canteen Ids:",canteenIds);
+      
+    }
+  },[canteenIds])
+
+
+  useEffect(()=>{
+     const fetchMenu = async () => {
+       try{
+          if(canteenIds.length > 0)
+          {
+            await fetchMenuData();
+          }
+       }
+       catch(error)
+       {
+          console.error("Error fetching menu data:", error);
+       }
+     }
+      fetchMenu();
+  },[canteenIds]);
+
+  useEffect(() => {
+    console.log("Menu data:", menuData);
+  },[menuData]);
 
   return (
     <>

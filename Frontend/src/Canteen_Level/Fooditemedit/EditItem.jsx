@@ -46,9 +46,9 @@ const Edititem = ({trigger,setTrigger,item,canteenId,type,scrolly}) => {
   }
 
 
-  useEffect(()=>{
-    console.log("item",data);
-  })
+  // useEffect(()=>{
+  //   console.log("item",data);
+  // })
 
   useEffect(() => {
     setData(item);
