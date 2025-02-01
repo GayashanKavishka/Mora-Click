@@ -180,7 +180,7 @@
   }
   
   .login-button {
-    background-color: red;
+    background-color: rgb(255, 140, 0);
     color: white;
     border: none;
     padding: 8px 15px;
