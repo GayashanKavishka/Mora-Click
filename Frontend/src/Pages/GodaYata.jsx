@@ -3,6 +3,7 @@ import axios from 'axios';
 import './GodaYata.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import image from '../assets/placeholderimage.png';
 
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9ef';
@@ -13,7 +14,6 @@ export default function GodaYata() {
   const [specialItems, setSpecialItems] = useState([]);
   const [isCanteenOpen, setIsCanteenOpen] = useState(true);
 
-  useEffect(() => {
     const fetchCanteenStatus = async () => {
       try {
         const response = await axios.get(CANTEEN_API_URL);
@@ -77,10 +77,35 @@ export default function GodaYata() {
       }
     };
 
-    fetchCanteenStatus();
-    fetchMenu();
-    fetchSpecialItems();
-  }, []);
+   
+
+
+  useEffect(() => {
+    
+    const fetchCanteenInfo = async () => {
+        try{
+           await fetchCanteenStatus();
+        }
+        catch(error){
+          console.error('Error fetching canteen status:', error);
+        }
+    }
+
+    fetchCanteenInfo();
+    
+  },[])
+
+  useEffect(() => {
+    const fetchMenuData = async () => {
+      try {
+        await fetchMenu();
+        await fetchSpecialItems();
+      } catch (error) {
+        console.error('Error fetching menu data:', error);
+      }
+    }
+    fetchMenuData();
+  },[isCanteenOpen])
 
   return (
     <>
@@ -105,12 +130,26 @@ export default function GodaYata() {
               <div className="food-items">
                 {specialItems.map((food) => (
                   <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
-                    <img
+                    {/* <img
                       src={food.image}
                       alt={food.name}
                       className="food-image"
-                      onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
+                      onError={(e) => { e.target.onerror = null; e.target.src = {image} }}
+                    /> */}
+
+                    {food.image ? (
+                      <img
+                      src={food.image}
+                      alt={food.name}
+                      className="food-image"
+                    /> 
+                    ):(
+                      <img
+                      src={image}
+                      alt={food.name}
+                      className="food-image"
                     />
+                    )}
                     <h3 className="food-name">{food.name}</h3>
                     <p className="food-price">Rs. {food.price}</p>
                     <p className="food-availability">
@@ -130,12 +169,25 @@ export default function GodaYata() {
                 <div className="food-items">
                   {items.map((food) => (
                     <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
-                      <img
+                      {/* <img
                         src={food.image}
                         alt={food.name}
                         className="food-image"
-                        onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
-                      />
+                        onError={(e) => { e.target.onerror = null; e.target.src = {image} }}
+                      /> */}
+                      {food.image ? (
+                      <img
+                      src={food.image}
+                      alt={food.name}
+                      className="food-image"
+                    /> 
+                    ):(
+                      <img
+                      src={image}
+                      alt={food.name}
+                      className="food-image"
+                    />
+                    )}
                       <h3 className="food-name">{food.name}</h3>
                       <p className="food-price">Rs. {food.price}</p>
                       <p className="food-availability">
