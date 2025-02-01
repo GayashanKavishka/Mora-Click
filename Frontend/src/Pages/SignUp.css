@@ -4,12 +4,13 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+  background: linear-gradient(to bottom right, #0029f494, #3b00fc);
   font-family: 'Arial', sans-serif;
 }
 
 .signup-form {
   background: #fff;
+  margin: 20px;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

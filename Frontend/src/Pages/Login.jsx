@@ -58,7 +58,7 @@ const LoginPage = () => {
       </div>
 
       {/* Right Section */}
-    <div className="login-right-container">
+    <div className="login-right-container" style={{}}>
       <div className="login-right">
         <h2>LOGIN</h2>
         <form className="login-form">

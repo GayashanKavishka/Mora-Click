@@ -1,9 +1,9 @@
 /* Footer General Styles */
 .footer {
     background-image: url("../assets/footer.jpg"); /* Add your footer image path */
-    background-size: cover; /* Ensure the image covers the entire footer */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Avoid repeating the image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff;
     padding: 50px 20px;
     font-family: "Poppins", sans-serif;
@@ -16,7 +16,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7); /* Modern overlay effect */
+    background: rgba(0, 0, 0, 0.7);
     z-index: -1;
 }
 
@@ -41,7 +41,7 @@
     color: #ffcc00;
     margin-bottom: 15px;
     text-transform: uppercase;
-    text-align: left; /* Align text to the left */
+    text-align: left;
 }
 
 .footer-column h3 {
@@ -56,8 +56,8 @@
     font-size: 1rem;
     color: #dcdcdc;
     line-height: 1.6;
-    margin: 10px 0; /* Add margin between lines */
-    text-align: left; /* Align text with the logo */
+    margin: 10px 0;
+    text-align: left;
 }
 
 .footer-column a {
@@ -89,26 +89,26 @@
 /* Social Icons Section */
 .social-icons {
     display: flex;
-    justify-content: flex-start; /* Align icons to the left */
-    gap: 15px; /* Spacing between icons */
+    justify-content: flex-start;
+    gap: 15px;
 }
 
 .social-icons a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 50px; /* Icon size */
+    width: 50px;
     height: 50px;
-    color: #000; /* Default icon color */
-    border-radius: 50%; /* Circular icons */
-    font-size: 1.5rem; /* Larger icon size */
-    text-decoration: none; /* Remove underline for icons */
-    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease; /* Smooth transitions */
+    color: #000;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
 .social-icons a:hover {
-    transform: scale(1.1); /* Slightly enlarge icon on hover */
-    color: #fff; /* Change icon color on hover */
+    transform: scale(1.1);
+    color: #fff;
 }
 
 /* Bottom Footer */
@@ -121,8 +121,8 @@
     color: #aaa;
 }
 
-/* Responsive Footer */
-@media (max-width: 768px) {
+/* Responsive Footer for Tablets */
+@media (max-width: 1024px) {
     .footer-container {
         flex-direction: column;
         text-align: center;
@@ -130,21 +130,59 @@
     }
 
     .footer-column {
-        text-align: center; /* Center align for smaller screens */
+        text-align: center;
+        min-width: unset;
     }
 
     .footer-column p {
         text-align: center;
-        margin-top: 0; /* Adjust spacing for smaller screens */
     }
 
     .social-icons {
-        justify-content: center; /* Center align icons for smaller screens */
+        justify-content: center;
     }
 
     .social-icons a {
-        width: 60px; /* Larger size for smaller screens */
-        height: 60px;
-        font-size: 1.8rem; /* Adjust font size */
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+    }
+}
+
+/* Responsive Footer for Mobile */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 15px;
+    }
+
+    .footer-container {
+        gap: 30px;
+    }
+
+    .footer-column {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+
+    .footer-column h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-column p {
+        font-size: 0.95rem;
+    }
+
+    .social-icons a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .footer-bottom {
+        font-size: 0.8rem;
     }
 }

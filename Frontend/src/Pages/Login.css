@@ -238,4 +238,121 @@
   .login-right {
     animation: slideInRight 1s ease-out forwards;
   }
+  @media screen and (max-width: 1024px) {
+    .login-page-container {
+      flex-direction: column;
+      height: auto;
+      
+    }
+
+    .login-page-container{
+      background-color: #c9c9c9;
+    }
+  
+    .login-left {
+      flex: none;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+    }
+  
+    .logo-image {
+      width: 250px;
+      height: 250px;
+    }
+  
+    .wel {
+      font-size: 32px;
+    }
+  
+    .cta-text {
+      font-size: 18px;
+    }
+  
+    /* .login-right-container {
+      flex: none;
+      width: 100%;
+      padding: 20px;
+      border-radius: 0;
+    } */
+
+    .login-right-container {
+      width: 100%;
+      padding: 15px;
+      padding-bottom: 340px;
+      height: 100vh;
+      align-items: start;
+    }
+  
+    .login-right {
+      width: 90%;
+      max-width: 400px;
+      border-radius: 20px;
+    }
+  
+    .login-form {
+      max-width: 100%;
+      
+    }
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .login-left {
+      padding: 15px;
+      text-align: center;
+      background-image: none; /* Remove background for clarity */
+      background-color: #333; /* Dark background */
+    }
+  
+    .logo-image {
+      width: 200px;
+      height: 200px;
+    }
+  
+    .wel {
+      font-size: 28px;
+    }
+  
+    .cta-text {
+      font-size: 16px;
+    }
+
+    .login-page-container{
+      background-color: #c9c9c9;
+    }
+    .login-right-container {
+      width: 100%;
+      padding: 15px;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+  
+    .login-right {
+      width: 100%;
+      border-radius: 15px;
+      padding: 25px;
+      height: 510px;
+      box-shadow: none;
+    }
+  
+    .login-form {
+      width: 100%;
+    }
+  
+    input {
+      font-size: 16px;
+      padding: 12px;
+    }
+  
+    .login_button {
+      padding: 10px;
+      font-size: 18px;
+    }
+  
+    .signup-text {
+      font-size: 14px;
+    }
+  }
   
