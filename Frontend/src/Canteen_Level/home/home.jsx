@@ -6,7 +6,8 @@ import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import './home.css'
 import Menu from '../menu/menu'
-import ProtectedCanteenRoute from '../../Auth/protectedCanteenRoutes'
+
+
 
 
 const Home = () => {
@@ -17,15 +18,36 @@ const Home = () => {
   const[canteenName , setCanteenName] = useState('');
   const [cover, setCover] = useState(false);
 
-  const toggleCanteen = () => {
-    setIsOpen((prevState) => !prevState);
+  const toggleCanteen = async () => {
+    const newstatus = isOpen ? false : true; // Ensure true is sent when open
+    try {
+      const res = await axios.put(
+        'http://localhost:5000/canteen/updatecanteenstatus',
+        {
+          _id: canteenid,
+          status: newstatus, // This will be true when canteen is open
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (res.status === 200) {
+        console.log("Canteen status updated:", newstatus);
+        setIsOpen(newstatus);
+      }
+    } catch (err) {
+      console.log("Error updating canteen status:", err);
+    }
   };
-
+  
   useEffect(() => {
     axios.get(`http://localhost:5000/canteen/getcanteen/?_id=${canteenid}`)
     .then((res) => {
       setCanteenName(res.data.data[0].name)
       setCover(res.data.data[0].cover)
+      setIsOpen(res.data.data[0].open)
     })
     .catch((err) => {
       console.log(err);
