@@ -61,16 +61,37 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import logo from "../assets/logo.jpg";
 import { FaBars, FaTimes } from "react-icons/fa"; // Import icons
+import { jwtDecode } from "jwt-decode";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for menu toggle
   const navigate = useNavigate();
+  const [decodedToken, setDecodedToken] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    console.log("Token:", token);
+    if(token){
+      const decoded = jwtDecode(token);
+      console.log("Decoded Token:", decoded);
+      setDecodedToken(decoded);
+    }
+    // const decoded = jwtDecode(token);
+    // setDecodedToken(decoded);
+    // console.log("Decoded Token:", decoded);
+    // setIsLoggedIn(!!token);
   }, []);
+
+
+  useEffect(() => {
+    if(decodedToken){
+      console.log("logged token :",decodedToken);
+      if(decodedToken.role !== "canteen"){
+        setIsLoggedIn(true);
+      }
+    }
+  }, [decodedToken]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
