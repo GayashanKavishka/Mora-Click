@@ -45,20 +45,22 @@ router.put('/updatecanteen', async (req, res) => {
     
 
 
-router.put('/updatecanteenstatus',)
-async (req, res) => {
+router.put('/updatecanteenstatus', async (req, res) => {
     try {
-        const _id = req.query._id;
-        const newStatus = req.body.status;
-        const result = await updateCanteenStatus(_id, newStatus);
-        if(result.status === 200) return res.status(200).json({ message: 'Canteen status updated successfully' });
-        if(result.status === 404) return res.status(404).json({ message: 'Canteen not found' });
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({ error: "ERROR" });
-    }
-}
+        const { _id, status } = req.body; // ✅ Get _id and status from request body
+        
+        
+        if (!_id || status === undefined) {
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
 
+        const result = await updateCanteenStatus(_id, status);
+        return res.status(result.status).json({ message: result.message });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error', error });
+    }
+});
 
 
 

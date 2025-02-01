@@ -39,20 +39,28 @@ const updatecanteen =(canteen)=>
 
 
 
-const updateCanteenStatus = (_id) => {
-    return new Promise((resolve, reject) => {
-        const objectId = new mongo.Types.ObjectId(_id);
-        canteens.updateOne({_id: objectId}, {open: true}).then((data) => {
-            if (data.nModified > 0) {
-                return resolve({status: 200, message: 'Canteen status updated to open'});
-            } else {
-                return reject({status: 404, message: 'Canteen not found'});
-            }
-        }).catch((err) => {
-            return reject(err);
-        });
-    });
+const updateCanteenStatus = async (_id, newStatus) => {
+    try {
+        if (!mongo.Types.ObjectId.isValid(_id)) {
+            return { status: 400, message: 'Invalid Canteen ID' };
+        }
+        
+        const objectId = new mongo.Types.ObjectId(_id); // ✅ Convert ID properly
+        const result = await canteens.updateOne({ _id: objectId }, { $set: { open: newStatus } });
+        
+        
+        if (result.modifiedCount >= 0) {
+            return { status: 200, message: 'Canteen status updated successfully' };
+        } else {
+            return { status: 404, message: 'Canteen not found' };
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        return { status: 500, message: 'Database error', error };
+    }
 };
+
+
 
 
 
