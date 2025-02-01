@@ -108,7 +108,7 @@
 /* Mobile (480px and below) */
 @media screen and (max-width: 480px) {
     .he {
-        height: 250px;
+        height: 300px;
     }
 
     .mas {
