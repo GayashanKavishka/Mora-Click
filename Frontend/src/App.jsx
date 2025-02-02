@@ -122,7 +122,7 @@ function AppContent() {
 
   useEffect(() => {
     console.log("Prev route:", prevRoute);
-  },[prevRoute])
+  },[prevRoute]);
 
   return (
     <>
