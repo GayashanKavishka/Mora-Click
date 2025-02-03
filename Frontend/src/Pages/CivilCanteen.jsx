@@ -3,7 +3,10 @@ import axios from 'axios';
 import './CivilCanteen.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import ReviewList from '../Components/ReviewList';
+import ReviewForm from '../Components/ReviewForm';
 import image from '../assets/placeholderimage.png';
+import { jwtDecode } from 'jwt-decode';
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f1';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9f1';
 const SPECIAL_API_URL = 'http://localhost:5000/special/getItembyId?canteen_id=6761446355efca0108f8d9f1';
@@ -12,7 +15,32 @@ export default function CivilCanteen() {
   const [foodData, setFoodData] = useState(null);
   const [specialItems, setSpecialItems] = useState([]);
   const [isCanteenOpen, setIsCanteenOpen] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [decodedToken, setDecodedToken] = useState(null);
 
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      console.log("Token:", token);
+      if(token){
+        
+        const decoded = jwtDecode(token);
+        console.log("Decoded Token:", decoded);
+        setDecodedToken(decoded);
+      }
+      // const decoded = jwtDecode(token);
+      // setDecodedToken(decoded);
+      // console.log("Decoded Token:", decoded);
+      // setIsLoggedIn(!!token);
+    }, []);
+
+    useEffect(() => {
+        if(decodedToken){
+          console.log("logged token :",decodedToken);
+          if(decodedToken.role !== "canteen"){
+            setIsLoggedIn(true);
+          }
+        }
+      }, [decodedToken]);
 
     const fetchCanteenStatus = async () => {
       try {
@@ -199,7 +227,11 @@ export default function CivilCanteen() {
             ))}
         </div>
       )}
-
+      <ReviewForm
+  canteenId="6761446355efca0108f8d9f1"
+  user_ID={decodedToken?.user_id || 'Guest'}
+/>
+      <ReviewList canteenId="6761446355efca0108f8d9f1" />
       <Footer />
     </>
   );

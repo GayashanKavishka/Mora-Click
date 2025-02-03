@@ -1,29 +1,48 @@
 import { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import './ReviewForm.css';
 
-function ReviewForm({ canteenId }) {
+function ReviewForm({ canteenId, user_ID }) {
   const [reviewText, setReviewText] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('/api/reviews', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: 'USER_ID', // Replace with the actual user ID
-        canteenId,
-        reviewText,
-      }),
-    });
+    // Debugging Logs
+    console.log('User ID:', user_ID);
+    console.log('Canteen ID:', canteenId);
+    console.log('Review:', reviewText);
+    const payload = {
+      userId: user_ID,
+      canteenId: canteenId,
+      review: reviewText,
+    };
 
-    if (response.ok) {
-      alert('Review submitted successfully!');
-    } else {
-      alert('Failed to submit review');
+    console.log('payload:', payload);
+
+    try {
+     
+
+      console.log('Submitting review with payload:', payload);
+
+      const response = await axios.post('http://localhost:5000/review/addreview', payload);
+
+      if (response.status === 200) {
+        alert('Review submitted successfully!');
+        setReviewText('');
+      } else {
+        alert('Failed to submit review');
+      }
+    } catch (error) {
+      console.error('Error submitting review:');
+
+      // Additional error details
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+      }
+
+      alert('Something went wrong');
     }
   };
 

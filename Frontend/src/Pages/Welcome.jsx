@@ -28,6 +28,9 @@ import civil from '../assets/civil.jpg';
 import godayata from '../assets/godayata.jpg';
 import godauda from '../assets/Goda Uda.jpg';
 import staff from '../assets/staff.jpg';
+
+import moranew2 from '../assets/moranew2.png';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { use } from 'react';
@@ -91,11 +94,12 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="main-container flex flex-col">
+    <div className="main-container flex flex-col  mt-[20px] rounded-[40px]">
       <Header />
       {/* Hero Section */}
-      <section className="welcomehero  md:gap-4">
-        <div className="content">
+      <div className='flex justify-center items-center p-[20px]'>
+      <section className="welcomehero  md:gap-4 rounded-[40px]">
+        <div className="content rounded-[20px]">
           <h1 className='font-Lobster'>Mora Click</h1>
           <p className='hidden lg:block'>
             "Welcome to Mora Click, your ultimate destination for delicious, mouth-watering dishes crafted with passion and fresh ingredients. From classic Italian cuisines to global favorites, we bring you flavors that delight every palate. Explore our menu, order online, or reserve a table to indulge in an unforgettable dining experience today!"
@@ -105,10 +109,11 @@ export default function Welcome() {
           </div>
         </div>
         <div className="hero-image  ">
-          <img src={mora1} alt="Main Dish" className='flex lg:w-[390px] lg:h-[300px] ' />
+          <img src={moranew2} alt="Main Dish" className='flex lg:w-[390px] lg:h-[300px] ' />
           <h2 className='text-white font-semibold text-center mt-4 block lg:hidden'>Find Where your Food !</h2>
         </div>
       </section>
+      </div>
 
       {/* <div className='mt-5'>
         <h1 className='text-center font-bold text-[50px]'>Join with us to Find your Food  Rate & Review </h1>
@@ -132,7 +137,7 @@ export default function Welcome() {
         data-aos="fade-up" // You can set various AOS animations
         data-aos-duration="1000" // Duration of the animation
         // style={{ backgroundImage: `url(${canteen})` }}
-        className="m-1 mr-1 rounded-[20px] h-[400px] bg-cover bg-center relative flex flex-col items-center justify-around gap-0 w-full animate-slide-in-left"
+        className="m-1 mr-1 rounded-[20px] p-[20px] h-[400px] bg-cover bg-center relative flex flex-col items-center justify-around gap-0 w-full animate-slide-in-left"
       >
         {/* <div className="absolute inset-0 bg-black bg-opacity-50"></div> */}
           <img
@@ -152,13 +157,14 @@ export default function Welcome() {
       </>
         ) : (
             <>
+            <div className='flex flex-col justify-center items-center p-[20px]'>
             <div className='flex justify-center items-center w-full'>
                   <h1
                     data-aos="fade-right" // You can set various AOS animations
                     data-aos-duration="1000" // Duration of the animation
                     className="relative inline-block text-center font-bold font-Roboto text-blue-950 lg:text-[60px]  mb-[40px] 
-        before:content-[''] before:absolute before:bottom-[-5px] before:left-0 
-        before:w-full  before:h-[4px]  before:bg-gradient-to-r before:from-[#f1c40f] before:to-[#e67e22] before:rounded-[5px]">
+                                before:content-[''] before:absolute before:bottom-[-5px] before:left-0 
+                                before:w-full  before:h-[4px]  before:bg-gradient-to-r before:from-[#f1c40f] before:to-[#e67e22] before:rounded-[5px]">
                     Let's Join,Rate & Review
                   </h1>
             </div>
@@ -166,9 +172,9 @@ export default function Welcome() {
               data-aos="fade-up" // You can set various AOS animations
               data-aos-duration="1000" // Duration of the animation
               style={{ backgroundImage: `url(${canteen})` }}
-              className="m-1 mr-1 rounded-[20px] h-[400px] bg-cover bg-center relative flex items-center justify-around gap-0 w-full"
+              className=" mr-[20px] rounded-[40px] m-[20px] h-[400px] bg-cover bg-center relative flex items-center justify-around gap-0 w-full  animate-slide-in-left"
             >
-              <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+              <div className=" rounded-[40px] absolute inset-0 bg-black bg-opacity-50"></div>
                 <img
                 ref={imgRef}
                 src={mora5}
@@ -182,6 +188,7 @@ export default function Welcome() {
                   SingUp
                 </button>
               </div>
+            </div>
             </div> 
           </>
           
