@@ -13,9 +13,9 @@ import DIAK from '../assets/DIAK.png'
 export default function AboutUs() {
     return (
 
-        <div className="about-us-container">
+        <div className="about-us-container ">
           <Header/>
-          <header className="about-header">
+          <header className="about-header mt-[70px] pt-20 h-[350px]">
             <h1>About Us</h1>
             <p>We are team DIAK with passionable for explouring and innovating the future.</p>
             <div className="diak-logo">

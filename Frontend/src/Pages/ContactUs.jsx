@@ -32,7 +32,7 @@ export default function ContactUs() {
     return (
       <>
       <Header />
-        <div className="contact-container">
+        <div className="contact-container mt-[50px]">
           <header className="contact-header">
             <h1>Contact Us</h1>
             <p>We'd love to hear from you! Feel free to reach out using the form below.</p>

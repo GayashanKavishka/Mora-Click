@@ -191,8 +191,8 @@ const canteenname = (canteen_Id)=>
   return (
     <>
       <Header />
-      <div className="menuhero-container">
-        <div className="menuhero-content">
+      <div className="menuhero-container mt-[60px]">
+        <div className="menuhero-content ">
           <h1 className="menuhero-title">Explore Our Delicious Menu</h1>
           <p className="menuhero-description">
             Discover a variety of mouthwatering dishes, refreshing beverages, and delightful short eats from your favorite canteens.

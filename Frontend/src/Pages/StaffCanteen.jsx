@@ -106,7 +106,7 @@ export default function StaffCanteen() {
   return (
     <>
       <Header />
-      <section className="staff-canteen-hero">
+      <section className="staff-canteen-hero mt-[50px]">
         <div className="hero-content">
           <h1>Welcome to the Staff Canteen</h1>
           <p>Enjoy exclusive meals and beverages specially curated for our staff.</p>

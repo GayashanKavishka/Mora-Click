@@ -136,7 +136,7 @@ export default function CivilCanteen() {
   return (
     <>
       <Header />
-      <section className="civilcanteenhero">
+      <section className="civilcanteenhero mt-[50px]">
         <div className="hero-content">
           <h1>Welcome to Civil Canteen</h1>
           <p>Relish our exquisite meals and energizing beverages.</p>

@@ -107,7 +107,7 @@ export default function GodaUda() {
   return (
     <>
       <Header />
-      <section className="godaudahero">
+      <section className="godaudahero mt-[50px]">
         <div className="hero-content">
           <h1>Welcome to Goda Uda Canteen</h1>
           <p>Enjoy our variety of delicious meals, refreshing beverages, and tasty short eats.</p>

@@ -152,8 +152,8 @@ const Home = () => {
   return (
     <div>
       <Canteen_header canteenName={canteenName} canteenId={canteenid} />
-      <div className="he" style={{ backgroundImage: `url(${cover})` }}>
-        <div className="flex justify-start items-center pt-1 pb-1 p-2 gap-3 z-10 w-full lg:hidden">
+      <div className="he " style={{ backgroundImage: `url(${cover})` }}>
+        <div className="flex justify-start items-center pt-1 pb-1 p-2 gap-3 z-10 w-full lg:hidden ">
           <button onClick={() => navigate(-1)} className="bg-orange-500 p-2 rounded-lg font-bold text-white hover:bg-orange-700 hover:transition hover:duration-100 w-9">
             <i className="fas fa-angle-left"></i>
           </button>

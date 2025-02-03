@@ -110,7 +110,7 @@ export default function GodaYata() {
   return (
     <>
       <Header />
-      <section className="godayatahero">
+      <section className="godayatahero mt-[50px]">
         <div className="hero-content">
           <h1>Welcome to Goda Yata Canteen</h1>
           <p>Enjoy our variety of delicious meals, refreshing beverages, and tasty short eats.</p>
