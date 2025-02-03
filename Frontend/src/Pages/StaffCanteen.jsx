@@ -3,6 +3,9 @@ import axios from 'axios';
 import './StaffCanteen.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import ReviewList from '../Components/ReviewList';
+import ReviewForm from '../Components/ReviewForm';
+import {jwtDecode} from 'jwt-decode';
 import image from '../assets/placeholderimage.png';
 
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f2';
@@ -13,6 +16,32 @@ export default function StaffCanteen() {
   const [foodData, setFoodData] = useState(null);
   const [specialItems, setSpecialItems] = useState([]);
   const [isCanteenOpen, setIsCanteenOpen] = useState(true);
+  const [decodedToken, setDecodedToken] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+          const token = localStorage.getItem("token");
+          console.log("Token:", token);
+          if(token){
+            
+            const decoded = jwtDecode(token);
+            console.log("Decoded Token:", decoded);
+            setDecodedToken(decoded);
+          }
+          // const decoded = jwtDecode(token);
+          // setDecodedToken(decoded);
+          // console.log("Decoded Token:", decoded);
+          // setIsLoggedIn(!!token);
+        }, []);
+    
+        useEffect(() => {
+            if(decodedToken){
+              console.log("logged token :",decodedToken);
+              if(decodedToken.role !== "canteen"){
+                setIsLoggedIn(true);
+              }
+            }
+          }, [decodedToken]);
 
     const fetchCanteenStatus = async () => {
       try {
@@ -196,7 +225,15 @@ export default function StaffCanteen() {
             ))}
         </div>
       )}
-
+      {isLoggedIn ? (
+  <div>
+      <ReviewForm
+  canteenId="6761446355efca0108f8d9f2"
+  user_ID={decodedToken?.user_id || 'Guest'}
+/>
+      <ReviewList canteenId="6761446355efca0108f8d9f2" />
+      </div>
+      ) : ""}
       <Footer />
     </>
   );
