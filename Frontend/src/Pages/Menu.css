@@ -9,8 +9,10 @@ body {
 
 /* MenuHero Section */
 .menuhero-container {
-    background: linear-gradient(to right, #ff6347, #ffb347);
-    color: white;
+    /* background: linear-gradient(to right, #ff6347, #ffb347); */
+    background: linear-gradient(to right, #fce80a, #ffb347);
+    color: rgb(255, 255, 255);
+    font-weight: 500;
     text-align: center;
     padding: 50px 20px;
     border-bottom-left-radius: 20px;
@@ -53,16 +55,16 @@ body {
 }
 
 .categorymenu-title {
-    font-size: 2.5rem;
+    /* font-size: 2.5rem;
     color: #333;
     margin-bottom: 20px;
     position: relative;
     letter-spacing: 1px;
-    text-transform: uppercase;
-    animation: colorPulse 3s infinite ease-in-out;
+    text-transform: uppercase; */
+    /* animation: colorPulse 3s infinite ease-in-out; */
 }
 
-.categorymenu-title::after {
+/* .categorymenu-title::after {
     content: '';
     display: block;
     width: 50px;
@@ -70,7 +72,7 @@ body {
     margin: 10px auto 0 auto;
     border-radius: 2px;
     animation: slideWidth 1.5s ease-out;
-}
+} */
 
 /* Pulse Animation for Category Title */
 @keyframes colorPulse {
@@ -92,12 +94,12 @@ body {
     }
 }
 
-.categorymenu-title:hover {
+/* .categorymenu-title:hover {
     color: #ff6347;
     cursor: pointer;
     transform: scale(1.1);
     transition: transform 0.3s ease, color 0.3s ease;
-}
+} */
 
 /* Menu Item Styles */
 .menu-items {

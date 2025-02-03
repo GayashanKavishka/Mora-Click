@@ -201,8 +201,8 @@ const canteenname = (canteen_Id)=>
       </div>
       <div className="menu-container">
         {/* Main Meal Category */}
-        <div className="menu-category">
-          <h2 className="categorymenu-title">Main Meal</h2>
+        <div className="menu-category ">
+          <h2 className="categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Main Meal</h2>
           <div className="menu-items">
             {menuData.main.map(item => ( !item.available ? null :
               <div className="menu-item" key={item._id}>
@@ -222,7 +222,7 @@ const canteenname = (canteen_Id)=>
 
         {/* Short Eats Category */}
         <div className="menu-category">
-          <h2 className="categorymenu-title">Short Eats</h2>
+          <h2 className="categorymenu-title categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Short Eats</h2>
           <div className="menu-items">
             {menuData.shortEat.map(item => ( !item.available ? null :
               <div className="menu-item" key={item._id}>
@@ -242,7 +242,7 @@ const canteenname = (canteen_Id)=>
 
         {/* Beverages Category */}
         <div className="menu-category">
-          <h2 className="categorymenu-title">Beverages</h2>
+          <h2 className="categorymenu-title categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Beverages</h2>
           <div className="menu-items">
             {menuData.beverage.map(item => ( !item.available ? null :
               <div className="menu-item" key={item._id}>

@@ -1,93 +1,31 @@
-// import React, { useState, useEffect } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import "./Header.css";
-// import logo from "../assets/logo.jpg";
-
-// export default function Header() {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     // Check if the token exists in localStorage
-//     const token = localStorage.getItem("token");
-//     setIsLoggedIn(!!token); // Convert token existence to boolean
-//   }, []);
-
-//   const handleLogout = () => {
-//     localStorage.removeItem("token"); // Remove token
-//     setIsLoggedIn(false);
-//     navigate("/"); // Redirect to home after logout
-//   };
-
-//   return (
-//     <header className="navbar">
-//       <div className="logo">
-//         <img src={logo} alt="logo" />
-//       </div>
-//       <nav>
-//         <Link to="/">Home</Link>
-//         <Link to="/menu">Menu</Link>
-//         <Link to="/about">About Us</Link>
-
-//         {/* Canteen Dropdown */}
-//         <div className="dropdown">
-//           <button className="dropbtn">Canteens</button>
-//           <div className="dropdown-content">
-//             <Link to="/godayata">Goda Yata</Link>
-//             <Link to="/godauda">Goda Uda</Link>
-//             <Link to="/staff">Staff Canteen</Link>
-//             <Link to="/civil">Civil Canteen</Link>
-//           </div>
-//         </div>
-
-//         <Link to="/contact">Contact Us</Link>
-//       </nav>
-
-//       {/* Show Login if not logged in, otherwise Logout */}
-//       {isLoggedIn ? (
-//         <button className="login-button" onClick={handleLogout}>Log out</button>
-//       ) : (
-//         <Link to="/login">
-//           <button className="login-button">Log in</button>
-//         </Link>
-//       )}
-//     </header>
-//   );
-// }
-
-
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import logo from "../assets/logo.jpg";
-import { FaBars, FaTimes } from "react-icons/fa"; // Import icons
+import { FaBars, FaTimes } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
+import  store from '../assets/store.png';
+import shopwindow from '../assets/shop-window.svg';
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for menu toggle
-  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [decodedToken, setDecodedToken] = useState(null);
+  const [prevScrollY, setPrevScrollY] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("Token:", token);
-    if(token){
+    if (token) {
       const decoded = jwtDecode(token);
-      console.log("Decoded Token:", decoded);
       setDecodedToken(decoded);
     }
-    // const decoded = jwtDecode(token);
-    // setDecodedToken(decoded);
-    // console.log("Decoded Token:", decoded);
-    // setIsLoggedIn(!!token);
   }, []);
 
-
   useEffect(() => {
-    if(decodedToken){
-      console.log("logged token :",decodedToken);
-      if(decodedToken.role !== "canteen"){
+    if (decodedToken) {
+      if (decodedToken.role !== "canteen") {
         setIsLoggedIn(true);
       }
     }
@@ -99,26 +37,44 @@ export default function Header() {
     navigate("/");
   };
 
+  // Scroll event listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > prevScrollY) {
+        setVisible(false); // Hide navbar when scrolling down
+      } else {
+        setVisible(true); // Show navbar when scrolling up
+      }
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollY]);
+
   return (
-    <header className="navbar">
+    <header className={`navbar ${visible ? "visible" : "hidden"}`}>
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
 
-      {/* Hamburger Menu Icon */}
       <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <FaTimes /> : <FaBars />}
       </div>
+       
 
-      {/* Navigation Links */}
-      <nav className={isMenuOpen ? "nav-links active" : "nav-links"}>
-        <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
-        <Link to="/menu" onClick={() => setIsMenuOpen(false)}>Menu</Link>
-        <Link to="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+       
+      <nav className={isMenuOpen ? "nav-links active " : "nav-links "}>
+         <div className={isMenuOpen ?"flex flex-col":"flex gap-5 "}>
+        <Link to="/" onClick={() => setIsMenuOpen(false)}><i class="fa fa-home" style={{fontSize:"25px"}}></i></Link>
+        <Link to="/menu" onClick={() => setIsMenuOpen(false)}><i class='fas fa-hamburger' style={{fontSize:"29px"}}></i> </Link>
+        <Link to="/about" onClick={() => setIsMenuOpen(false)}><i class='fas fa-address-card' style={{fontSize:"29px"}}></i> </Link>
 
-        {/* Canteen Dropdown */}
         <div className="dropdown">
-          <button className="dropbtn">Canteens</button>
+          <button className={isMenuOpen ?"dropbtn ml-[32px]":"dropbtn"}><i class="bi bi-shop-window"><div className="w-4 h-4 mb-[12px]" ><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16">
+  <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5m2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5"/>
+</svg></div></i></button>
           <div className="dropdown-content">
             <Link to="/godayata" onClick={() => setIsMenuOpen(false)}>Goda Yata</Link>
             <Link to="/godauda" onClick={() => setIsMenuOpen(false)}>Goda Uda</Link>
@@ -127,9 +83,8 @@ export default function Header() {
           </div>
         </div>
 
-        <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
+        <Link to="/contact" onClick={() => setIsMenuOpen(false)}><i class='fas fa-phone' style={{fontSize:"29px"}}></i> </Link>
 
-        {/* Login/Logout Button */}
         {isLoggedIn ? (
           <button className="login-button" onClick={handleLogout}>Log out</button>
         ) : (
@@ -137,7 +92,9 @@ export default function Header() {
             <button className="login-button">Log in</button>
           </Link>
         )}
+        </div>
       </nav>
+      
     </header>
   );
 }

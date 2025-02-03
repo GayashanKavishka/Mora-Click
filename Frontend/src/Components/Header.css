@@ -1,14 +1,31 @@
-/* Navigation Bar */
+/* Transparent Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(44, 62, 80, 0.8);
+  width: 100%;
   padding: 15px 50px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(3, 29, 53, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect */
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+/* Navbar visible */
+.navbar.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Navbar hidden (slide up effect) */
+.navbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 /* Logo */
@@ -100,8 +117,6 @@
 /*-----------------------------------
 ✅ Responsive Design for Mobile/Tablet
 -----------------------------------*/
-
-/* Hide nav-links and show menu-icon on smaller screens */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -137,7 +152,6 @@
   }
 }
 
-/* Show nav-links normally on larger screens */
 @media (min-width: 769px) {
   .menu-icon {
     display: none;

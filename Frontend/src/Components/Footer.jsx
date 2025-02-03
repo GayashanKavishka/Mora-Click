@@ -3,7 +3,7 @@ import "./Footer.css";
 
 export default function Footer() {
     return (
-        <footer className="footer">
+        <footer className="footer rounded-t-[40px]">
           <div className="footer-container">
             {/* Column 1: Logo and Intro */}
             <div className="footer-column">
