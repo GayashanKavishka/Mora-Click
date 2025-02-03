@@ -98,7 +98,7 @@ const login = (username, password) => {
                 console.log(passwordMatch)
                 if (passwordMatch) {
                     const token = jwt.sign(
-                        { username: user.username, role: user.role }, 
+                        { username: user.e_mail, role: user.role }, 
                         process.env.Secret_Key, 
                         { expiresIn: '1h' }
                     );
