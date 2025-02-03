@@ -19,12 +19,17 @@ import mora1 from '../assets/mora1.jpg';
 import mora2 from '../assets/mora2.png';
 import mora3 from '../assets/mora3.png';
 import mora5 from '../assets/mora5.png';
+import moranew from '../assets/moranew.png';
 import canteen from '../assets/canteen.jpg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { use } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Welcome() {
   const navigate = useNavigate();
+  const [token,setToken] = useState(null);
+  const[role,setRole] = useState(null);
 
   const handleContactUsClick = () => {
     navigate('/contact');
@@ -33,6 +38,24 @@ export default function Welcome() {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setToken(token);
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const decode = jwtDecode(token);
+      setRole(decode.role);
+    }
+  }, [token]);
+
+  useEffect(()=>{
+    if(role){
+      console.log("role",role);
+    }
+  },[role])
 
   const [inView, setInView] = useState(false);
   const imgRef = useRef(null);
@@ -66,7 +89,7 @@ export default function Welcome() {
       {/* Hero Section */}
       <section className="welcomehero  md:gap-4">
         <div className="content">
-          <h1>Mora Click</h1>
+          <h1 className='font-Lobster'>Mora Click</h1>
           <p className='hidden lg:block'>
             "Welcome to Mora Click, your ultimate destination for delicious, mouth-watering dishes crafted with passion and fresh ingredients. From classic Italian cuisines to global favorites, we bring you flavors that delight every palate. Explore our menu, order online, or reserve a table to indulge in an unforgettable dining experience today!"
           </p>
@@ -88,30 +111,72 @@ export default function Welcome() {
       </div> */}
 
    <div className="mt-5 relative">
-      <h1 className="text-center font-bold text-[50px]  border-b-4 border-[#f1c40f] pb-2">
-        Join with us to Find your Food Rate & Review
+      
+      {
+        role === "Student" ? (
+      <>
+      <h1
+        data-aos="fade-right" // You can set various AOS animations
+        data-aos-duration="1000" // Duration of the animation
+        className="text-center font-bold font-Lobster text-blue-900 text-[60px] [text-shadow:3px_3px_5px_yellow]">
+        Let's Enjoy Your Foods
       </h1>
       <div
         data-aos="fade-up" // You can set various AOS animations
         data-aos-duration="1000" // Duration of the animation
-        style={{ backgroundImage: `url(${canteen})` }}
-        className="m-1 mr-1 rounded-[20px] h-[400px] bg-cover bg-center relative flex items-center justify-around gap-0 w-full"
+        // style={{ backgroundImage: `url(${canteen})` }}
+        className="m-1 mr-1 rounded-[20px] h-[400px] bg-cover bg-center relative flex flex-col items-center justify-around gap-0 w-full animate-slide-in-left"
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        {/* <div className="absolute inset-0 bg-black bg-opacity-50"></div> */}
           <img
           ref={imgRef}
-          src={mora5}
-          className={`h-[400px] relative z-10 transition-all  sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
-            inView ? "animate-slide-in-left" : "opacity-0"
-          }`}
+          src={moranew}
+          data-aos="fade-up" // You can set various AOS animations
+          data-aos-duration="1000" // Duration of the animation
+          className={`h-[351px] w-[850px] mt-8 relative z-10 transition-all`}
         />
-        <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
+        {/* <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
           <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>
           <button onClick={()=>navigate("/sign-up")}className="btn-order z-10  ">
             SingUp
           </button>
-        </div>
-      </div>
+        </div> */}
+      </div> 
+      </>
+        ) : (
+            <>
+            <h1
+              data-aos="fade-right" // You can set various AOS animations
+              data-aos-duration="1000" // Duration of the animation
+              className="text-center font-bold font-Lobster text-blue-900 lg:text-[60px] [text-shadow:3px_3px_5px_yellow] md:text-[40px]">
+              Join with us to Find your Food  Rate & Review
+            </h1>
+            <div
+              data-aos="fade-up" // You can set various AOS animations
+              data-aos-duration="1000" // Duration of the animation
+              style={{ backgroundImage: `url(${canteen})` }}
+              className="m-1 mr-1 rounded-[20px] h-[400px] bg-cover bg-center relative flex items-center justify-around gap-0 w-full"
+            >
+              <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                <img
+                ref={imgRef}
+                src={mora5}
+                className={`h-[400px] relative z-10 transition-all  sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
+                  inView ? "animate-slide-in-left" : "opacity-0"
+                }`}
+              />
+              <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
+                <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>
+                <button onClick={()=>navigate("/sign-up")}className="btn-order z-10  ">
+                  SingUp
+                </button>
+              </div>
+            </div> 
+          </>
+          
+        )
+      }
+      
     </div>
 
 

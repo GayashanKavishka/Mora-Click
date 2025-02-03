@@ -21,6 +21,9 @@ module.exports = {
         'custom-yellow': '#f1c40f',
         'custom-orange': '#e67e22',
       },
+      fontFamily:{
+        'Lobster': ['Lobster'],
+      }
     },
   },
   plugins: [],
