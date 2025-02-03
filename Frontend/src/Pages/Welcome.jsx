@@ -145,7 +145,7 @@ export default function Welcome() {
           src={moranew}
           data-aos="fade-up" // You can set various AOS animations
           data-aos-duration="1000" // Duration of the animation
-          className={`h-[351px] w-[850px] mt-8 relative z-10 transition-all`}
+          className={`lg:h-[351px] lg:w-[850px] sm:h-[200px] sm:w-[400px] md:h-[300px] md:w-[600px] mt-8 relative z-10 transition-all`}
         />
         {/* <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
           <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>
