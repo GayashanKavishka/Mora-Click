@@ -1,27 +1,55 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import './ReviewList.css';
 
 function ReviewList({ canteenId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchReviews = async () => {
-      const response = await fetch(`/api/reviews/${canteenId}`);
-      const data = await response.json();
-      setReviews(data);
+      if (!canteenId) {
+        console.warn("Canteen ID is missing!");
+        return;
+      }
+
+      try {
+        const response = await axios.post('http://localhost:5000/review/getreview', {
+          canteenId:canteenId// Correctly passing canteenId as a query parameter
+        });
+
+        console.log("Review data received:", response.data);
+
+        // Ensure the response follows the expected structure and correctly sets reviews
+        if (response.data && response.data.data) {
+          setReviews(response.data.data); 
+        } else {
+          console.error("Unexpected response format:", response.data);
+          setReviews([]);
+        }
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
     };
 
     fetchReviews();
   }, [canteenId]);
 
   return (
-    <div>
-      <h3>Reviews</h3>
-      {reviews.map((review) => (
-        <div key={review._id}>
-          <p><strong>{review.userId.username}</strong></p>
-          <p>{review.reviewText}</p>
-        </div>
-      ))}
+    <div className="review-container">
+      <h3 className="review-title">Reviews</h3>
+      {reviews.length === 0 ? (
+        <p className="no-reviews">No reviews yet.</p>
+      ) : (
+        reviews.map((review) => (
+          <div key={review._id} className="review-card">
+            <div className="review-header">
+              <p className="review-user">{review.userId?.username || "Anonymous"}</p>
+              <p className="review-date">{new Date(review.createdAt).toLocaleDateString()}</p>
+            </div>
+            <p className="review-text">{review.review}</p>
+          </div>
+        ))
+      )}
     </div>
   );
 }
