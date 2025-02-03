@@ -24,7 +24,13 @@ import canteen from '../assets/canteen.jpg';
 import m1 from '../assets/main meal mora.png';
 import m2 from '../assets/beverages mora.png';
 import m3 from '../assets/short eats mora.png';
+import civil from '../assets/civil.jpg';
+import godayata from '../assets/godayata.jpg';
+import godauda from '../assets/Goda Uda.jpg';
+import staff from '../assets/staff.jpg';
+
 import moranew2 from '../assets/moranew2.png';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { use } from 'react';
@@ -199,29 +205,29 @@ export default function Welcome() {
   </h2>
 
   {/* Mora Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 justify-items-center">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 justify-items-center">
     {/* Main Meals */}
     <div className="flex flex-col items-center">
-      <div className="relative w-80 h-80 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m1} alt="Main Meals" className="w-full h-64 object-cover transition-transform duration-300 hover:scale-110" />
+      <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+        <img src={m1} alt="Main Meals" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
       </div>
-      <p className="mt-4 text-xl font-semibold text-gray-700">Main Meals</p>
+      <p className="mt-4 text-[35px] font-semibold text-gray-700">Main Meals</p>
     </div>
 
     {/* Beverages */}
     <div className="flex flex-col items-center">
-      <div className="relative w-80 h-80 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m2} alt="Beverages" className="w-full h-64 object-cover transition-transform duration-300 hover:scale-110" />
+      <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+        <img src={m2} alt="Beverages" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
       </div>
-      <p className="mt-4 text-xl font-semibold text-gray-700">Beverages</p>
+      <p className="mt-4 text-[35px] font-semibold text-gray-700">Beverages</p>
     </div>
 
     {/* Short Eats */}
     <div className="flex flex-col items-center">
-      <div className="relative w-80 h-80 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m3} alt="Short Eats" className="w-full h-64 object-cover transition-transform duration-300 hover:scale-110" />
+      <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+        <img src={m3} alt="Short Eats" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
       </div>
-      <p className="mt-4 text-xl font-semibold text-gray-700">Short Eats</p>
+      <p className="mt-4 text-[35px] font-semibold text-gray-700">Short Eats</p>
     </div>
   </div>
 </div>
@@ -233,28 +239,28 @@ export default function Welcome() {
         <h2>Our Canteens</h2>
         <Carousel>
           <Carousel.Item>
-            <Link to="/godayata"><img className="d-block w-100" src={Food1Image} alt="Main Meals" /></Link>
+            <Link to="/godayata"><img className="d-block w-100" src={godauda} alt="Main Meals" /></Link>
             <Carousel.Caption>
               <h3>Goda Yata</h3>
               {/* <p>Delicious main courses crafted for every taste!</p> */}
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <Link to="/godauda"><img className="d-block w-100" src={Food2Image} alt="Beverages" /></Link>
+            <Link to="/godauda"><img className="d-block w-100" src={godayata} alt="Beverages" /></Link>
             <Carousel.Caption>
               <h3>Goda Uda</h3>
               {/* <p>Refreshing drinks to complement your meal.</p> */}
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <Link to="/staff"><img className="d-block w-100" src={Food3Image} alt="Short Eats" /></Link>
+            <Link to="/staff"><img className="d-block w-100" src={staff} alt="Short Eats" /></Link>
             <Carousel.Caption>
               <h3>Staff Canteen</h3>
               {/* <p>Perfect snacks for a quick bite!</p> */}
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <Link to="/civil"><img className="d-block w-100" src={Food3Image} alt="Short Eats" /></Link>
+            <Link to="/civil"><img className="d-block w-100" src={civil} alt="Short Eats" /></Link>
             <Carousel.Caption>
               <h3>Civil Canteen</h3>
               {/* <p>Perfect snacks for a quick bite!</p> */}
