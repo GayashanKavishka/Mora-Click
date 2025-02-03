@@ -7,6 +7,7 @@ import dineth from '../assets/dineth.jpg'
 import sethna from '../assets/sethna.jpg'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
+import DIAK from '../assets/DIAK.png'
 
 
 export default function AboutUs() {
@@ -16,8 +17,12 @@ export default function AboutUs() {
           <Header/>
           <header className="about-header">
             <h1>About Us</h1>
-            <p>We are a team dedicated to providing the best food experiences for you.</p>
+            <p>We are team DIAK with passionable for explouring and innovating the future.</p>
+            <div className="diak-logo">
+              <img src={DIAK} alt="DIAK Logo" />
+            </div>
           </header>
+
           <section className="about-content">
             <div className="about-text">
               <h1>Our Story</h1>

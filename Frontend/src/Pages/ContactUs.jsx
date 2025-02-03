@@ -52,7 +52,7 @@ export default function ContactUs() {
                   <label htmlFor="message">Message</label>
                   <textarea id="message" name="message" placeholder="Write your message" rows="5" required></textarea>
                 </div>
-                <button type="submit" className="submit-button">Send Message</button>
+                <button type="submit" className="contact-submit-button">Send Message</button>
               </form>
             </div>
             <div className="contact-details">
