@@ -42,6 +42,8 @@ export default function CivilCanteen() {
         }
       }, [decodedToken]);
 
+      
+
     const fetchCanteenStatus = async () => {
       try {
         const response = await axios.get(CANTEEN_API_URL);
@@ -227,11 +229,15 @@ export default function CivilCanteen() {
             ))}
         </div>
       )}
-      <ReviewForm
-  canteenId="6761446355efca0108f8d9f1"
-  user_ID={decodedToken?.user_id || 'Guest'}
-/>
-      <ReviewList canteenId="6761446355efca0108f8d9f1" />
+ {isLoggedIn ? (
+  <div>
+    <ReviewForm
+      canteenId="6761446355efca0108f8d9f1"
+      user_ID={decodedToken?.user_id || 'Guest'}
+    />
+    <ReviewList canteenId="6761446355efca0108f8d9f1" />
+  </div>
+) : ""}
       <Footer />
     </>
   );
