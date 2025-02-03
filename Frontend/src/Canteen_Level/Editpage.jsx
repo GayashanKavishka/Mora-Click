@@ -45,7 +45,7 @@ const EditPage = () => {
     // functions 
 
     const close = ()=>{
-        navigate(-1);
+      navigate("/canteen/home",{state:{ scrolly: location.state.scrolly }});
     }
 
 
@@ -77,8 +77,9 @@ const EditPage = () => {
     }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-blue-600 bg-opacity-50 p-4">
-      <div className="bg-white w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg">
+    <div style={{backgroundImage:`url(${data.image})`}} className="fixed inset-0 flex items-center justify-center bg-blue-600 bg-opacity-50 p-4 bg-cover bg-center ">
+    <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="bg-white w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg relative z-10 ">
         {/* Header */}
         <div className="flex justify-between items-center border-b pb-3">
           <h2 className="text-lg font-semibold text-gray-800">Edit Item</h2>

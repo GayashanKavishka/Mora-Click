@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect ,useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Welcome.css';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,13 @@ import Food2Image from "../assets/food 2.png";
 import Food3Image from "../assets/food 3.jpg";
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import mora1 from '../assets/mora1.jpg';
+import mora2 from '../assets/mora2.png';
+import mora3 from '../assets/mora3.png';
+import mora5 from '../assets/mora5.png';
+import canteen from '../assets/canteen.jpg';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Welcome() {
   const navigate = useNavigate();
@@ -23,24 +30,90 @@ export default function Welcome() {
     navigate('/contact');
   };
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  const [inView, setInView] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        } else {
+          setInView(false);
+        }
+      },
+      { threshold: 0 } // Trigger when 50% of the element is visible
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => {
+      if (imgRef.current) {
+        observer.unobserve(imgRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="main-container">
+    <div className="main-container flex flex-col">
       <Header />
       {/* Hero Section */}
-      <section className="welcomehero">
+      <section className="welcomehero  md:gap-4">
         <div className="content">
           <h1>Mora Click</h1>
-          <p>
+          <p className='hidden lg:block'>
             "Welcome to Mora Click, your ultimate destination for delicious, mouth-watering dishes crafted with passion and fresh ingredients. From classic Italian cuisines to global favorites, we bring you flavors that delight every palate. Explore our menu, order online, or reserve a table to indulge in an unforgettable dining experience today!"
           </p>
           <div className="buttons">
             <button className="btn-order" onClick={handleContactUsClick}>Contact us</button>
           </div>
         </div>
-        <div className="hero-image">
-          <img src={main} alt="Main Dish" />
+        <div className="hero-image  ">
+          <img src={mora1} alt="Main Dish" className='flex lg:w-[390px] lg:h-[300px] ' />
+          <h2 className='text-white font-semibold text-center mt-4 block lg:hidden'>Find Where your Food !</h2>
         </div>
       </section>
+
+      {/* <div className='mt-5'>
+        <h1 className='text-center font-bold text-[50px]'>Join with us to Find your Food  Rate & Review </h1>
+        <div style={{backgroundImage:`url(${canteen})`}} className='m-9 '>
+           <img src={mora5} className='h-[400px] bg-cover'></img>
+        </div>
+      </div> */}
+
+   <div className="mt-5 relative">
+      <h1 className="text-center font-bold text-[50px]  border-b-4 border-[#f1c40f] pb-2">
+        Join with us to Find your Food Rate & Review
+      </h1>
+      <div
+        data-aos="fade-up" // You can set various AOS animations
+        data-aos-duration="1000" // Duration of the animation
+        style={{ backgroundImage: `url(${canteen})` }}
+        className="m-1 mr-1 rounded-[20px] h-[400px] bg-cover bg-center relative flex items-center justify-around gap-0 w-full"
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <img
+          ref={imgRef}
+          src={mora5}
+          className={`h-[400px] relative z-10 transition-all  sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
+            inView ? "animate-slide-in-left" : "opacity-0"
+          }`}
+        />
+        <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
+          <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>
+          <button onClick={()=>navigate("/sign-up")}className="btn-order z-10  ">
+            SingUp
+          </button>
+        </div>
+      </div>
+    </div>
+
 
       {/* Food Carousel Section */}
       <section className="food-carousel">

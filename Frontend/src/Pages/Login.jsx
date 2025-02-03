@@ -2,12 +2,16 @@ import React from "react";
 import { useState  } from "react";
 import {useNavigate} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "./Login.css"; // Create a CSS file for styling
 import logo from "../assets/logo.png"; // Add your logo image here
 
+
+
 const LoginPage = () => {
+    
    const [userName, setUserName] = useState("");
    const [password, setPassword] = useState("");
 
@@ -22,13 +26,20 @@ const LoginPage = () => {
       console.log(response);
       localStorage.setItem("token", response.data.token);
       console.log(response.data.token);
-      alert("Login Successful");
-      const decoded = jwtDecode(response.data.token);
-      if(decoded.role === "canteen") navigate("/canteen/home");
-      else navigate("/");
+      // alert("Login Successful");
+      toast.success("Login Successful!", { autoClose: 2000 });
+      setTimeout(()=>{
+        const decoded = jwtDecode(response.data.token);
+        if(decoded.role === "canteen") navigate("/canteen/home");
+        else navigate("/");
+      },2000);
+      // const decoded = jwtDecode(response.data.token);
+      // if(decoded.role === "canteen") navigate("/canteen/home");
+      // else navigate("/");
     }).catch((error) => {
       console.log(error);
-      alert("Login Failed");
+      // alert("Login Failed");
+      toast.error("Login Failed");
     });
   
    }

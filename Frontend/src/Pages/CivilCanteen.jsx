@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
 import './CivilCanteen.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import ReviewForm from '../Components/ReviewForm';
-import ReviewList from '../Components/ReviewList';
-
+import image from '../assets/placeholderimage.png';
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f1';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9f1';
 const SPECIAL_API_URL = 'http://localhost:5000/special/getItembyId?canteen_id=6761446355efca0108f8d9f1';
@@ -15,90 +12,98 @@ export default function CivilCanteen() {
   const [foodData, setFoodData] = useState(null);
   const [specialItems, setSpecialItems] = useState([]);
   const [isCanteenOpen, setIsCanteenOpen] = useState(true);
-  const [isLoggedin, setIsLoggedin] = useState(false);
 
-  const fetchCanteenStatus = async () => {
-    try {
-      const response = await axios.get(CANTEEN_API_URL);
-      const canteen = response.data.data[0];
-      setIsCanteenOpen(canteen.open);
-    } catch (error) {
-      console.error('Error fetching canteen status:', error);
-    }
-  };
 
-  const fetchMenu = async () => {
-    try {
-      const response = await axios.get(MENU_API_URL);
-      const menu = response.data.data[0];
+    const fetchCanteenStatus = async () => {
+      try {
+        const response = await axios.get(CANTEEN_API_URL);
+        const canteen = response.data.data[0];
+        setIsCanteenOpen(canteen.open);
+      } catch (error) {
+        console.error('Error fetching canteen status:', error);
+      }
+    };
 
-      const reshapedData = {
-        mainMeals: menu.main.map(item => ({
+    const fetchMenu = async () => {
+      try {
+        const response = await axios.get(MENU_API_URL);
+        const menu = response.data.data[0];
+
+        const reshapedData = {
+          mainMeals: menu.main.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            available: item.available,
+            description: item.description || '',
+            image: item.image || '', // Include image URL
+          })),
+          shortEats: menu.short_eat.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            available: item.available,
+            image: item.image || '', // Include image URL
+          })),
+          beverages: menu.beverage.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            available: item.available,
+            image: item.image || '', // Include image URL
+          })),
+        };
+
+        setFoodData(reshapedData);
+      } catch (error) {
+        console.error('Error fetching menu:', error);
+      }
+    };
+
+    const fetchSpecialItems = async () => {
+      try {
+        const response = await axios.get(SPECIAL_API_URL);
+        const specialData = response.data.data.map(item => ({
           id: item._id,
           name: item.name,
           price: item.price,
-          available: item.available,
           description: item.description || '',
           image: item.image || '',
-        })),
-        shortEats: menu.short_eat.map(item => ({
-          id: item._id,
-          name: item.name,
-          price: item.price,
           available: item.available,
-          image: item.image || '',
-        })),
-        beverages: menu.beverage.map(item => ({
-          id: item._id,
-          name: item.name,
-          price: item.price,
-          available: item.available,
-          image: item.image || '',
-        })),
-      };
-
-      setFoodData(reshapedData);
-    } catch (error) {
-      console.error('Error fetching menu:', error);
-    }
-  };
-
-  const fetchSpecialItems = async () => {
-    try {
-      const response = await axios.get(SPECIAL_API_URL);
-      const specialData = response.data.data.map(item => ({
-        id: item._id,
-        name: item.name,
-        price: item.price,
-        description: item.description || '',
-        image: item.image || '',
-        available: item.available,
-      }));
-      setSpecialItems(specialData);
-    } catch (error) {
-      console.error('Error fetching special items:', error);
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        console.log(decoded);
-        setIsLoggedin(true);
+        }));
+        setSpecialItems(specialData);
       } catch (error) {
-        console.error('Invalid token:', error);
-        setIsLoggedin(false);
+        console.error('Error fetching special items:', error);
       }
-    } else {
-      setIsLoggedin(false);
-    }
+    };
 
-    fetchCanteenStatus();
-    fetchMenu();
-    fetchSpecialItems();
-  }, []);
+
+    useEffect(() => {
+        
+        const fetchCanteenInfo = async () => {
+            try{
+               await fetchCanteenStatus();
+            }
+            catch(error){
+              console.error('Error fetching canteen status:', error);
+            }
+        }
+    
+        fetchCanteenInfo();
+        
+      },[])
+    
+      useEffect(() => {
+        const fetchMenuData = async () => {
+          try {
+            await fetchMenu();
+            await fetchSpecialItems();
+          } catch (error) {
+            console.error('Error fetching menu data:', error);
+          }
+        }
+        fetchMenuData();
+      },[isCanteenOpen])
 
   return (
     <>
@@ -123,12 +128,26 @@ export default function CivilCanteen() {
               <div className="food-items">
                 {specialItems.map((food) => (
                   <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
-                    <img
+                    {/* <img
                       src={food.image}
                       alt={food.name}
                       className="food-image"
                       onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
+                    /> */}
+
+                    {food.image ? (
+                      <img
+                      src={food.image}
+                      alt={food.name}
+                      className="food-image"
+                    /> 
+                    ):(
+                      <img
+                      src={image}
+                      alt={food.name}
+                      className="food-image"
                     />
+                    )}
                     <h3 className="food-name">{food.name}</h3>
                     <p className="food-price">Rs. {food.price}</p>
                     <p className="food-availability">
@@ -148,12 +167,25 @@ export default function CivilCanteen() {
                 <div className="food-items">
                   {items.map((food) => (
                     <div key={food.id} className={`food-card ${food.available ? '' : 'unavailable'}`}>
-                      <img
+                      {/* <img
                         src={food.image}
                         alt={food.name}
                         className="food-image"
                         onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.jpg'; }}
-                      />
+                      /> */}
+                      {food.image ? (
+                      <img
+                      src={food.image}
+                      alt={food.name}
+                      className="food-image"
+                    /> 
+                    ):(
+                      <img
+                      src={image}
+                      alt={food.name}
+                      className="food-image"
+                    />
+                    )}
                       <h3 className="food-name">{food.name}</h3>
                       <p className="food-price">Rs. {food.price}</p>
                       <p className="food-availability">
@@ -167,8 +199,7 @@ export default function CivilCanteen() {
             ))}
         </div>
       )}
-      <ReviewForm canteenId="6761446355efca0108f8d9f1" />
-      <ReviewList canteenId="6761446355efca0108f8d9f1" />
+
       <Footer />
     </>
   );
