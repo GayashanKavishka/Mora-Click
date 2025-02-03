@@ -42,6 +42,8 @@ app.use('/special', specialRouter);
 const userRouter = require('./Routes/userRoute');
 app.use('/user', userRouter);
 
+const reviewRouter = require('./Routes/reviewRoute');
+app.use('/review', reviewRouter);
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 5000');
