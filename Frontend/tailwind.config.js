@@ -23,6 +23,8 @@ module.exports = {
       },
       fontFamily:{
         'Lobster': ['Lobster'],
+        'Poppins': ['Poppins'],
+        'Roboto': ['Roboto'],
       }
     },
   },

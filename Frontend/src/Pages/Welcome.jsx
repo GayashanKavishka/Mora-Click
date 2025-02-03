@@ -145,12 +145,16 @@ export default function Welcome() {
       </>
         ) : (
             <>
-            <h1
-              data-aos="fade-right" // You can set various AOS animations
-              data-aos-duration="1000" // Duration of the animation
-              className="text-center font-bold font-Lobster text-blue-900 lg:text-[60px] [text-shadow:3px_3px_5px_yellow] md:text-[40px]">
-              Join with us to Find your Food  Rate & Review
-            </h1>
+            <div className='flex justify-center items-center w-full'>
+                  <h1
+                    data-aos="fade-right" // You can set various AOS animations
+                    data-aos-duration="1000" // Duration of the animation
+                    className="relative inline-block text-center font-bold font-Roboto text-blue-950 lg:text-[60px]  mb-[40px] 
+        before:content-[''] before:absolute before:bottom-[-5px] before:left-0 
+        before:w-full  before:h-[4px]  before:bg-gradient-to-r before:from-[#f1c40f] before:to-[#e67e22] before:rounded-[5px]">
+                    Let's Join,Rate & Review
+                  </h1>
+            </div>
             <div
               data-aos="fade-up" // You can set various AOS animations
               data-aos-duration="1000" // Duration of the animation
