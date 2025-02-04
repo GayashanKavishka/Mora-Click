@@ -217,7 +217,11 @@ export default function Welcome() {
     {/* Main Meals */}
     <div className="flex flex-col items-center">
       <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m1} alt="Main Meals" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
+        <img src={m1} alt="Main Meals" onClick={() => { 
+               navigate('/menu',{state:"main"}); 
+              //  scrollToSection('main'); 
+         }}
+          className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
       </div>
       <p className="mt-4 text-[35px] font-semibold text-gray-700">Main Meals</p>
     </div>
@@ -225,7 +229,11 @@ export default function Welcome() {
     {/* Beverages */}
     <div className="flex flex-col items-center">
       <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m2} alt="Beverages" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
+        <img src={m2} alt="shortEat" onClick={() => { 
+               navigate('/menu',{state:"shortEat"}); 
+              //  scrollToSection('shortEat'); 
+         }} 
+         className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
       </div>
       <p className="mt-4 text-[35px] font-semibold text-gray-700">Beverages</p>
     </div>
@@ -233,12 +241,15 @@ export default function Welcome() {
     {/* Short Eats */}
     <div className="flex flex-col items-center">
       <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m3} alt="Short Eats" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
+        <img src={m3} alt="Beverages" onClick={() => { 
+               navigate('/menu',{state:"beverage"}); 
+              //  scrollToSection('beverage'); 
+         }} className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
       </div>
       <p className="mt-4 text-[35px] font-semibold text-gray-700">Short Eats</p>
     </div>
   </div>
-</div>
+</div>beverage
 
 
 
