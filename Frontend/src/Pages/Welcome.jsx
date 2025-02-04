@@ -40,6 +40,7 @@ export default function Welcome() {
   const navigate = useNavigate();
   const [token,setToken] = useState(null);
   const[role,setRole] = useState(null);
+  const[decodedToken,setDecodedToken] = useState(null);
 
   const handleContactUsClick = () => {
     navigate('/contact');
@@ -60,6 +61,13 @@ export default function Welcome() {
       setRole(decode.role);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      const decode = jwtDecode(token);
+      setDecodedToken(decode);
+    }
+  },[decodedToken]);
 
   useEffect(()=>{
     if(role){
@@ -145,7 +153,7 @@ export default function Welcome() {
           src={moranew}
           data-aos="fade-up" // You can set various AOS animations
           data-aos-duration="1000" // Duration of the animation
-          className={`lg:h-[351px] lg:w-[850px] sm:h-[200px] sm:w-[400px] md:h-[300px] md:w-[600px] mt-8 relative z-10 transition-all`}
+          className={`lg:h-[351px] lg:w-[850px] sm:h-[200px] sm:w-[400px] md:h-[300px] md:w-[600px] mt-8 relative z-10 transition-all sm:animate-slide-in-left md:animate-slide-in-left`}
         />
         {/* <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
           <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>

@@ -20,6 +20,7 @@ import Loading from "./Components/Loading";
 import EditPage from "./Canteen_Level/Editpage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedUserRoute from "./Auth/protectedUserRoutes";
 
 // function AppContent() {
 //   const [isLoading, setIsLoading] = useState(false);
@@ -130,7 +131,7 @@ function AppContent() {
       {!isLoading && (
         <main>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={<ProtectedUserRoute><Welcome/></ProtectedUserRoute>}/>
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/godayata" element={<GodaYata />} />

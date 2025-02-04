@@ -81,8 +81,13 @@
   border-radius: 5px;
 }
 
+.dropdown-content:hover{
+  color: #f1c40f;
+}
+
 .dropdown:hover .dropdown-content {
   display: block;
+  color: #f1c40f;
 }
 
 .dropdown-content a {
@@ -93,7 +98,7 @@
 }
 
 .dropdown-content a:hover {
-  color: #2c3e50;
+  color:  #f1c40f;
 }
 
 /* Login Button */
