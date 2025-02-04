@@ -21,6 +21,7 @@ import EditPage from "./Canteen_Level/Editpage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedUserRoute from "./Auth/protectedUserRoutes";
+import Account from "./Pages/Account";
 
 // function AppContent() {
 //   const [isLoading, setIsLoading] = useState(false);
@@ -141,6 +142,7 @@ function AppContent() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/editmenu" element={<EditPage />} />
+            <Route path="/account" element={<Account/>} />
             {/*----------------------canteen level----------------------*/}
             <Route path="/login" element={<Login />} />
             <Route path="/canteen/Home" element={<ProtectedCanteenRoute><Home /></ProtectedCanteenRoute>} />
