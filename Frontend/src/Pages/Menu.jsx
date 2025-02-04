@@ -204,19 +204,28 @@ const canteenname = (canteen_Id)=>
         <div className="menu-category ">
           <h2 className="categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Main Meal</h2>
           <div className="menu-items">
-            {menuData.main.map(item => ( !item.available ? null :
-              <div className="menu-item" key={item._id}>
-                <img
-                  src={item.image || "https://via.placeholder.com/150"} // Fallback image
-                  alt={item.name}
-                  className="item-image"
-                />
-                <h3 className="item-name">{item.name}</h3>
-                <p className="item-price">Rs. {item.price}</p>
-                <p className="item-description">{item.description}</p>
-                <p className="item-canteen">Available at:{canteenname(item.canteen_id)} </p>
+          {menuData.main.length === 0 ? (
+          <div className="text-center  ">
+              <p className="text-[20px] text-yellow-600 font-semibold">Loading...</p>
+              <div class="spinner-border text-warning " role="status">
+                    <span class="visually-hidden">Loading...</span>
               </div>
-            ))}
+          </div>
+          )
+         :(
+          menuData.main.map(item => ( !item.available ? null :
+          <div className="menu-item" key={item._id}>
+            <img
+              src={item.image || "https://via.placeholder.com/150"} // Fallback image
+              alt={item.name}
+              className="item-image"
+            />
+            <h3 className="item-name">{item.name}</h3>
+            <p className="item-price">Rs. {item.price}</p>
+            <p className="item-description">{item.description}</p>
+            <p className="item-canteen">Available at:{canteenname(item.canteen_id)} </p>
+          </div>
+        )))}
           </div>
         </div>
 
@@ -224,7 +233,15 @@ const canteenname = (canteen_Id)=>
         <div className="menu-category">
           <h2 className="categorymenu-title categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Short Eats</h2>
           <div className="menu-items">
-            {menuData.shortEat.map(item => ( !item.available ? null :
+          {menuData.shortEat.length === 0 ? (
+             <div className="text-center  ">
+                <p className="text-[20px] text-yellow-600 font-semibold">Loading...</p>
+                <div class="spinner-border text-warning " role="status">
+                      <span class="visually-hidden">Loading...</span>
+                </div>
+             </div>
+          ):(
+            menuData.shortEat.map(item => ( !item.available ? null :
               <div className="menu-item" key={item._id}>
                 <img
                   src={item.image || "https://via.placeholder.com/150"} // Fallback image
@@ -236,7 +253,9 @@ const canteenname = (canteen_Id)=>
                 <p className="item-description">{item.description}</p>
                 <p className="item-canteen">Available at: {canteenname(item.canteen_id)}</p>
               </div>
-            ))}
+            ))
+          )}
+            
           </div>
         </div>
 
@@ -244,7 +263,15 @@ const canteenname = (canteen_Id)=>
         <div className="menu-category">
           <h2 className="categorymenu-title categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Beverages</h2>
           <div className="menu-items">
-            {menuData.beverage.map(item => ( !item.available ? null :
+          {menuData.beverage.length === 0 ? (
+            <div className="text-center  ">
+              <p className="text-[20px] text-yellow-600 font-semibold">Loading...</p>
+              <div class="spinner-border text-warning " role="status">
+                    <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ):(
+            menuData.beverage.map(item => ( !item.available ? null :
               <div className="menu-item" key={item._id}>
                 <img
                   src={item.image || "https://via.placeholder.com/150"} // Fallback image
@@ -256,7 +283,9 @@ const canteenname = (canteen_Id)=>
                 <p className="item-description">{item.description}</p>
                 <p className="item-canteen">Available at: {canteenname(item.canteen_id)}</p>
               </div>
-            ))}
+            ))
+          )}
+            
           </div>
         </div>
       </div>

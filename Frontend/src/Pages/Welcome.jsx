@@ -276,6 +276,9 @@ export default function Welcome() {
           </Carousel.Item>
         </Carousel>
       </section>
+      <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
 
       <Footer />
     </div>

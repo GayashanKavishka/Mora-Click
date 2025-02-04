@@ -149,7 +149,7 @@ export default function StaffCanteen() {
 
       {isCanteenOpen && (
         <div className="categories-container">
-          {specialItems.length > 0 && (
+          {specialItems.length > 0 ? (
             <div className="category">
               <h2 className="category-title">Special Items</h2>
               <div className="food-items">
@@ -184,9 +184,19 @@ export default function StaffCanteen() {
                 ))}
               </div>
             </div>
-          )}
+          )
+          :
+          (
+            <div className="text-center  ">
+                <p className="text-[20px] text-yellow-600 font-semibold">Loading...</p>
+                <div class="spinner-border text-warning " role="status">
+                      <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+          )
+        }
 
-          {foodData &&
+          {foodData ?
             Object.entries(foodData).map(([category, items]) => (
               <div key={category} className="category">
                 <h2 className="category-title">{category.replace(/([A-Z])/g, ' $1')}</h2>
@@ -222,7 +232,17 @@ export default function StaffCanteen() {
                   ))}
                 </div>
               </div>
-            ))}
+            ))
+            :
+            (
+              <div className="text-center  ">
+                <p className="text-[20px] text-yellow-600 font-semibold">Loading...</p>
+                <div class="spinner-border text-warning " role="status">
+                      <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            )
+          }
         </div>
       )}
       {isLoggedIn ? (
