@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
@@ -212,6 +213,7 @@ const canteenname = (canteen_Id)=>
   const [decodedToken, setDecodedToken] = useState(null);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -261,6 +263,7 @@ const canteenname = (canteen_Id)=>
         })
         .then((response) => {
           console.log("Rating added:", response.data);
+          navigate(0);
         })
         .catch((error) => {
           console.error("Error adding rating:", error); 

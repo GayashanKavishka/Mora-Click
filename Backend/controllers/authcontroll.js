@@ -101,7 +101,7 @@ const login = (username, password) => {
 
                        
 
-                        { username: user.e_mail, role: user.role ,user_id : user._id , name : user.firstName, user._id,ID:user._id }, 
+                        { username: user.e_mail, role: user.role ,user_id : user._id , name : user.firstName,ID:user._id }, 
 
                         process.env.Secret_Key, 
                         { expiresIn: '1h' }

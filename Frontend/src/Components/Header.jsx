@@ -42,7 +42,7 @@ export default function Header() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    navigate("/");
+    navigate(0);
   };
 
   useEffect(() => {
