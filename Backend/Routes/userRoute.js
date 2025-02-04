@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {registerUser} = require('../controllers/usercontroll.js');
+const {registerUser , getuser , updateUser} = require('../controllers/usercontroll.js');
 
 router.post('/insertUser', async (req, res) => {
     try {
@@ -10,6 +10,31 @@ router.post('/insertUser', async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(400).json({ error:"ERROR " });
+    }
+});
+
+router.get('/getuser', async (req, res) => {
+    try {
+        const _id = req.query._id;
+        const result = await getuser(_id);
+        if(result.status === 200) return res.status(200).json({ data: result.data });
+        if(result.status === 404) return res.status(404).json({ message: 'User not found' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "ERROR" });
+    }
+});
+
+router.put('/updateuser', async (req, res) => {
+    try {
+        const _id = req.query._id;
+        const data = req.body;
+        const result = await updateUser(_id, data);
+        if(result.status === 200) return res.status(200).json({ message: 'User updated successfully', data: result.data });
+        if(result.status === 404) return res.status(404).json({ message: 'User not found' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "ERROR" });
     }
 });
 
