@@ -4,7 +4,6 @@ import { isTokenExpired } from "./authUser";
 
 
 const ProtectedUserRoute = ({ children }) => {
-  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   console.log(token);
 
