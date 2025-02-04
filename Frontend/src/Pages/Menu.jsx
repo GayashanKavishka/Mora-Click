@@ -4,6 +4,10 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import axios from "axios";
 import { use } from "react";
+import StarRating from "../Components/Raiting";
+import RatingPopup from "../Components/AddRateing";
+import  {jwtDecode} from "jwt-decode";
+
 
 // Define canteen IDs for fetching menu data
 // const canteenIds = [
@@ -28,6 +32,9 @@ import { use } from "react";
 
 
 
+
+
+
 const Menu = () => {
   const [menuData, setMenuData] = useState({
     main: [],
@@ -41,6 +48,8 @@ const Menu = () => {
 
   const [canteenIds, setCanteenIds] = useState([]);
   const [canteenInfo, setCanteenInfo] = useState({});
+
+
 
 
 const GetCanteenIds = async () => {
@@ -146,7 +155,7 @@ const canteenname = (canteen_Id)=>
   //   fetchIdsAndMenu();
   // }, []);
 
-
+  
 
   useEffect(()=>{
      const fetchCanteenID = async () => {
@@ -188,6 +197,92 @@ const canteenname = (canteen_Id)=>
     console.log("Menu data:", menuData);
   },[menuData]);
 
+
+  //------------------------------------------------------------
+
+  
+
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedCanteeId, setSelectedCanteeId] = useState(""); 
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedItemID, setSelectedItemID] = useState("");
+  const [decodedToken, setDecodedToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
+    console.log("Token:", token);
+    if(token){
+      const decoded = jwtDecode(token);
+      console.log("Decoded Token:", decoded);
+      setDecodedToken(decoded);
+    }
+  }, []);
+
+  useEffect(() => {
+    if(decodedToken){
+      console.log("logged token :",decodedToken);
+      setUser(decodedToken.ID);
+    }
+  }, [decodedToken]);
+
+
+  const openPopup = (item,type) => {
+    console.log("Opening popup for item:", item);
+    setSelectedItem(item.name);
+    setIsPopupOpen(true);
+    setSelectedType(type);
+    setSelectedCanteeId(item.canteen_id);
+    setSelectedRating(item.raiting);
+    setSelectedItemID(item._id);
+  };
+
+
+  const addRaintingMain = async (name,type,selectedRating,canteen_id,item_id) => {
+    console.log("Rating name:", name);
+    console.log("Rating canteen_id:", canteen_id);
+    console.log("Rating type:", type);
+    console.log("Rating selectedRating:", selectedRating);
+    console.log("Rating item_id:", item_id);
+    console.log("Rating user:", user);
+
+    try {
+        axios.post("http://localhost:5000/raiting/add",{
+          user_id: user,
+          item_id: item_id,
+          canteen_id: canteen_id,
+          type: type,
+          raite: selectedRating
+        })
+        .then((response) => {
+          console.log("Rating added:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error adding rating:", error); 
+        });
+    }
+    catch(error)
+    {
+        console.error("Error adding rating:", error);
+    }
+  }
+
+  const addRaintingShort = async (item,canteen_id) => {
+    console.log("Rating item:", item);
+    console.log("Rating canteen_id:", item.canteen_id);
+  }
+
+  const addRaintingBeverage = async (item,canteen_id) => {
+    console.log("Rating item:", item);
+    console.log("Rating canteen_id:", item.canteen_id);
+  }
+  
+
   return (
     <>
       <Header />
@@ -224,10 +319,18 @@ const canteenname = (canteen_Id)=>
             <p className="item-price">Rs. {item.price}</p>
             <p className="item-description">{item.description}</p>
             <p className="item-canteen">Available at:{canteenname(item.canteen_id)} </p>
+            <div className="flex justify-around">
+             <StarRating rating={item.raiting} />
+             {!token ? (""):(
+               <button onClick={()=>openPopup(item,"main")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button>
+             )}
+             {/* <button onClick={()=>openPopup(item,"main")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button> */}
+            </div>
           </div>
         )))}
           </div>
         </div>
+        {/* <RatingPopup isOpen={isPopupOpen} itemName={selectedItem} onClose={() => setIsPopupOpen(false)} onRate={addRaintingMain} type={selectedType}  canteen_id={selectedCanteeId} rate={selectedRating} itemID={selectedItemID}/> */}
 
         {/* Short Eats Category */}
         <div className="menu-category">
@@ -252,6 +355,13 @@ const canteenname = (canteen_Id)=>
                 <p className="item-price">Rs. {item.price}</p>
                 <p className="item-description">{item.description}</p>
                 <p className="item-canteen">Available at: {canteenname(item.canteen_id)}</p>
+                <div className="flex justify-around">
+                  <StarRating rating={item.raiting} />
+                  {/* <button onClick={()=>openPopup(item,"short_eat")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button> */}
+                  { !token ? (""):(
+                     <button onClick={()=>openPopup(item,"short_eat")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button>
+                  )}
+                  </div>
               </div>
             ))
           )}
@@ -282,6 +392,13 @@ const canteenname = (canteen_Id)=>
                 <p className="item-price">Rs. {item.price}</p>
                 <p className="item-description">{item.description}</p>
                 <p className="item-canteen">Available at: {canteenname(item.canteen_id)}</p>
+                <div className="flex justify-around">
+                  <StarRating rating={item.raiting} />
+                  {/* <button onClick={()=>openPopup(item,"beverage")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button> */}
+                  {!token ? (""):(
+                   <button onClick={()=>openPopup(item,"beverage")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button>
+                  )}
+                </div>
               </div>
             ))
           )}
@@ -290,6 +407,7 @@ const canteenname = (canteen_Id)=>
         </div>
       </div>
       <Footer />
+      <RatingPopup isOpen={isPopupOpen} itemName={selectedItem} onClose={() => setIsPopupOpen(false)} onRate={addRaintingMain} type={selectedType}  canteen_id={selectedCanteeId} rate={selectedRating} itemID={selectedItemID}/>
     </>
   );
 };
