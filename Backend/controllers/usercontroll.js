@@ -68,7 +68,7 @@ const registerUser = (obj) => {
     }
 
     });
-};
+}
 
 // const loginUser = (obj) => {
 //     return new Promise((resolve, reject) => {
@@ -105,7 +105,55 @@ const registerUser = (obj) => {
 //     );
 // }
 
+const getuser = (_id) => {
+    return new Promise((resolve, reject) => {
+        user.findOne({ _id: _id }).then((data) => {
+            return resolve({ status: 200, data });
+        }).catch((err) => {
+            return reject(err);
+        })
+    }
+    );
+}
+
+const updateUser =(_id,data) =>{
+    return new Promise((resolve,reject)=>{
+    const objectId = new mongo.Types.ObjectId(_id);
+
+    user.findOne({ _id: objectId }).then((result) => {
+        if (!result) {
+            return reject({ status: 404, message: "User not found" });
+        }
+        console.log(data.password)
+        const updateFields = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            dob: data.dob,
+            username: data.username,
+            role: data.role,
+            faculty: data.faculty,
+            e_mail: data.e_mail,
+            contact: data.contact
+        };
+        
+        if(data.password){
+            const encriptedPassword = bcrypt.hashSync(data.password, saltRounds);
+            updateFields.password = encriptedPassword;
+        }
+
+        user.updateOne({ _id: objectId }, { $set: updateFields }).then((data) => {
+            if (data.matchedCount === 0) {
+                return resolve({ status: 404, message: "Update failed" });
+            }
+            return resolve({ status: 200, message: "User updated successfully", data });
+        }).catch((err) => reject({ status: 500, message: "Database update failed", error: err }));
+    });
+}
+)}
+
 module.exports = {
-    registerUser
+    registerUser,
+    getuser,
+    updateUser
 };
 
