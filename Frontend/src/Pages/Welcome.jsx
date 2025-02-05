@@ -24,6 +24,7 @@ import canteen from '../assets/canteen.jpg';
 import m1 from '../assets/main meal mora.png';
 import m2 from '../assets/beverages mora.png';
 import m3 from '../assets/short eats mora.png';
+import m4 from '../assets/special item mora.png';
 import civil from '../assets/civil.jpg';
 import godayata from '../assets/godayata.jpg';
 import godauda from '../assets/Goda Uda.jpg';
@@ -212,32 +213,41 @@ export default function Welcome() {
     <span className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-md"></span>
   </h2>
 
-  {/* Mora Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 justify-items-center">
-    {/* Main Meals */}
-    <div className="flex flex-col items-center">
-      <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m1} alt="Main Meals" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
-      </div>
-      <p className="mt-4 text-[35px] font-semibold text-gray-700">Main Meals</p>
+ {/* Mora Grid */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 justify-items-center">
+  {/* Main Meals */}
+  <div className="flex flex-col items-center">
+    <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+      <img src={m1} alt="Main Meals" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
     </div>
-
-    {/* Beverages */}
-    <div className="flex flex-col items-center">
-      <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m2} alt="Beverages" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
-      </div>
-      <p className="mt-4 text-[35px] font-semibold text-gray-700">Beverages</p>
-    </div>
-
-    {/* Short Eats */}
-    <div className="flex flex-col items-center">
-      <div className="relative w-96 h-96 bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src={m3} alt="Short Eats" className="w-full h-72 object-cover transition-transform duration-300 hover:scale-110" />
-      </div>
-      <p className="mt-4 text-[35px] font-semibold text-gray-700">Short Eats</p>
-    </div>
+    <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Main Meals</p>
   </div>
+
+  {/* Beverages */}
+  <div className="flex flex-col items-center">
+    <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+      <img src={m2} alt="Beverages" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+    </div>
+    <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Beverages</p>
+  </div>
+
+  {/* Short Eats */}
+  <div className="flex flex-col items-center">
+    <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+      <img src={m3} alt="Short Eats" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+    </div>
+    <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Short Eats</p>
+  </div>
+
+  {/* Special Items */}
+  <div className="flex flex-col items-center">
+    <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+      <img src={m4} alt="Special Items" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+    </div>
+    <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Special Items</p>
+  </div>
+</div>
+
 </div>
 
 
