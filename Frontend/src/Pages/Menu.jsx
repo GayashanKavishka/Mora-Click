@@ -217,20 +217,40 @@ const fetchMenuData = async () => {
     console.log("Rating user:", user);
 
     try {
-        axios.post("http://localhost:5000/raiting/add",{
-          user_id: user,
-          item_id: item_id,
-          canteen_id: canteen_id,
-          type: type,
-          raite: selectedRating
-        })
-        .then((response) => {
-          console.log("Rating added:", response.data);
-          navigate(0);
-        })
-        .catch((error) => {
-          console.error("Error adding rating:", error); 
-        });
+        
+        if(type === "special")
+        {
+          axios.post("http://localhost:5000/raiting/addspecial",{
+            user_id: user,
+            item_id: item_id,
+            raite: selectedRating
+          })
+          .then((response) => {
+            console.log("Rating added:", response.data);
+            navigate(0);
+          })
+          .catch((error) => {
+            console.error("Error adding rating:", error); 
+          });
+        }
+        else
+        {
+          axios.post("http://localhost:5000/raiting/add",{
+            user_id: user,
+            item_id: item_id,
+            canteen_id: canteen_id,
+            type: type,
+            raite: selectedRating
+          })
+          .then((response) => {
+            console.log("Rating added:", response.data);
+            navigate(0);
+          })
+          .catch((error) => {
+            console.error("Error adding rating:", error); 
+          });
+
+        }
     }
     catch(error)
     {
