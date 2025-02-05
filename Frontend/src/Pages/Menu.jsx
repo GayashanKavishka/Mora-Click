@@ -9,33 +9,6 @@ import StarRating from "../Components/Raiting";
 import RatingPopup from "../Components/AddRateing";
 import  {jwtDecode} from "jwt-decode";
 
-
-// Define canteen IDs for fetching menu data
-// const canteenIds = [
-//   "6761446355efca0108f8d9ef",
-//   "6761446355efca0108f8d9f0",
-//   "6761446355efca0108f8d9f2",
-//   "6761446355efca0108f8d9f1",
-// ];
-
-// const canteenInfo = {
-//   "Goda Yata" : "6761446355efca0108f8d9ef" ,
-//   "Goda Uda" : "6761446355efca0108f8d9f0" ,
-//   "Staff Canteen" : "6761446355efca0108f8d9f2" ,
-//   "Civil Canteen" : "6761446355efca0108f8d9f1" ,
-// }
-
-
-
-
-
-
-
-
-
-
-
-
 const Menu = () => {
   const [menuData, setMenuData] = useState({
     main: [],
@@ -49,6 +22,7 @@ const Menu = () => {
 
   const [canteenIds, setCanteenIds] = useState([]);
   const [canteenInfo, setCanteenInfo] = useState({});
+  const [specialItems, setSpecialItems] = useState([]);
 
 
 
@@ -80,12 +54,7 @@ const canteenname = (canteen_Id)=>
 
 }
 
-
-  
-
-
-
-  const fetchMenuData = async () => {
+const fetchMenuData = async () => {
     try {
       console.log("Fetching menu data...");
       const requests = canteenIds.map((canteenId) =>
@@ -121,43 +90,37 @@ const canteenname = (canteen_Id)=>
       setLoading(false);
     }
   };
+
+  const fetchSpecialItems = async () => {
+    try {
+      const canteenRequests = canteenIds.map((canteenId) =>
+        axios.get(`http://localhost:5000/special/getItembyId?canteen_id=${canteenId}`)
+      );
+  
+      const responses = await Promise.all(canteenRequests);
+  
+      const allSpecialItems = responses.flatMap((response, index) => {
+        const canteenId = canteenIds[index];
+        return response.data.data.map((item) => ({
+          ...item,
+          canteen_id: canteenId,
+        }));
+      });
+  
+      setSpecialItems(allSpecialItems);
+    } catch (error) {
+      console.error("Error fetching special items:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (canteenIds.length > 0) {
+      fetchSpecialItems();
+    }
+  }, [canteenIds]);
   
   
-  // useEffect(() => {
-  //   const fetchIds = async () => {
-  //     try {
-  //        await GetCanteenIds();
-  //     } catch (error) {
-  //       console.error("Error fetching canteen data:", error);
-  //     }
-  //   };
-
-  //   fetchIds();
-  //   fetchMenuData();
-  //   console.log("hello",menuData);
-  //   // console.log("hello",menuData);
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchIdsAndMenu = async () => {
-  //     try {
-  //       // Fetch the canteen IDs first
-  //       await GetCanteenIds();
-        
-  //       // After fetching IDs, ensure the menu data is fetched
-  //       if (canteenIds.length > 0) {
-  //         await fetchMenuData();
-  //       }
-  //     } catch (error) {
-  //       console.error("Error during fetching process:", error);
-  //     }
-  //   };
   
-  //   fetchIdsAndMenu();
-  // }, []);
-
-  
-
   useEffect(()=>{
      const fetchCanteenID = async () => {
       try {
@@ -408,6 +371,40 @@ const canteenname = (canteen_Id)=>
             
           </div>
         </div>
+
+      {/* Special Items Category */}
+      <div className="menu-category">
+        <h2 className="categorymenu-title relative inline-block text-center font-Roboto text-blue-950 lg:text-[35px] mb-[40px]">Special Items</h2>
+        <div className="menu-items">
+          {specialItems.length === 0 ? (
+            <div className="text-center">
+              <p className="text-[20px] text-yellow-600 font-semibold">Loading...</p>
+              <div className="spinner-border text-warning" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : (
+            specialItems.map((item) => (
+              !item.available ? null : (
+                <div className="menu-item" key={item._id}>
+                  <img src={item.image || "https://via.placeholder.com/150"} alt={item.name} className="item-image" />
+                  <h3 className="item-name">{item.name}</h3>
+                  <p className="item-price">Rs. {item.price}</p>
+                  <p className="item-description">{item.description}</p>
+                  <p className="item-canteen">Available at: {canteenname(item.canteen_id)}</p>
+                  <div className="flex justify-around">
+                    <StarRating rating={item.raiting} />
+                    {!token ? null : (
+                      <button onClick={() => openPopup(item, "special")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button>
+                    )}
+                  </div>
+                </div>
+              )
+            ))
+          )}
+        </div>
+      </div>
+
       </div>
       <Footer />
       <RatingPopup isOpen={isPopupOpen} itemName={selectedItem} onClose={() => setIsPopupOpen(false)} onRate={addRaintingMain} type={selectedType}  canteen_id={selectedCanteeId} rate={selectedRating} itemID={selectedItemID}/>
