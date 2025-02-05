@@ -133,13 +133,13 @@ function AppContent() {
         <main>
           <Routes>
             <Route path="/" element={<ProtectedUserRoute><Welcome/></ProtectedUserRoute>}/>
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/godayata" element={<GodaYata />} />
-            <Route path="/godauda" element={<GodaUda />} />
-            <Route path="/staff" element={<StaffCanteen />} />
-            <Route path="/civil" element={<CivilCanteen />} />
-            <Route path="/menu" element={<Menu />} />
+            <Route path="/about" element={<ProtectedUserRoute><AboutUs /></ProtectedUserRoute>} />
+            <Route path="/contact" element={<ProtectedUserRoute><ContactUs /></ProtectedUserRoute>} />
+            <Route path="/godayata" element={<ProtectedUserRoute><GodaYata /></ProtectedUserRoute>} />
+            <Route path="/godauda" element={<ProtectedUserRoute><GodaUda /></ProtectedUserRoute>} />
+            <Route path="/staff" element={<ProtectedUserRoute><StaffCanteen /></ProtectedUserRoute>} />
+            <Route path="/civil" element={<ProtectedUserRoute><CivilCanteen /></ProtectedUserRoute>} />
+            <Route path="/menu" element={<ProtectedUserRoute><Menu /></ProtectedUserRoute>} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/editmenu" element={<EditPage />} />
             <Route path="/account" element={<Account/>} />
