@@ -7,6 +7,7 @@ import ReviewList from '../Components/ReviewList';
 import ReviewForm from '../Components/ReviewForm';
 import {jwtDecode} from 'jwt-decode';
 import image from '../assets/placeholderimage.png';
+import StarRating from '../Components/Raiting';
 
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9ef';
@@ -57,6 +58,7 @@ export default function GodaYata() {
       try {
         const response = await axios.get(MENU_API_URL);
         const menu = response.data.data[0];
+        console.log("Menu:", menu);
 
         const reshapedData = {
           mainMeals: menu.main.map(item => ({
@@ -66,6 +68,7 @@ export default function GodaYata() {
             available: item.available,
             description: item.description || '',
             image: item.image || '', // Include image URL
+            raiting: item.raiting || 0,
           })),
           shortEats: menu.short_eat.map(item => ({
             id: item._id,
@@ -73,6 +76,7 @@ export default function GodaYata() {
             price: item.price,
             available: item.available,
             image: item.image || '', // Include image URL
+            raiting: item.raiting || 0,
           })),
           beverages: menu.beverage.map(item => ({
             id: item._id,
@@ -80,6 +84,7 @@ export default function GodaYata() {
             price: item.price,
             available: item.available,
             image: item.image || '', // Include image URL
+            raiting: item.raiting || 0,
           })),
         };
 
@@ -150,6 +155,7 @@ export default function GodaYata() {
         <h2>{isCanteenOpen ? 'Canteen is Open' : 'Canteen is Closed'}</h2>
         <p>{isCanteenOpen ? 'Come in and enjoy your meal!' : 'Sorry, we are currently closed. Please visit later!'}</p>
       </div>
+
 
       {isCanteenOpen && (
         <div className="categories-container">
@@ -233,6 +239,12 @@ export default function GodaYata() {
                         {food.available ? 'Available' : 'Not Available'}
                       </p>
                       {food.description && <p className="food-description">{food.description}</p>}
+                      <div className="flex justify-around">
+                      {console.log(food)}
+                      <StarRating rating = {food.raiting} />
+                      {/* <button onClick={()=>openPopup(item,"short_eat")} className="mr-2 mb-0 bg-blue-950 w-[60px] h-[30px] text-white rounded">Rate</button> */}
+
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -252,11 +264,11 @@ export default function GodaYata() {
       )}
        {isLoggedIn ? (
   <div>
+    <ReviewList canteenId="6761446355efca0108f8d9ef" />
       <ReviewForm
   canteenId="6761446355efca0108f8d9ef"
   user_ID={decodedToken?.user_id || 'Guest'}
-/>
-      <ReviewList canteenId="6761446355efca0108f8d9ef" />
+/> 
       </div>
       ) : ""}
       <Footer />
