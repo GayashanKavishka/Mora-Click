@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './CivilCanteen.css';
 import Header from '../Components/Header';
@@ -139,6 +139,20 @@ export default function CivilCanteen() {
         fetchMenuData();
       },[isCanteenOpen])
 
+      //-------------------------------------------
+
+      const reviewSectionRef = useRef(null);
+      
+        const scrollToReview = () => {
+          console.log('Scrolling to review section');
+          if (reviewSectionRef.current) {
+            reviewSectionRef.current.scrollIntoView({
+              behavior: 'smooth',  // For smooth scrolling
+              block: 'start'  // Scroll to the top of the section
+            });
+          }
+        }
+
   return (
     <>
       <Header />
@@ -158,6 +172,7 @@ export default function CivilCanteen() {
         <div className="categories-container">
           {specialItems.length > 0 ? (
             <div className="category">
+              <button className='mb-3 font-semibold' onClick={scrollToReview}>Go to Reviews<i class='fas fa-angle-right'></i> </button>
               <h2 className="category-title">Special Items</h2>
               <div className="food-items">
                 {specialItems.map((food) => (
@@ -260,7 +275,7 @@ export default function CivilCanteen() {
         </div>
       )}
  {isLoggedIn ? (
-  <div>
+  <div ref={reviewSectionRef}>
     <ReviewList canteenId="6761446355efca0108f8d9f1" />
     <ReviewForm
       canteenId="6761446355efca0108f8d9f1"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './GodaUda.css';
 import Header from '../Components/Header';
@@ -8,6 +8,7 @@ import ReviewForm from '../Components/ReviewForm';
 import {jwtDecode} from 'jwt-decode';
 import image from '../assets/placeholderimage.png';
 import StarRating from '../Components/Raiting';
+import { useNavigate } from 'react-router-dom';
 
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f0';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9f0';
@@ -137,6 +138,24 @@ export default function GodaUda() {
         fetchMenuData();
       },[isCanteenOpen])
 
+
+      //-------------------------------------
+
+      const navigate = useNavigate();
+  // const [ref, setRef] = useState(null);
+
+  const reviewSectionRef = useRef(null);
+
+  const scrollToReview = () => {
+    console.log('Scrolling to review section');
+    if (reviewSectionRef.current) {
+      reviewSectionRef.current.scrollIntoView({
+        behavior: 'smooth',  // For smooth scrolling
+        block: 'start'  // Scroll to the top of the section
+      });
+    }
+  }
+
   return (
     <>
       <Header />
@@ -156,6 +175,7 @@ export default function GodaUda() {
         <div className="categories-container">
           {specialItems.length > 0 ? (
             <div className="category">
+              <button className='mb-3 font-semibold' onClick={scrollToReview}>Go to Reviews<i class='fas fa-angle-right'></i> </button>
               <h2 className="category-title">Special Items</h2>
               <div className="food-items">
                 {specialItems.map((food) => (
@@ -258,9 +278,9 @@ export default function GodaUda() {
         </div>
       ) }
       {isLoggedIn ? (
-  <div>
+  <div ref={reviewSectionRef}>
     <ReviewList canteenId="6761446355efca0108f8d9f0" />
-      <ReviewForm
+      <ReviewForm 
   canteenId="6761446355efca0108f8d9f0"
   user_ID={decodedToken?.user_id || 'Guest'}
 />
