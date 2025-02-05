@@ -25,6 +25,7 @@ const LoginPage = () => {
     }).then((response) => {
       console.log(response);
       localStorage.setItem("token", response.data.token);
+      
       console.log(response.data.token);
       // alert("Login Successful");
       toast.success("Login Successful!", { autoClose: 2000 });

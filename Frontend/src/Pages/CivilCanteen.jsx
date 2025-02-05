@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './CivilCanteen.css';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
+import Header from '../Components/header';
+import Footer from '../Components/footer';
 import ReviewList from '../Components/ReviewList';
 import ReviewForm from '../Components/ReviewForm';
 import image from '../assets/placeholderimage.png';
@@ -41,6 +41,8 @@ export default function CivilCanteen() {
           }
         }
       }, [decodedToken]);
+
+      
 
       
 

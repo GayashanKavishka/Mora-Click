@@ -129,7 +129,6 @@ const updateUser =(_id,data) =>{
             firstName: data.firstName,
             lastName: data.lastName,
             dob: data.dob,
-            username: data.username,
             role: data.role,
             faculty: data.faculty,
             e_mail: data.e_mail,

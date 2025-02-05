@@ -14,7 +14,7 @@ import Home from "./Canteen_Level/home/home";
 import Login from "./Pages/Login";
 import Menu from "./Pages/Menu";
 import SignUp from "./Pages/SignUp";
-import EditAccount from "./Canteen_Level/account/account";
+import EditAccount from "./Pages/EditAccount";
 import ProtectedCanteenRoute from "./Auth/protectedCanteenRoutes";
 import Loading from "./Components/Loading";
 import EditPage from "./Canteen_Level/Editpage";
@@ -143,6 +143,7 @@ function AppContent() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/editmenu" element={<EditPage />} />
             <Route path="/account" element={<Account/>} />
+            <Route path="/edit-account" element={<EditAccount />} />
             {/*----------------------canteen level----------------------*/}
             <Route path="/login" element={<Login />} />
             <Route path="/canteen/Home" element={<ProtectedCanteenRoute><Home /></ProtectedCanteenRoute>} />
