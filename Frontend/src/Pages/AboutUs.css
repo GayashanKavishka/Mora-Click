@@ -1,8 +1,10 @@
+/*General Styles*/
 /* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -11,148 +13,216 @@ body {
     color: #333;
 }
 
-h1, h2 {
-    color: #2c3e50;
-}
-
-h3 {
-    color: #f39c12;
-}
-
-/* About Us Header */
+/* Header */
 .about-header {
     text-align: center;
-    padding: 50px 20px;
-    background-image: url('../assets/about.jpg'); /* Use your image path */
-    background-size: cover; /* Ensures the image covers the entire section */
-    background-position: center; /* Centers the image */
-    color: #fff;
-    margin-bottom: 50px;
+    padding: 60px 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/about.jpg') center/cover no-repeat;
     position: relative;
-}
-
-.about-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adds a dark overlay for better text visibility */
-    z-index: 1;
-}
-
-.about-header h1,
-.about-header p {
-    position: relative;
-    z-index: 2; /* Ensures text appears above the overlay */
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .about-header h1 {
     font-size: 3rem;
-    margin-bottom: 20px;
-    color: white;
+    color: #f7f8fc;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 5px rgba(255, 215, 0, 0.8), 
+                 0px 0px 15px rgba(255, 215, 0, 0.6);
+    transition: transform 0.3s ease-in-out, 
+                text-shadow 0.3s ease-in-out, 
+                letter-spacing 0.3s ease-in-out, 
+                color 0.3s ease-in-out;
+    letter-spacing: 2px;
+    display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 0, 0, 0.6));
+    border-radius: 8px;
+    animation: fadeIn 1s ease-in-out, glowText 1.5s infinite alternate;
 }
 
+/* Hover Effect */
+.about-header h1:hover {
+    transform: scale(1.1) rotate(2deg);
+    text-shadow: 5px 5px 10px rgba(255, 215, 0, 1), 
+                 0px 0px 25px rgba(255, 215, 0, 1);
+    letter-spacing: 4px;
+    color: #78a0be;
+}
+
+/* Text Glow Animation */
+@keyframes glowText {
+    from {
+        text-shadow: 3px 3px 5px rgba(255, 215, 0, 0.8), 
+                     0px 0px 15px rgba(255, 215, 0, 0.6);
+    }
+    to {
+        text-shadow: 5px 5px 10px rgba(255, 215, 0, 1), 
+                     0px 0px 25px rgba(255, 215, 0, 1);
+    }
+}
+
+/* Fade-in Effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 .about-header p {
+    color:rgb(252, 252, 252);
     font-size: 1.2rem;
+    opacity: 0.9;
 }
 
 /* About Content Section */
 .about-content {
     display: flex;
-    justify-content: space-between;
-    padding: 40px 80px;
-    background-color: #fff;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: white;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-.about-text {
-    
-    text-align: center;
+.about-text h1 {
+    font-size: 2rem;
+    color: navy;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #b8c4dc;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 .about-text p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #555;
+    color: black;
+    max-width: 800px;
 }
 
-.about-text h1{
-    font-size: 2rem;
-
-}
-
+/* Image Hover Effect */
 .about-image img {
     width: 100%;
-    height: auto;
+    max-width: 500px;
     border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
 }
 
 .about-image img:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Team Section */
+/* Team Section */
 .team-section {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
-    background-color: #ecf0f1;
+    background: linear-gradient(10deg, rgb(211, 211, 226), black);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
 .team-section h2 {
     font-size: 2.5rem;
     margin-bottom: 30px;
+    color: #e5f3fb;
+    text-shadow: 3px 3px 10px rgba(29, 59, 228, 0.9);
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .team-members {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
 }
 
 .team-member {
     text-align: center;
-    max-width: 200px;
+    max-width: 250px;
+    padding: 20px;
+    background: rgba(134, 145, 159, 0.33);
+    border-radius: 15px;
+    box-shadow: 0px 6px 15px rgba(0, 89, 255, 0.5);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    animation: float 3s infinite ease-in-out;
 }
 
+/* Hover Effects */
+.team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(163, 175, 226, 0.8);
+}
+
+/* Glow Effect on Images */
 .team-member img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     margin-bottom: 15px;
-    border: 4px solid #f1c40f;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border: 4px solid #81888f;
+    box-shadow: 0px 4px 12px rgba(34, 126, 246, 0.5);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
 }
 
+.team-member img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px rgb(165, 193, 229);
+}
+
+/* Animated Text */
 .team-member h3 {
-    font-size: 1.3rem;
-    color: #2c3e50;
+    font-size: 1.5rem;
+    color: #a5bbc3;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 8px rgba(17, 30, 42, 0.8);
+    transition: letter-spacing 0.3s ease-in-out;
+}
+
+.team-member h3:hover {
+    letter-spacing: 1.5px;
 }
 
 .team-member p {
-    color: #7f8c8d;
+    font-size: 1.1rem;
     font-weight: 500;
+    color: white;
+    opacity: 0.9;
+    transition: color 0.3s ease-in-out;
 }
 
-/* Media Queries for Responsiveness */
+.team-member:hover p {
+    color: #24315e;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .about-image img {
-        width: 80%;
-    }
-
     .team-members {
         flex-direction: column;
         align-items: center;
     }
-
+    
     .team-member {
-        margin-bottom: 30px;
+        max-width: 90%;
     }
 }
