@@ -169,7 +169,9 @@ export default function StaffCanteen() {
         <div className="categories-container">
           {specialItems.length > 0 ? (
             <div className="category">
+              <div className="flex justify-center items-center mb-3">
               <button className='mb-3 font-semibold' onClick={scrollToReview}>Go to Reviews<i class='fas fa-angle-right'></i> </button>
+              </div>
               <h2 className="category-title">Special Items</h2>
               <div className="food-items">
                 {specialItems.map((food) => (
@@ -276,6 +278,7 @@ export default function StaffCanteen() {
       <ReviewForm
   canteenId="6761446355efca0108f8d9f2"
   user_ID={decodedToken?.user_id || 'Guest'}
+  scrollToReview={() => navigate(0)}
 />
       
       </div>

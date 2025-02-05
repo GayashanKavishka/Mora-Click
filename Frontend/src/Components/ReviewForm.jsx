@@ -42,7 +42,7 @@ function ReviewForm({ canteenId, user_ID,scrollToReview }) {
     <div className={`review-form-container ${isExpanded ? 'expanded' : ''}`} onClick={() =>  setIsExpanded(true)}>
       <h3>Write a Review</h3>
       {isExpanded && (
-        <form onSubmit={handleSubmit}>
+        <form className= "flex justify-between items-center gap-1" onSubmit={handleSubmit}>
           <textarea
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
