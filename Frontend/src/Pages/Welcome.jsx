@@ -193,7 +193,7 @@ export default function Welcome() {
               />
               <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
                 <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>
-                <button onClick={()=>navigate("/sign-up")}className="btn-order z-10  ">
+                <button onClick={()=>navigate("/sign-up")}className="btn-order z-10 rounded ">
                   SingUp
                 </button>
               </div>
@@ -218,26 +218,41 @@ export default function Welcome() {
   {/* Main Meals */}
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-      <img src={m1} alt="Main Meals" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+      <img src={m1} alt="Main Meals" onClick={() => { 
+               navigate('/menu',{state:"main"}); 
+              //  scrollToSection('main'); 
+         }} className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+
     </div>
     <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Main Meals</p>
   </div>
 
+
   {/* Beverages */}
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-      <img src={m2} alt="Beverages" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+      <img src={m2} alt="Beverages" onClick={() => { 
+               navigate('/menu',{state:"shortEat"}); 
+              //  scrollToSection('shortEat'); 
+         }}  className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+
     </div>
     <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Beverages</p>
   </div>
 
+
   {/* Short Eats */}
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-      <img src={m3} alt="Short Eats" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+      <img src={m3} alt="Short Eats" onClick={() => { 
+               navigate('/menu',{state:"beverage"}); 
+              //  scrollToSection('beverage'); 
+         }} className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+
     </div>
     <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Short Eats</p>
   </div>
+
 
   {/* Special Items */}
   <div className="flex flex-col items-center">
@@ -249,6 +264,7 @@ export default function Welcome() {
 </div>
 
 </div>
+
 
 
 
@@ -286,10 +302,6 @@ export default function Welcome() {
           </Carousel.Item>
         </Carousel>
       </section>
-      <div class="spinner-border text-warning" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div>
-
       <Footer />
     </div>
   );

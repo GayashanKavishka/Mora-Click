@@ -46,7 +46,7 @@ function ReviewList({ canteenId }) {
               <p className="review-user">{review.userId?.username || "Anonymous"}</p>
               <p className="review-date">{new Date(review.createdAt).toLocaleDateString()}</p>
             </div>
-            <p className="review-text">{review.review}</p>
+            <div className='bg-slate-100 w-[600] h-[40px] flex justify-start items-center rounded'><p className="review-text m-2">{review.review}</p></div>
           </div>
         ))
       )}
