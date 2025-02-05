@@ -136,10 +136,10 @@ const updateUser =(_id,data) =>{
             contact: data.contact
         };
         
-        if(data.password){
-            const encriptedPassword = bcrypt.hashSync(data.password, saltRounds);
-            updateFields.password = encriptedPassword;
-        }
+        // if(data.password){
+        //     const encriptedPassword = bcrypt.hashSync(data.password, saltRounds);
+        //     updateFields.password = encriptedPassword;
+        // }
 
         user.updateOne({ _id: objectId }, { $set: updateFields }).then((data) => {
             if (data.matchedCount === 0) {

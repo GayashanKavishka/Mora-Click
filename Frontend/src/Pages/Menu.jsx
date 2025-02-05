@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState,useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 import Header from "../Components/Header";
@@ -247,6 +247,34 @@ const fetchMenuData = async () => {
     console.log("Rating item:", item);
     console.log("Rating canteen_id:", item.canteen_id);
   }
+
+
+  //-----------------------------------
+
+  const section1Ref = useRef(null);
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
+  const section4Ref = useRef(null);
+
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const scrollTo = params.get("scrollTo");
+
+    if (scrollTo) {
+      const sectionRefMap = {
+        "main": section1Ref,
+        "beverage": section2Ref,
+        "shortEat": section3Ref,
+        "special": section4Ref,
+      };
+
+      const targetRef = sectionRefMap[scrollTo];
+      if (targetRef?.current) {
+        targetRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   
 
   return (
@@ -262,7 +290,7 @@ const fetchMenuData = async () => {
       </div>
       <div className="menu-container">
         {/* Main Meal Category */}
-        <div className="menu-category ">
+        <div className="menu-category "  ref={section1Ref}>
           <h2 className="categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Main Meal</h2>
           <div className="menu-items">
           {menuData.main.length === 0 ? (
@@ -299,7 +327,7 @@ const fetchMenuData = async () => {
         {/* <RatingPopup isOpen={isPopupOpen} itemName={selectedItem} onClose={() => setIsPopupOpen(false)} onRate={addRaintingMain} type={selectedType}  canteen_id={selectedCanteeId} rate={selectedRating} itemID={selectedItemID}/> */}
 
         {/* Short Eats Category */}
-        <div className="menu-category">
+        <div className="menu-category"  ref={section3Ref}>
           <h2 className="categorymenu-title categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Short Eats</h2>
           <div className="menu-items">
           {menuData.shortEat.length === 0 ? (
@@ -336,7 +364,7 @@ const fetchMenuData = async () => {
         </div>
 
         {/* Beverages Category */}
-        <div className="menu-category">
+        <div className="menu-category" ref={section2Ref}>
           <h2 className="categorymenu-title categorymenu-title relative inline-block text-center  font-Roboto text-blue-950 lg:text-[35px]  mb-[40px]">Beverages</h2>
           <div className="menu-items">
           {menuData.beverage.length === 0 ? (
@@ -373,7 +401,7 @@ const fetchMenuData = async () => {
         </div>
 
       {/* Special Items Category */}
-      <div className="menu-category">
+      <div className="menu-category" ref={section4Ref}>
         <h2 className="categorymenu-title relative inline-block text-center font-Roboto text-blue-950 lg:text-[35px] mb-[40px]">Special Items</h2>
         <div className="menu-items">
           {specialItems.length === 0 ? (

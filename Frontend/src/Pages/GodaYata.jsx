@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef } from 'react';
 import axios from 'axios';
 import './GodaYata.css';
 import Header from '../Components/Header';
@@ -8,6 +8,8 @@ import ReviewForm from '../Components/ReviewForm';
 import {jwtDecode} from 'jwt-decode';
 import image from '../assets/placeholderimage.png';
 import StarRating from '../Components/Raiting';
+import { useLocation,useNavigate } from 'react-router-dom';
+import { use } from 'react';
 
 const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9ef';
 const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9ef';
@@ -141,6 +143,63 @@ export default function GodaYata() {
     fetchMenuData();
   },[isCanteenOpen])
 
+  //------------------------------------------------------------
+  // const location = useLocation();
+  // const reviewRef = useRef(null);
+  const navigate = useNavigate();
+  // const [ref, setRef] = useState(null);
+
+  const reviewSectionRef = useRef(null);
+
+  const scrollToReview = () => {
+    if (reviewSectionRef.current) {
+      reviewSectionRef.current.scrollIntoView({
+        behavior: 'smooth',  // For smooth scrolling
+        block: 'start'  // Scroll to the top of the section
+      });
+    }
+  }
+
+
+  // useEffect(() => {
+  //   if(reviewRef.current){
+  //     setRef(reviewRef.current);
+  //   }
+  // },[location]);
+
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const scrollTo = params.get("scrollTo");
+  //   console.log("Scrolling to:", scrollTo);
+  //   console.log("reviewRef:", reviewRef.current);
+
+  //   if(scrollTo && reviewRef.current){
+  //     reviewRef.current.scrollIntoView({behavior: "smooth"});
+  //   }
+  // }, [ref]);
+
+
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const scrollTo = params.get("scrollTo");
+  
+  //   console.log("Scrolling to:", scrollTo);
+  //   console.log("reviewRef:", reviewRef.current);
+  
+  //   if (scrollTo && reviewRef.current) {
+  //     reviewRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // }, [location]);
+  
+  
+  
+
+
+  // const navigateAndReload = (section) => {
+  //   navigate(0);
+  //   window.location.reload();
+  // };
+
   return (
     <>
       <Header />
@@ -161,6 +220,7 @@ export default function GodaYata() {
         <div className="categories-container">
           {specialItems.length > 0 ? (
             <div className="category">
+              <button className='mb-3 font-semibold' onClick={scrollToReview}>Go to Reviews<i class='fas fa-angle-right'></i> </button>
               <h2 className="category-title">Special Items</h2>
               <div className="food-items">
                 {specialItems.map((food) => (
@@ -263,13 +323,14 @@ export default function GodaYata() {
         </div>
       )}
        {isLoggedIn ? (
-  <div>
-    <ReviewList canteenId="6761446355efca0108f8d9ef" />
+  <div id="reviews" ref={reviewSectionRef}>
+    <ReviewList  canteenId="6761446355efca0108f8d9ef" />
       <ReviewForm
   canteenId="6761446355efca0108f8d9ef"
   user_ID={decodedToken?.user_id || 'Guest'}
+  scrollToReview={() => navigateAndReload("reviews")}
 /> 
-      </div>
+  </div>
       ) : ""}
       <Footer />
     </>

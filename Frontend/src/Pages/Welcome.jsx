@@ -102,6 +102,11 @@ export default function Welcome() {
     };
   }, []);
 
+
+  const handleNavigation = (sectionId)=>{
+        navigate(`/menu?scrollTo=${sectionId}`);
+  }
+
   return (
     <div className="main-container flex flex-col  mt-[20px] rounded-[40px]">
       <Header />
@@ -219,7 +224,7 @@ export default function Welcome() {
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer">
       <img src={m1} alt="Main Meals" onClick={() => { 
-               navigate('/menu',{state:"main"}); 
+               handleNavigation('main'); 
               //  scrollToSection('main'); 
          }} className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
 
@@ -232,7 +237,7 @@ export default function Welcome() {
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer">
       <img src={m2} alt="Beverages" onClick={() => { 
-               navigate('/menu',{state:"shortEat"}); 
+               handleNavigation('beverage'); 
               //  scrollToSection('shortEat'); 
          }}  className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
 
@@ -245,7 +250,7 @@ export default function Welcome() {
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer">
       <img src={m3} alt="Short Eats" onClick={() => { 
-               navigate('/menu',{state:"beverage"}); 
+               handleNavigation('shortEat');  
               //  scrollToSection('beverage'); 
          }} className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
 
@@ -257,7 +262,7 @@ export default function Welcome() {
   {/* Special Items */}
   <div className="flex flex-col items-center">
     <div className="relative w-full max-w-[300px] bg-gray-100 rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer">
-      <img src={m4} onClick={()=>{ navigate('/menu')}} alt="Special Items" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
+      <img src={m4} onClick={()=>{ handleNavigation('special'); }} alt="Special Items" className="w-full h-auto max-h-[250px] object-cover transition-transform duration-300 hover:scale-110" />
     </div>
     <p className="mt-4 text-lg md:text-xl lg:text-[35px] font-semibold text-gray-700 text-center">Special Items</p>
   </div>
