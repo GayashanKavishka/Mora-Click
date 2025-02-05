@@ -192,7 +192,7 @@ export default function Welcome() {
               />
               <div className='z-10 flex flex-col items-center justify-center gap-[25px]'>
                 <h2 className='z-10 text-white font-bold'>Sing up For Rate Foods and Review Foods</h2>
-                <button onClick={()=>navigate("/sign-up")}className="btn-order z-10  ">
+                <button onClick={()=>navigate("/sign-up")}className="btn-order z-10 rounded ">
                   SingUp
                 </button>
               </div>
@@ -287,10 +287,6 @@ export default function Welcome() {
           </Carousel.Item>
         </Carousel>
       </section>
-      <div class="spinner-border text-warning" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div>
-
       <Footer />
     </div>
   );

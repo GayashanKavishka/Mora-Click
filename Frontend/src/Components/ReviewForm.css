@@ -78,4 +78,9 @@
     .review-form-container h3 {
         font-size: 1.4rem;
     }
+
+    .review-form-container button{
+        width: 30%;
+
+    }
 }
