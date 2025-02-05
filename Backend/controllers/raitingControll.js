@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const raitings = require("../model/raitingModel");
 const menue = require("../model/menuModel");
+const specials = require("../model/specialModel");
 
 const addRaiting = (user_id, item_id, raite, type, canteen_id) => {
     console.log(user_id, item_id, raite, type, canteen_id);
@@ -53,11 +54,58 @@ const addRaiting = (user_id, item_id, raite, type, canteen_id) => {
       }
     });
   };
+
+
+const addSpecialRaiting = (user_id,item_id,rate)=>{
+    console.log(user_id,item_id,rate);
+    return new Promise(async(resolve,reject)=>{
+      try
+      {
+        const u_id = new mongoose.Types.ObjectId(user_id);
+        const i_id = new mongoose.Types.ObjectId(item_id);
+        const existingRating = await raitings.findOne({ user_id: u_id, item_id: i_id });
+
+        if(existingRating){
+          await raitings.updateOne({ user_id: u_id, item_id: i_id }, { $set: { raiting: rate } });
+          console.log("Updated existing rating");
+        }
+        else{
+          const newRating = new raitings({ user_id: u_id, item_id: i_id, raiting: rate });
+          await newRating.save();
+          console.log("Saved new rating");
+        }
+
+        const allRatings = await raitings.find({ item_id: i_id });
+        const sum = allRatings.reduce((acc, curr) => acc + curr.raiting, 0);
+        const avg = sum / allRatings.length;
+        console.log("New average rating:", avg);
+
+        const updatedSpecial = await specials.updateOne(
+          { _id: i_id },
+          { $set: { raiting: avg } },
+          { new: true }
+        );
+  
+        if (!updatedSpecial) {
+          console.log("Special not found");
+          return reject({ status: 404, message: "Special not found" });
+        }
+  
+        console.log("Updated special:", updatedSpecial);
+        resolve({ status: 200, data: updatedSpecial });
+      }
+      catch(error){
+        console.error("Error:", error);
+        reject({ status: 500, error });
+      } 
+    });
+}
   
 
 
 
 
 module.exports = {
-     addRaiting
+     addRaiting,
+     addSpecialRaiting
 }
