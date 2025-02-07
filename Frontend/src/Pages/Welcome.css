@@ -9,9 +9,12 @@ body {
   font-family: "Poppins", Arial, sans-serif;
   background-color: #f7f8fc;
   color: #333;
+  overflow-x: hidden;
 }
 
 /* Hero Section */
+
+
 .welcomehero {
   display: flex;
   justify-content: space-between;
@@ -23,6 +26,12 @@ body {
   background-repeat: no-repeat;
   color: #fff;
   position: relative;
+  animation: fadeIn 1.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.welcomehero:hover {
+  transform: scale(1.02);
 }
 
 .welcomehero::before {
@@ -32,7 +41,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 40px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
@@ -41,6 +49,34 @@ body {
 .welcomehero .hero-image {
   position: relative;
   z-index: 2;
+}
+
+.welcomehero .content h1{
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #afbac9;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 15px rgba(4, 53, 248, 0.9);
+  letter-spacing: 3px;
+  display: inline-block;
+  position: relative;
+  animation: moraClickBounce 2s infinite alternate, fadeIn 1.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, color 0.3s ease-in-out;
+}
+
+.welcomehero .content h1:hover{
+  transform: scale(1.1) rotate(3deg);
+  color: #a0b7eb;
+  text-shadow: 6px 6px 20px rgba(230, 126, 34, 0.9);
+}
+
+@keyframes moraClickBounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
 }
 
 .content {
@@ -218,3 +254,202 @@ body {
     gap: 20px;
   }
 }
+
+
+
+
+/* CTA Button */
+.btn-order {
+  background-color: #c7dbe3;
+  color: #46505a;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border:#04080a;
+  border-width:inherit;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  animation: pulseEffect 1.5s infinite alternate;
+}
+
+.btn-order:hover {
+  background: linear-gradient(135deg, #6b98ed, #f6f4f2);
+  color: #04080a;
+  transform: scale(1.1);
+  box-shadow: 0px 6px 15px rgba(243, 156, 18, 0.8);
+}
+
+/* Hero Image */
+.hero-image img {
+  width: 400px;
+  border-radius: 50%;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+  animation: zoomIn 1s ease-in-out, floatUp 3s infinite alternate;
+}
+
+/* Food Carousel Section */
+.food-carousel {
+  padding: 40px 20px;
+  background-color: #f7f8fc;
+  text-align: center;
+}
+
+.food-carousel h2 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+  color: #203c59;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Modern Text Effect */
+.food-carousel h2::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #2e9bf4, #695add);
+  border-radius: 5px;
+  animation: lineGlow 1.5s infinite alternate;
+}
+
+/* Food Carousel Description */
+.food-carousel p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  animation: fadeInText 1.5s ease-in-out forwards;
+}
+
+/* Bootstrap Carousel Styling */
+.carousel-item img {
+  height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease-in-out;
+}
+
+.carousel-item img:hover {
+  transform: scale(1.05);
+}
+
+.carousel-caption h3 {
+  font-size: 2.5rem;
+  color: #1f2024;
+  font-weight: 600;
+  text-transform: uppercase;
+  animation: textGlow 1.5s infinite alternate;
+}
+
+.carousel-caption p {
+  font-size: 2rem;
+  color: rgb(192, 204, 216);
+  font-weight: 600;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceGlow {
+  0%, 100% {
+    text-shadow: 3px 3px 10px rgba(241, 196, 15, 0.8);
+  }
+  50% {
+    text-shadow: 0px 0px 20px rgba(241, 196, 15, 1);
+  }
+}
+
+@keyframes pulseEffect {
+  0% {
+    transform: scale(1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(243, 156, 18, 0.8);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.6);
+  }
+  50% {
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes lineGlow {
+  0% {
+    background: linear-gradient(to right, #f1c40f, #e67e22);
+  }
+  100% {
+    background: linear-gradient(to right, #e67e22, #f1c40f);
+  }
+}
+

@@ -1,15 +1,15 @@
 /* General Styles */
-body {
+/* body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
     overflow-x: hidden;
-}
+} */
 
-/* MenuHero Section */
-.menuhero-container {
-    /* background: linear-gradient(to right, #ff6347, #ffb347); */
+/* MenuHero Section */ 
+/* .menuhero-container { */
+    /* background: linear-gradient(to right, #ff6347, #ffb347);
     background: linear-gradient(to right, #fce80a, #ffb347);
     color: rgb(255, 255, 255);
     font-weight: 500;
@@ -193,3 +193,203 @@ p.error {
         transform: translateY(0);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* MenuHero Section */
+.menuhero-container {
+    background: linear-gradient(to right, #0b1b48, #f4f4f1);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.5s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.menuhero-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.menuhero-description {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* Menu Section */
+.menu-container {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.menu-category {
+    margin-bottom: 60px;
+    text-align: center;
+    animation: categoryFadeIn 1.5s ease-in-out;
+}
+
+.categorymenu-title {
+    font-size: 2.8rem;
+    color: #64530498;
+    margin-bottom: 25px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    transition: color 0.9s ease-in-out, transform 0.3s ease-in-out;
+    text-shadow: 2px 2px 4px rgba(208, 199, 199, 0.3);
+}
+
+.categorymenu-title:hover {
+    color: #293d7b;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Menu Items */
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    animation: slideUp 1.5s ease-in-out;
+}
+
+.menu-item {
+    background: linear-gradient(to bottom, #0033cc, #000000);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(255, 255, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    color: white;
+}
+
+.menu-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 20px rgba(255, 255, 0, 0.5);
+}
+
+.item-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: brightness(0.9);
+}
+
+.menu-item:hover .item-image {
+    transform: scale(1.15);
+    filter: brightness(1);
+}
+
+.item-name {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    margin: 15px 0 8px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.item-price {
+    font-size: 1.2rem;
+    color: #ffcc00;
+    font-weight: bold;
+    text-align: center;
+}
+
+.item-canteen {
+    font-size: 1rem;
+    color: #bbbbbb;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Error and Loading Messages */
+p {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 20px;
+}
+
+p.loading {
+    font-weight: bold;
+    color: #ffcc00;
+    animation: pulse 1.5s infinite;
+}
+
+p.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes categoryFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

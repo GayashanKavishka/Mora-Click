@@ -100,7 +100,7 @@ const LoginPage = () => {
           </button>
         </form>
         <p className="signup-text">
-          Do you haven’t account? <a href="/sign-up">Sign up</a>
+          Don't you have any account? <a href="/sign-up">Sign up here</a>
         </p>
       </div>
     </div>
