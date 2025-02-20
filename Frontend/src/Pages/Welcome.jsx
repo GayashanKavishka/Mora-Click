@@ -36,6 +36,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { use } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { requestFCMToken } from '../utils/firebaseUtils';
+import axios from 'axios';
 
 export default function Welcome() {
   const navigate = useNavigate();
@@ -53,6 +55,7 @@ export default function Welcome() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    console.log("Token from Welcome:",token);
     setToken(token);
   }, []);
 
@@ -66,8 +69,13 @@ export default function Welcome() {
   useEffect(() => {
     if (token) {
       const decode = jwtDecode(token);
+      // console.log("Decoded Token in welcome",decode);
       setDecodedToken(decode);
     }
+  },[token]);
+
+  useEffect(()=>{
+    console.log("Decoded Token in welcome",decodedToken);
   },[decodedToken]);
 
   useEffect(()=>{
@@ -106,6 +114,55 @@ export default function Welcome() {
   const handleNavigation = (sectionId)=>{
         navigate(`/menu?scrollTo=${sectionId}`);
   }
+
+  //------------------------------------------------
+
+  const [FCMToken,setFCMToken] = useState(null);
+
+  useEffect(()=>{
+    const FCMToken = async()=>{
+      try{
+        console.log("Fetching FCM token inside welcome ...");
+        const fetchFCM = await requestFCMToken();
+        console.log("FCM",fetchFCM);
+        setFCMToken(fetchFCM);
+      }
+      catch(err){
+        console.log(err); 
+
+      }
+    }
+    FCMToken();
+  },[])
+
+
+
+  useEffect(() => {
+    
+    if(FCMToken && decodedToken){
+      console.log("FCM Token",FCMToken);
+      console.log("Decoded Token",decodedToken);
+      axios.post("http://localhost:5000/user/addFCM",
+      {
+        _id:decodedToken.ID,
+        FCMToken:FCMToken
+      })
+      .then((res)=>{
+        console.log("FCM token added to DB successfully");
+      })
+      .catch((err)=>{
+        console.log("Error adding FCM token to DB",err);
+      })
+    }
+  },[FCMToken,decodedToken]);
+
+
+
+
+
+  
+
+
 
   return (
     <div className="main-container flex flex-col  mt-[20px] rounded-[40px]">

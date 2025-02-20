@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {registerUser , getuser , updateUser} = require('../controllers/usercontroll.js');
+const {registerUser , getuser , updateUser,UpdateFCM} = require('../controllers/usercontroll.js');
 
 router.post('/insertUser', async (req, res) => {
     try {
@@ -37,5 +37,21 @@ router.put('/updateuser', async (req, res) => {
         res.status(400).json({ error: "ERROR" });
     }
 });
+
+router.post('/addFCM', async (req, res) => {
+    try {
+        const _id = req.body._id;
+        const FCMToken = req.body.FCMToken;
+        console.log(_id);
+        console.log(FCMToken);
+        const result = await UpdateFCM(_id, FCMToken);
+        if(result.status === 200) return res.status(200).json({ message: 'FCM Token updated successfully', data: result.data });
+        if(result.status === 404) return res.status(404).json({ message: 'User not found' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "ERROR" });
+    }
+});
+
 
 module.exports = router;

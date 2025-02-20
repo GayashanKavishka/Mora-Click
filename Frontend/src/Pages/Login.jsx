@@ -10,10 +10,13 @@ import logo from "../assets/logo.png"; // Add your logo image here
 
 
 
+
 const LoginPage = () => {
     
    const [userName, setUserName] = useState("");
    const [password, setPassword] = useState("");
+
+   
 
    const navigate = useNavigate();
 
