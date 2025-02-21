@@ -151,9 +151,41 @@ const updateUser =(_id,data) =>{
 }
 )}
 
+
+
+const UpdateFCM = (_id,FCMToken)=>{
+    return new Promise((resolve,reject)=>{
+        const objectId = new mongo.Types.ObjectId(_id);
+
+        user.findOne({ _id: objectId }).then((result) => {
+            if (!result) {
+                return reject({ status: 404, message: "User not found" });
+            }
+            console.log(FCMToken)
+            const updateFields = {
+                FCMToken: FCMToken
+            };
+            
+            user.updateOne({ _id: objectId }, { $set: updateFields }).then((data) => {
+                if (data.matchedCount === 0) {
+                    return resolve({ status: 404, message: "Update failed" });
+                }
+                return resolve({ status: 200, message: "User updated successfully", data });
+            }).catch((err) => reject({ status: 500, message: "Database update failed", error: err }));
+        });
+    }
+    )
+}
+
+
+
+
+
+
 module.exports = {
     registerUser,
     getuser,
-    updateUser
+    updateUser,
+    UpdateFCM
 };
 

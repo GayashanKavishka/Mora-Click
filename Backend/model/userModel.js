@@ -13,6 +13,7 @@ const users = new mongoose.Schema({
   contact: { type: String, default: null },
   gender: { type: String, default: null, required: true },
   depernment: { type: String, default: null },
+  FCMToken : {type: String, default: ""},
 });
 
 module.exports = mongoose.model.users||mongoose.model('users', users);

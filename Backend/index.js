@@ -48,6 +48,9 @@ app.use('/review', reviewRouter);
 const raitingRouter = require('./Routes/raitingRoute')
 app.use('/raiting',raitingRouter);
 
+const notification = require('./Routes/notificationRouter');
+app.use('/notification',notification);
+
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 5000');
 });
