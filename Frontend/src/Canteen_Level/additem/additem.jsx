@@ -18,55 +18,122 @@ const Additem = ({trigger,setTrigger,type,canteenId,scrolly}) => {
     name: '',
     price: '',
     image: '',
-    description: ''
+    discription: ''
   });
 
 
-  const ImgTo64base=(img)=>{
+  // const ImgTo64base=(img)=>{
     
-      const reader = new FileReader();
-      reader.readAsDataURL(img);
-      reader.onload = () => {
-        setData({...data, image: reader.result});
-      }
-  }
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(img);
+  //     reader.onload = () => {
+  //       setData({...data, image: reader.result});
+  //     }
+  // }
+
+  // const AddItem = (e) => {
+  //   e.preventDefault();
+  //   console.log(data);
+  //   if(type ==='specials'){
+  //     //Logic to add special items
+  //     axios.post(`http://localhost:5000/special/addspecial`,{
+  //       canteen_id:canteenId,
+  //       name:data.name,
+  //       price:data.price,
+  //       image:data.image,
+  //       description:data.description
+  //       }).then((res) => {
+  //         console.log(res);
+  //         // setTrigger(false);
+  //         navigate('/canteen/home',{state:{ scrolly: scrolly }})
+  //         navigate(0);
+
+  //       }
+  //       ).catch((err) => {
+  //         console.log(err);
+  //       });
+  //       }
+  //   else{
+
+  //     const formData = new FormData();
+  //     formData.append('name', data.name);
+  //     formData.append('price', data.price);
+  //     formData.append('description', data.description);
+  //     formData.append('image', data.image);
+  //     axios.put(`http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, formData,
+  //       {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res);
+  //       // setTrigger(false);
+  //       navigate('/canteen/home' ,{state:{ scrolly: scrolly }})
+  //       navigate(0);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   }
+    
+  // }
+
 
   const AddItem = (e) => {
     e.preventDefault();
-    console.log(data);
+  
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("description", data.discription);
+    
+    // Ensure correct image upload
+    if (data.image) {
+      formData.append("image", data.image);  // ✅ Append file correctly
+    }
+
     if(type ==='specials'){
-      //Logic to add special items
-      axios.post(`http://localhost:5000/special/addspecial`,{
-        canteen_id:canteenId,
-        name:data.name,
-        price:data.price,
-        image:data.image,
-        description:data.description
-        }).then((res) => {
+       //Logic to add special items
+      
+       const datalist = new FormData();
+       datalist.append('canteen_id',canteenId);
+        datalist.append('name',data.name);
+        datalist.append('price',data.price);
+        datalist.append('image',data.image);
+        datalist.append('description',data.discription);
+
+
+
+      axios.post(`http://localhost:5000/special/addspecial`,datalist).then((res) => {
           console.log(res);
           // setTrigger(false);
           navigate('/canteen/home',{state:{ scrolly: scrolly }})
-
-        }
-        ).catch((err) => {
+          navigate(0);
+          return
+        }).catch((err) => {
           console.log(err);
+          return
         });
-        }
-    else{
-      axios.put(`http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, data)
-      .then((res) => {
-        console.log(res);
-        // setTrigger(false);
-        navigate('/canteen/home' ,{state:{ scrolly: scrolly }})
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      
     }
-    
-  }
-
-
+  
+    axios.put(
+      `http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, 
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },  // ✅ Correct content type
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      navigate('/canteen/home', { state: { scrolly: scrolly } });
+      navigate(0);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+  
 
 
   return (trigger) ?(
@@ -107,7 +174,7 @@ const Additem = ({trigger,setTrigger,type,canteenId,scrolly}) => {
                              type='file' 
                              id='image' 
                              name='image'
-                             onChange={(e) => {ImgTo64base(e.target.files[0])}}
+                             onChange={(e) => setData({...data, image: e.target.files[0]})}
                              />
                         </div>
                         <div className='form-group'>
@@ -116,7 +183,7 @@ const Additem = ({trigger,setTrigger,type,canteenId,scrolly}) => {
                             id='description' 
                             name='description' 
                             placeholder='Enter Description'
-                            onChange={(e) => setData({...data, description: e.target.value})}
+                            onChange={(e) => setData({...data, discription: e.target.value})}
                             />
                         </div>
                         <div className='form-group'>

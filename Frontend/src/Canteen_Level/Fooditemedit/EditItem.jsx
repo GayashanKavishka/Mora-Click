@@ -8,6 +8,7 @@ const Edititem = ({trigger,setTrigger,item,canteenId,type,scrolly}) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [image , setImage] = useState();
 
   const close = () => {
      setTrigger(false);
@@ -36,14 +37,14 @@ const Edititem = ({trigger,setTrigger,item,canteenId,type,scrolly}) => {
   
 
 
-  const ImgTo64base=(img)=>{
+  // const ImgTo64base=(img)=>{
     
-      const reader = new FileReader();
-      reader.readAsDataURL(img);
-      reader.onload = () => {
-        setData({...data, image: reader.result});
-      }
-  }
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(img);
+  //     reader.onload = () => {
+  //       setData({...data, image: reader.result});
+  //     }
+  // }
 
 
   // useEffect(()=>{
@@ -148,7 +149,7 @@ const Edititem = ({trigger,setTrigger,item,canteenId,type,scrolly}) => {
                              type='file' 
                              id='image' 
                              name='image'
-                             onChange={(e) => {ImgTo64base(e.target.files[0])}}
+                             onChange={(e) => setData({...data, image: e.target.files[0]})}
                              />
                         </div>
                         <div className='form-group'>

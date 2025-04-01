@@ -10,6 +10,10 @@ const users = require('./model/userModel');
 const app = express();
 const bodyParser = require('body-parser');
 
+//++++++++++++++++
+
+// const cloudinary = require('cloudinary').v2;
+
 
 app.use(bodyParser.json({ limit: '10mb' })); // Adjust the limit as needed
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
@@ -25,6 +29,31 @@ app.use(express.json());
 // }
 
 // func(users);
+
+
+
+// cloudinary configuration
+
+// cloudinary.config({
+//     cloud_name:"dwk2uss1k",
+//     secure:true,
+// })
+
+// const url = cloudinary.url('Rice_and_curry_a5fmes',
+//     {
+//         transformation:[
+//             {
+//                 fetch_format :'auto'
+
+//             },
+//             {
+//                 quality:'auto'
+//             }
+//         ]
+//     }
+// );
+
+// console.log(url);
 
 
 const authRouter = require('./Routes/authRoute');

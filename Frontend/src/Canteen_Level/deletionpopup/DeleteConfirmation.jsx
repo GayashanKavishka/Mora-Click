@@ -25,7 +25,8 @@ const DeleteConfirmation = ({ show, deleteItem, onCancel,canteen_id,type,scrolly
         .then((response) => {
           console.log('Success:', response);
           // window.location.reload()
-          navigation('/canteen/home',{state:{ scrolly: scrolly }})
+          navigation(0);
+          navigation('/canteen/home',{state:{ scrolly: scrolly }});
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -36,7 +37,9 @@ const DeleteConfirmation = ({ show, deleteItem, onCancel,canteen_id,type,scrolly
       .then((response) => {
         console.log('Success:', response);
         // window.location.reload()
-        navigation('/canteen/home',{state:{ scrolly: scrolly }})
+        navigation(0);
+        navigation('/canteen/home',{state:{ scrolly: scrolly }});
+        
       })
       .catch((error) => {
         console.error('Error:', error);

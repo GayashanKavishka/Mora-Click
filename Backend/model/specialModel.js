@@ -5,8 +5,8 @@ const specials = new mongose.Schema({
     name : {type:String, required:true},
     price : {type:Number, required:true},
     available : {type:Boolean, default:false,default : false},  
-    description:{type:String},
-    image : {type:String},
+    discription:{type:String},
+    image : {type:String ,default:"null"},
     raiting : {type:Number, default:0},
 
 });
