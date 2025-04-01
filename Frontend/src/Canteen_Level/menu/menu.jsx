@@ -11,6 +11,7 @@ import DeleteConfirmation from '../deletionpopup/DeleteConfirmation'
 
 
 
+
 const Menu = ({canteenId}) => {
 
 
@@ -43,6 +44,7 @@ const Menu = ({canteenId}) => {
 
 
  const [selectedType, setSelectedType] = useState('');
+ const [scroll, setScroll] = useState(0);
 
 
  const navigate = useNavigate();
@@ -156,11 +158,14 @@ const editfooditem = (item,type,id) => {
     //     setFooditemeditTrigger(true);
     //     setScrollPosition(window.scrollY);
     // });
-    navigate('/editmenu', { state: { item: item, canteen_id: canteenId, category: type, scrolly: id } });
+    setSelectedType(type);
+    navigate('/editmenu', { state: { item: item, canteen_id: canteenId, category: type, scrolly: type } });
 };
 
-const deletefooditem = (item) => {
+const deletefooditem = (item,type,scroll) => {
     deleteselecteditem(item);
+    setSelectedType(type);
+    setScroll(scroll);
     console.log("selected for delete", deleteItem);
     setTrigger(true); // Show the deletion confirmation popup
 };
@@ -365,8 +370,8 @@ return (
                     <div className='control-sec'>
                         <button className='edit' onClick={() => editfooditem(item,'main','main')}>Edit</button>
                         <Edititem trigger = {fooditemeditTrigger} type = {"main"} item = {selectedItem} scrolly= {"main"} canteenId={canteenId} setTrigger ={setFooditemeditTrigger}  />
-                        <button className='delete' onClick={() => deletefooditem(item)}>Delete</button>
-                        <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {"main"} type={'main'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } />
+                        <button className='delete' onClick={() => deletefooditem(item,'main','main')}>Delete</button>
+                        {/* <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {"main"} type={'main'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } /> */}
                     </div>
                 </div>
             ))}
@@ -407,8 +412,8 @@ return (
                         <div className='control-sec'>
                             <button className='edit' onClick={() => editfooditem(item,'short_eat','short')}>Edit</button>
                             <Edititem trigger = {fooditemeditTrigger} type = {"short_eat"} item = {selectedItem} canteenId={canteenId} setTrigger ={setFooditemeditTrigger} scrolly= {"short"} />
-                            <button className='delete' onClick={() => deletefooditem(item)} >Delete</button>
-                            <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {"short"} type={'short_eat'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } />
+                            <button className='delete' onClick={() => deletefooditem(item,'short_eat','short')} >Delete</button>
+                            {/* <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {"short"} type={'short_eat'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } /> */}
                         </div>
                     </div>
                 ))}
@@ -449,8 +454,8 @@ return (
                     <div className='control-sec'>
                         <button className='edit' onClick={() => editfooditem(item,'beverage','beverage')}>Edit</button>
                         <Edititem trigger = {fooditemeditTrigger} type = {"beverage"} item = {selectedItem} canteenId={canteenId} setTrigger ={setFooditemeditTrigger} scrolly= {"main"} />
-                        <button className='delete'  onClick={() => deletefooditem(item)} >Delete</button>
-                        <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {"drink"} type={'beverage'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } />
+                        <button className='delete'  onClick={() => deletefooditem(item,"beverage",'drinks')} >Delete</button>
+                        {/* <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {"drink"} type={'beverage'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } /> */}
                     </div>
                 </div>
             ))}
@@ -492,8 +497,8 @@ return (
                     </div>
                     <div className='control-sec'>
                         <button className='edit' onClick={() => editfooditem(item,'special','special')}>Edit</button>
-                        <button className='delete' onClick={() => deletefooditem(item)}>Delete</button>
-                        <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly={"special"} type={'special'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } />
+                        <button className='delete' onClick={() => deletefooditem(item,"special",'special')}>Delete</button>
+                        {/* <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly={"special"} type={'special'} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } /> */}
                     </div>
                 </div>
             ))}
@@ -502,6 +507,7 @@ return (
 
             </div>
             <Additem trigger = {specialTrigger} type = {"specials"} canteenId={canteenId} setTrigger ={setSpecialTrigger} scrolly= {"special"}/>
+            <DeleteConfirmation show={trigger} canteen_id={canteenId} deleteItem={deleteItem} scrolly= {scroll} type={selectedType} onConfirm={() => console.log('Confirmed')} onCancel={() => setTrigger(false) } />
         </div>
         </div>
   )

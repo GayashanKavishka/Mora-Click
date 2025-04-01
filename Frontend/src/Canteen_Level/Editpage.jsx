@@ -53,9 +53,21 @@ const EditPage = () => {
         e.preventDefault();
         console.log("submit");
         console.log(data);
+
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('price', data.price);
+        formData.append('image', data.image);
+        formData.append('discription', data.discription);
+        formData.append('_id', data._id);
+        formData.append('time_be_ua', data.time_be_ua);
+        formData.append('available', data.available);
+        formData.append('raiting', data.raiting);
         
         if(catogery === "special"){
-            axios.put(`http://localhost:5000/special/updateSpecial?_id=${data._id}`,data)
+            
+             
+            axios.put(`http://localhost:5000/special/updateSpecial?_id=${data._id}`,formData)
             .then((response)=>{
                 console.log("Success:",response);
                 navigate("/canteen/home",{state:{ scrolly: location.state.scrolly }});
@@ -66,7 +78,7 @@ const EditPage = () => {
             return
         }
 
-        axios.put(`http://localhost:5000/menu/updatefooditem?canteen_id=${cateen_id}&catogery=${catogery}`, data)
+        axios.put(`http://localhost:5000/menu/updatefooditem?canteen_id=${cateen_id}&catogery=${catogery}`, formData)
         .then((response)=>{
             console.log("Success:",response);
             navigate("/canteen/home",{state:{ scrolly: location.state.scrolly }});
@@ -145,9 +157,9 @@ const EditPage = () => {
               <textarea
                 id="description"
                 name="description"
-                value={data.description}
+                value={data.discription}
                 placeholder="Enter Description"
-                onChange={(e)=>setData({...data,description:e.target.value})}
+                onChange={(e)=>setData({...data,discription:e.target.value})}
                 className="mt-1 p-2 border rounded-lg h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

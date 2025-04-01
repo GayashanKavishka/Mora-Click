@@ -15,18 +15,48 @@ const getmenu = (canteen_id)=>{
     });
 };
 
-const updateCanteenMenu =(canteen_id,catogery,obj)=>
+const updateCanteenMenu =(canteen_id,catogery,obj,imageURL)=>
     {
         return new Promise((resolve,reject)=>{
             objectId = new mongo.Types.ObjectId(canteen_id);
-            console.log(objectId,catogery,obj);
+            obj.image = imageURL;
+            console.log(objectId,catogery,obj,imageURL);
             menus.updateOne({canteen_id:objectId},{$push:{[catogery]:obj}}).then((data)=>{
+                // console.log(data);
                 return resolve({status:200,data});
             }).catch((err)=>{
                 return reject(err);
             })
         });
     }
+
+
+
+
+// const updateCanteenMenu = async (canteen_id, catogery, obj, imageURL) => {
+//     try {
+//         const objectId = new mongo.Types.ObjectId(canteen_id); // ✅ Fix ObjectId issue
+//         obj.image = imageURL; // ✅ Store the image URL properly
+//         console.log("Updating menu for:", objectId, catogery, obj);
+
+//         const updateResult = await menus.updateOne(
+//             { canteen_id: objectId }, 
+//             { $push: { [catogery]: obj } }
+//         );
+
+//         if (updateResult.modifiedCount === 0) {
+//             return { status: 404, message: "Menu not found" };
+//         }
+
+//         return { status: 200, data: updateResult };
+//     } catch (error) {
+//         console.error("Update Error:", error);
+//         return { status: 500, error };
+//     }
+// };
+
+
+
    
 
 // const updateavailable = (canteen_id, category, meal_name) => {
@@ -148,7 +178,7 @@ const updatefooditem =(data,canteen_id,category) =>{
         const mealId = new mongo.Types.ObjectId(data._id);
         console.log("category",category);
         console.log("can_id",canteen_id);
-        console.log("data",data);
+        console.log("data in controll",data);
 
         menus.findOne({canteen_id:objectId}).then((result)=>{
             if(!result || !result[category]){
@@ -163,10 +193,10 @@ const updatefooditem =(data,canteen_id,category) =>{
             const updateFields = {
                 [`${category}.$.name`]: data.name,
                 [`${category}.$.price`]: data.price,
-                [`${category}.$.description`]: data.description,
+                [`${category}.$.discription`]: data.discription,
             };
 
-            if (data.image) {
+            if (data.image !== 'null') {
                 updateFields[`${category}.$.image`] = data.image;
             }
 
