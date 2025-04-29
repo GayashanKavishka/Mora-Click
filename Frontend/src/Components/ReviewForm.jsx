@@ -20,7 +20,7 @@ function ReviewForm({ canteenId, user_ID,scrollToReview }) {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/review/addreview', payload);
+      const response = await axios.post('https://mora-click-7.onrender.com/review/addreview', payload);
       if (response.status === 200) {
         // alert('Review submitted successfully!');
         toast.success('Review submitted successfully!', { autoClose: 2000 });

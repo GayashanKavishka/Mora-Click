@@ -26,7 +26,7 @@ const AccountDetails = () => {
       if (decodedToken?.user_id) {
         try {
           const response = await axios.get(`
-            http://localhost:5000/user/getuser?_id=${decodedToken.user_id}`);
+            https://mora-click-7.onrender.com/user/getuser?_id=${decodedToken.user_id}`);
           setUserData(response.data);
           setFormData(response.data.data); // Store in form state
         } catch (error) {
@@ -45,7 +45,7 @@ const AccountDetails = () => {
     console.log("Updating user data:", formData);
     try {
       await axios.put(`
-        http://localhost:5000/user/updateuser?_id=${decodedToken.user_id}`,
+        https://mora-click-7.onrender.com/user/updateuser?_id=${decodedToken.user_id}`,
         formData
       );
       setUserData({ data: formData }); // Update local state

@@ -104,7 +104,7 @@ const Additem = ({trigger,setTrigger,type,canteenId,scrolly}) => {
 
 
 
-      axios.post(`http://localhost:5000/special/addspecial`,datalist).then((res) => {
+      axios.post(`https://mora-click-7.onrender.com/special/addspecial`,datalist).then((res) => {
           console.log(res);
           // setTrigger(false);
           navigate('/canteen/home',{state:{ scrolly: scrolly }})
@@ -118,7 +118,7 @@ const Additem = ({trigger,setTrigger,type,canteenId,scrolly}) => {
     }
   
     axios.put(
-      `http://localhost:5000/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, 
+      `https://mora-click-7.onrender.com/menu/updatecanteenmenu?canteen_id=${canteenId}&catogery=${type}`, 
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },  // ✅ Correct content type

@@ -67,7 +67,7 @@ const EditPage = () => {
         if(catogery === "special"){
             
              
-            axios.put(`http://localhost:5000/special/updateSpecial?_id=${data._id}`,formData)
+            axios.put(`https://mora-click-7.onrender.com/special/updateSpecial?_id=${data._id}`,formData)
             .then((response)=>{
                 console.log("Success:",response);
                 navigate("/canteen/home",{state:{ scrolly: location.state.scrolly }});
@@ -78,7 +78,7 @@ const EditPage = () => {
             return
         }
 
-        axios.put(`http://localhost:5000/menu/updatefooditem?canteen_id=${cateen_id}&catogery=${catogery}`, formData)
+        axios.put(`https://mora-click-7.onrender.com/menu/updatefooditem?canteen_id=${cateen_id}&catogery=${catogery}`, formData)
         .then((response)=>{
             console.log("Success:",response);
             navigate("/canteen/home",{state:{ scrolly: location.state.scrolly }});

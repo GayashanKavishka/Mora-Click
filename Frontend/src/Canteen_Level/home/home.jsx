@@ -130,7 +130,7 @@ const Home = () => {
       // );
       
       const [updateRes, notificationRes] = await Promise.all([
-        axios.put('http://localhost:5000/canteen/updatecanteenstatus', {
+        axios.put('https://mora-click-7.onrender.com/canteen/updatecanteenstatus', {
           _id: canteenid,
           status: newstatus,
         },
@@ -139,7 +139,7 @@ const Home = () => {
             'Content-Type': 'application/json',
           },
         }),
-        axios.post('http://localhost:5000/notification/send-canteen-status', {
+        axios.post('https://mora-click-7.onrender.com/notification/send-canteen-status', {
           title: 'Canteen Status Update',
           body: `${jwtDecode(localStorage.getItem('token')).name} is now ${newstatus ? 'open' : 'closed'}.`,
         }),
@@ -161,7 +161,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/canteen/getcanteen/?_id=${canteenid}`)
+    axios.get(`https://mora-click-7.onrender.com/canteen/getcanteen/?_id=${canteenid}`)
       .then((res) => {
         setCanteenName(res.data.data[0].name);
         setCover(res.data.data[0].cover);
