@@ -56,7 +56,7 @@ const SignUp = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/user/insertUser", userData);
+      const response = await axios.post("https://mora-click-7.onrender.com/user/insertUser", userData);
       setMessage("User registered successfully!");
 
       setTimeout(() => {

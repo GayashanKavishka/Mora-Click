@@ -29,7 +29,7 @@ const Menu = () => {
 
 const GetCanteenIds = async () => {
   try {
-    const response = await axios.get("http://localhost:5000/canteen/getallcanteens");
+    const response = await axios.get("https://mora-click-7.onrender.com/canteen/getallcanteens");
     console.log("Canteen data:", response.data.data);
     const canteenIds = response.data.data.map((canteen) => canteen._id);
     const canteenInfo = response.data.data.reduce((acc, canteen) => {
@@ -58,7 +58,7 @@ const fetchMenuData = async () => {
     try {
       console.log("Fetching menu data...");
       const requests = canteenIds.map((canteenId) =>
-        axios.get(`http://localhost:5000/menu/getmenu?canteen_id=${canteenId}`)
+        axios.get(`https://mora-click-7.onrender.com/menu/getmenu?canteen_id=${canteenId}`)
       );
       const responses = await Promise.all(requests);
   
@@ -94,7 +94,7 @@ const fetchMenuData = async () => {
   const fetchSpecialItems = async () => {
     try {
       const canteenRequests = canteenIds.map((canteenId) =>
-        axios.get(`http://localhost:5000/special/getItembyId?canteen_id=${canteenId}`)
+        axios.get(`https://mora-click-7.onrender.com/special/getItembyId?canteen_id=${canteenId}`)
       );
   
       const responses = await Promise.all(canteenRequests);
@@ -220,7 +220,7 @@ const fetchMenuData = async () => {
         
         if(type === "special")
         {
-          axios.post("http://localhost:5000/raiting/addspecial",{
+          axios.post("https://mora-click-7.onrender.com/raiting/addspecial",{
             user_id: user,
             item_id: item_id,
             raite: selectedRating
@@ -235,7 +235,7 @@ const fetchMenuData = async () => {
         }
         else
         {
-          axios.post("http://localhost:5000/raiting/add",{
+          axios.post("https://mora-click-7.onrender.com/raiting/add",{
             user_id: user,
             item_id: item_id,
             canteen_id: canteen_id,

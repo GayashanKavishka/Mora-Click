@@ -10,9 +10,9 @@ import image from '../assets/placeholderimage.png';
 import StarRating from '../Components/Raiting';
 import { useNavigate } from 'react-router-dom';
 
-const MENU_API_URL = 'http://localhost:5000/menu/getmenu?canteen_id=6761446355efca0108f8d9f0';
-const CANTEEN_API_URL = 'http://localhost:5000/canteen/getcanteen?_id=6761446355efca0108f8d9f0';
-const SPECIAL_API_URL = 'http://localhost:5000/special/getItembyId?canteen_id=6761446355efca0108f8d9f0';
+const MENU_API_URL = 'https://mora-click-7.onrender.com/menu/getmenu?canteen_id=6761446355efca0108f8d9f0';
+const CANTEEN_API_URL = 'https://mora-click-7.onrender.com/canteen/getcanteen?_id=6761446355efca0108f8d9f0';
+const SPECIAL_API_URL = 'https://mora-click-7.onrender.com/special/getItembyId?canteen_id=6761446355efca0108f8d9f0';
 
 export default function GodaUda() {
   const [foodData, setFoodData] = useState(null);

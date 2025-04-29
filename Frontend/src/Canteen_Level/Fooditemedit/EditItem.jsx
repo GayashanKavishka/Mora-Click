@@ -95,7 +95,7 @@ const Edititem = ({trigger,setTrigger,item,canteenId,type,scrolly}) => {
     
     console.log("data",data);
 
-    axios.put(`http://localhost:5000/menu/updatefooditem?canteen_id=${canteenId}&catogery=${type}`, data)
+    axios.put(`https://mora-click-7.onrender.com/menu/updatefooditem?canteen_id=${canteenId}&catogery=${type}`, data)
     .then((res) => {
       console.log(res);
       navigate('/canteen/home' ,{state:{ scrolly: scrolly }})

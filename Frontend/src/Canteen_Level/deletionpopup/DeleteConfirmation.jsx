@@ -21,7 +21,7 @@ const DeleteConfirmation = ({ show, deleteItem, onCancel,canteen_id,type,scrolly
       // Do something with the response
 
       if(type === "special"){
-        axios.delete(`http://localhost:5000/special/deleteSpecial/?_id=${deleteItem}`)
+        axios.delete(`https://mora-click-7.onrender.com/special/deleteSpecial/?_id=${deleteItem}`)
         .then((response) => {
           console.log('Success:', response);
           // window.location.reload()
@@ -33,7 +33,7 @@ const DeleteConfirmation = ({ show, deleteItem, onCancel,canteen_id,type,scrolly
         });
         return
       }
-      axios.delete(`http://localhost:5000/menu/deletefooditem?canteen_id=${canteen_id}&catogery=${type}`,{data:{_id:deleteItem}})
+      axios.delete(`https://mora-click-7.onrender.com/menu/deletefooditem?canteen_id=${canteen_id}&catogery=${type}`,{data:{_id:deleteItem}})
       .then((response) => {
         console.log('Success:', response);
         // window.location.reload()
