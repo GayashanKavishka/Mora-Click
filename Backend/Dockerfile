@@ -8,7 +8,7 @@ FROM node:22.11.0
 COPY package*.json ./
 
 # Install production dependencies
-RUN npm install 
+RUN npm install && npm rebuild bcrypt --build-from-source 
 
 # Copy the entire backend folder into the container
 COPY . .
