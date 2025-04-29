@@ -31,13 +31,13 @@ RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json first for caching purposes
 COPY package*.json ./
 
-# Install dependencies and rebuild bcrypt
+# Install dependencies and rebuild bcrypt from source
 RUN npm install && npm rebuild bcrypt --build-from-source
 
-# Copy the rest of the application
+# Copy the rest of the application code
 COPY . .
 
 # Expose the port your backend uses
@@ -45,4 +45,5 @@ EXPOSE 5000
 
 # Start the application
 CMD ["npm", "start"]
+
 
