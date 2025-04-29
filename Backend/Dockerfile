@@ -1,5 +1,5 @@
 # Use a specific Node.js base image
-FROM node:22.11.0
+FROM 22.11.0-bullseye
 
 # Set the working directory inside the container
 # WORKDIR /app
