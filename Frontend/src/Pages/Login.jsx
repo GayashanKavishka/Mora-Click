@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "./Login.css"; // Create a CSS file for styling
-import logo from "../assets/logo.png"; // Add your logo image here
+import logo from "../assets/logo.webp"; // Add your logo image here
 
 
 
