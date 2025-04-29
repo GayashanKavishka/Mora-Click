@@ -29,7 +29,6 @@ import civil from '../assets/civil.jpg';
 import godayata from '../assets/godayata.jpg';
 import godauda from '../assets/Goda Uda.jpg';
 import staff from '../assets/staff.jpg';
-
 import moranew2 from '../assets/moranew2.png';
 
 import AOS from 'aos';
