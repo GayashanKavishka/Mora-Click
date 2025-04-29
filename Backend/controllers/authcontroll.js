@@ -115,7 +115,7 @@ const login = (username, password) => {
                 // console.log(passwordMatch)
                 if (canteen.password === password) {
                     const token = jwt.sign(
-                        { username: canteen.username, role: "canteen", canteen_id: canteen._id }, 
+                        { username: canteen.username, role: "canteen", canteen_id: canteen._id , name: canteen.name }, 
                         process.env.Secret_Key, 
                         { expiresIn: '1h' }
                     );

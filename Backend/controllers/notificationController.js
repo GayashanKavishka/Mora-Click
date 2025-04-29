@@ -38,9 +38,18 @@ const sendCanteenStatus = async (req, res) => {
         const devicetokens = await user.find({}, { FCMToken: 1, _id: 0 });
         
         // Extract non-empty tokens
-        const deviceTokensArray = devicetokens
-            .map(tokenObj => tokenObj.FCMToken)
-            .filter(token => token);  // Remove empty tokens
+        // const deviceTokensArray = devicetokens
+        //     .map(tokenObj => tokenObj.FCMToken)
+        //     .filter(token => token);  // Remove empty tokens
+
+        const deviceTokensArray = [
+            ...new Set(
+              devicetokens
+                .map(tokenObj => tokenObj.FCMToken)
+                .filter(token => token)  // Remove null/undefined
+            )
+          ];
+          
 
         console.log("Valid Tokens:", deviceTokensArray);
 

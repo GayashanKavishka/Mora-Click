@@ -116,19 +116,42 @@ const Home = () => {
   const toggleCanteen = async () => {
     const newstatus = isOpen ? false : true; // Ensure true is sent when open
     try {
-      const res = await axios.put(
-        'http://localhost:5000/canteen/updatecanteenstatus',
-        {
+      // const res = await axios.put(
+      //   'http://localhost:5000/canteen/updatecanteenstatus',
+      //   {
+      //     _id: canteenid,
+      //     status: newstatus, // This will be true when canteen is open
+      //   },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   }
+      // );
+      
+      const [updateRes, notificationRes] = await Promise.all([
+        axios.put('http://localhost:5000/canteen/updatecanteenstatus', {
           _id: canteenid,
-          status: newstatus, // This will be true when canteen is open
+          status: newstatus,
         },
         {
           headers: {
             'Content-Type': 'application/json',
           },
-        }
-      );
-      if (res.status === 200) {
+        }),
+        axios.post('http://localhost:5000/notification/send-canteen-status', {
+          title: 'Canteen Status Update',
+          body: `${jwtDecode(localStorage.getItem('token')).name} is now ${newstatus ? 'open' : 'closed'}.`,
+        }),
+      ]);
+
+
+      // if (res.status === 200) {
+      //   console.log("Canteen status updated:", newstatus);
+      //   setIsOpen(newstatus);
+      // }
+
+      if (updateRes.status === 200 && notificationRes.status === 200) {
         console.log("Canteen status updated:", newstatus);
         setIsOpen(newstatus);
       }
