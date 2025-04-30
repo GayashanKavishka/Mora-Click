@@ -21,6 +21,23 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
+
+  const Faculties = [
+    "Engineering",
+    "Architecture",
+    "Business",
+    "Medicine",
+    "Information Technology",
+  ]
+
+  const Departments = {
+    Engineering: ["Computer Science", "Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Chemical Engineering", "Biomedical Engineering","Electronics Engineering","Materials Engineering","Textile Engineering","EarthResources Engineering", "Transportation Engineering","Fashion Design"],
+    Architecture: ["Architecture", "Intergrated Design","BESS","Town and Country Planning","Facility Management"],
+    Business: ["Business Administration", "Marketing"],
+    Medicine: ["Medicine"],
+    "Information Technology": ["ITM", "IT","AI"],
+  }
+
   const [message, setMessage] = useState(""); // Success or error message
   const [error, setError] = useState(""); // Password mismatch error
 
@@ -113,13 +130,28 @@ const SignUp = () => {
         </div>
 
         <div className="form-group">
-          <label>Department</label>
-          <input type="text" name="department" value={formData.department} onChange={handleChange} required />
+          <label>Faculty</label>
+          <select name="faculty" value={formData.faculty} onChange={handleChange} required>
+            <option value="">Select Faculty</option>
+            {Faculties.map((faculty, index) => (
+              <option key={index} value={faculty}>
+                {faculty}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-group">
-          <label>Faculty</label>
-          <input type="text" name="faculty" value={formData.faculty} onChange={handleChange} required />
+          <label>Department</label>
+          <select name="department" value={formData.department} onChange={handleChange} required>
+            <option value="">Select Department</option>
+            {formData.faculty &&
+              Departments[formData.faculty].map((department, index) => (
+                <option key={index} value={department}>
+                  {department}
+                </option>
+              ))}
+          </select>
         </div>
 
         <div className="form-group">
