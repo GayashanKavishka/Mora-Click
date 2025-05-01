@@ -13,7 +13,7 @@ function ReviewList({ canteenId }) {
       }
 
       try {
-        const response = await axios.post('http://localhost:5000/review/getreview', {
+        const response = await axios.post('https://mora-click-7.onrender.com/review/getreview', {
           canteenId:canteenId// Correctly passing canteenId as a query parameter
         });
 

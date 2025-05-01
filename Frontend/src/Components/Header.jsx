@@ -73,7 +73,7 @@ export default function Header() {
   return (
     <header className={`navbar ${visible ? "visible" : "hidden"}`}>
       <div className="logo">
-        <img src={logo} alt="logo" />
+        <a href="/"><img src={logo} alt="logo" /></a>
       </div>
 
       <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>

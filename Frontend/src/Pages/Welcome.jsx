@@ -29,7 +29,6 @@ import civil from '../assets/civil.jpg';
 import godayata from '../assets/godayata.jpg';
 import godauda from '../assets/Goda Uda.jpg';
 import staff from '../assets/staff.jpg';
-
 import moranew2 from '../assets/moranew2.png';
 
 import AOS from 'aos';
@@ -142,7 +141,7 @@ export default function Welcome() {
     if(FCMToken && decodedToken){
       console.log("FCM Token",FCMToken);
       console.log("Decoded Token",decodedToken);
-      axios.post("http://localhost:5000/user/addFCM",
+      axios.post("https://mora-click-7.onrender.com/user/addFCM",
       {
         _id:decodedToken.ID,
         FCMToken:FCMToken
@@ -196,7 +195,7 @@ export default function Welcome() {
    <div className="mt-5 relative">
       
       {
-        role === "Student" ? (
+        token ? (
       <>
       <h1
         data-aos="fade-right" // You can set various AOS animations
@@ -249,7 +248,7 @@ export default function Welcome() {
                 <img
                 ref={imgRef}
                 src={mora5}
-                className={`h-[400px] relative z-10 transition-all  sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
+                className={`h-[300px] relative z-10 transition-all  lg:h-[300px] sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
                   inView ? "animate-slide-in-left" : "opacity-0"
                 }`}
               />

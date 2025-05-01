@@ -1,6 +1,6 @@
 import React from 'react';
 import './Loading.css';
-import SharkLogo from '../assets/logo.png';
+import SharkLogo from '../assets/logo.webp'; // Adjust the path to your logo image
 
 export default function Loading() {
     return (

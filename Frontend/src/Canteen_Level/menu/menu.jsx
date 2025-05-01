@@ -88,7 +88,7 @@ const func = () => {
     console.log(it._id);
 
 
-    axios.put(`http://localhost:5000/special/updateSpecialAvailable?_id=${it._id}`)
+    axios.put(`https://mora-click-7.onrender.com/special/updateSpecialAvailable?_id=${it._id}`)
     .then((res) => {
         console.log(res);
     }).catch((err)=>{
@@ -207,7 +207,7 @@ const deletefooditem = (item,type,scroll) => {
 
 const fetchMenu = async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/menu/getmenu?canteen_id=${canteenId}`);
+        const response = await axios.get(`https://mora-click-7.onrender.com/menu/getmenu?canteen_id=${canteenId}`);
         const menu = response.data.data[0];
         setMain(menu.main);
         console.log(menu.main);
@@ -221,7 +221,7 @@ const fetchMenu = async () => {
 
 const fetchSpecial = async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/special/getItembyId?canteen_id=${canteenId}`);
+        const response = await axios.get(`https://mora-click-7.onrender.com/special/getItembyId?canteen_id=${canteenId}`);
         const spec = response.data.data;
         console.log(spec);
         setSpecial(spec);
@@ -271,7 +271,7 @@ const handleToggleDrinks = (Item) => {
     const it = drinks.find((item) => item._id === Item._id); 
     console.log(it._id);
     
-    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=beverage&_id=${it._id}`, {
+    axios.put(`https://mora-click-7.onrender.com/menu/updateavailable?canteen_id=${canteenId}&catogery=beverage&_id=${it._id}`, {
     })
     .then((res) => {
         console.log(res);
@@ -294,7 +294,7 @@ const handleToggleShort = (Item) => {
     const it = short.find((item) => item._id === Item._id); 
     console.log(it._id);
     
-    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=short_eat&_id=${it._id}`, {
+    axios.put(`https://mora-click-7.onrender.com/menu/updateavailable?canteen_id=${canteenId}&catogery=short_eat&_id=${it._id}`, {
     })
     .then((res) => {
         console.log(res);
@@ -317,7 +317,7 @@ const handleToggleMain =(Item) => {
     const it = main.find((item) => item._id === Item._id); 
     console.log(it._id);
     
-    axios.put(`http://localhost:5000/menu/updateavailable?canteen_id=${canteenId}&catogery=main&_id=${it._id}`)
+    axios.put(`https://mora-click-7.onrender.com/menu/updateavailable?canteen_id=${canteenId}&catogery=main&_id=${it._id}`)
     .then((res) => {
         console.log(res);
     })

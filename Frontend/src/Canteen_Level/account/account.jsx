@@ -17,7 +17,7 @@ const EditAccount = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/canteen/getcanteen/?_id=${canteenId}`)
+    axios.get(`https://mora-click-7.onrender.com/canteen/getcanteen/?_id=${canteenId}`)
     .then((res) => {
       setUsername(res.data.data[0].username)
       setPassword(res.data.data[0].password)
@@ -58,7 +58,7 @@ const EditAccount = () => {
 
   const handleSave = () => {
     console.log({ canteenName, username, password, profilePicture, coverPhoto });
-    axios.put('http://localhost:5000/canteen/updatecanteen', {
+    axios.put('https://mora-click-7.onrender.com/canteen/updatecanteen', {
         _id: canteenId,
         name: canteenName,
         username : username,
