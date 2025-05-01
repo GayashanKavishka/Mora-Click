@@ -195,7 +195,7 @@ export default function Welcome() {
    <div className="mt-5 relative">
       
       {
-        role === "Student" ? (
+        token ? (
       <>
       <h1
         data-aos="fade-right" // You can set various AOS animations
@@ -248,7 +248,7 @@ export default function Welcome() {
                 <img
                 ref={imgRef}
                 src={mora5}
-                className={`h-[400px] relative z-10 transition-all  sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
+                className={`h-[300px] relative z-10 transition-all  lg:h-[300px] sm:w-[100px] sm:h-[300px] md:w-[300px] md:h-[300px]  ${
                   inView ? "animate-slide-in-left" : "opacity-0"
                 }`}
               />
