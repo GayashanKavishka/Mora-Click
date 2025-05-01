@@ -6,6 +6,11 @@ const bcrypt = require('bcrypt');
 const userModel = require('../model/userModel');
 const saltRounds = 10;
 
+//------
+
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
 
 const registerUser = (obj) => {
     return new Promise((resolve, reject) => {
@@ -49,13 +54,73 @@ const registerUser = (obj) => {
                         depernment: Depernment
             });
 
-            newUser.save()
-            .then((data) => {
-                return resolve({ status: 200, data });
-            }).catch((err) => {
-                return reject(err);
-            }
+            //----------------------------
+
+            const token = jwt.sign(
+                { 
+                        firstName: FName,
+                        lastName: LName,
+                        dob: DOB,
+                        username: Email,
+                        password: encriptedPassword,
+                        role: Role,
+                        faculty: Faculty,
+                        e_mail: Email,
+                        contact: PNumber,
+                        gender: Gender,
+                        depernment: Depernment 
+                }, 
+                process.env.Secret_Key, 
+                { expiresIn: '5m' }
             );
+
+            // newUser.save()
+            // .then((data) => {
+            //     return resolve({ status: 200, data });
+            // }).catch((err) => {
+            //     return reject(err);
+            // }
+            // );
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: process.env.EMAIL_USER,
+                  pass: process.env.EMAIL_PASS
+                }
+              });
+
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: Email,
+                subject: 'Verify Your Email - Mora-Click',
+                html: `
+                    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #f2e70a;">
+                        <h2 style="color: #f2e70a;">Welcome to Mora-Click, ${FName} ${LName}!</h2>
+                        <p>We're excited to have you on board. Please verify your email address to get started.</p>
+                        <p style="margin: 20px 0;">
+                            <a href="http://localhost:5173/verify/${token}" 
+                               style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                               Verify Email
+                            </a>
+                        </p>
+                        <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+                        <p style="word-wrap: break-word; color: #555;">http://localhost:5173/verify/${token}</p>
+                        <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+                        <p style="font-size: 12px; color: #999;">If you did not sign up for Mora-Click, please ignore this email.</p>
+                    </div>
+                `
+            };
+
+             transporter.sendMail(mailOptions)
+                .then(() => {
+                    console.log('Email sent successfully!');
+                    return resolve({ status: 200, message: "User registered. Please check your email for verification." });
+                })
+                .catch((error) => {
+                    console.error('Error sending email:', error);
+                    return reject({ status: 500, message: "Error sending email" });
+                });  
 
             console.log(users);
         }

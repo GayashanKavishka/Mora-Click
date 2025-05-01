@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignUp.css";
 import bg from "../assets/bgi.jpg";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate(); // Hook for navigation
+
+  ///-----------
+
+  
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -57,13 +63,21 @@ const SignUp = () => {
 
     try {
       const response = await axios.post("http://localhost:5000/user/insertUser", userData);
-      setMessage("User registered successfully!");
+      setMessage(response.data.message);
+      toast.success("We’ve sent a verification link to your email. Please check your inbox(Spam also). If not, please check your email again and submit.", {
+        autoClose: false, // Alert will stay until user closes it
+        closeOnClick: true,
+        draggable: true,
+      });
 
-      setTimeout(() => {
-        navigate("/login"); // Redirect to login page
-      }, 2000); // Delay to show the success message
+      // Add this component to your JSX to render the toast notifications
+      <ToastContainer />
 
-      console.log("Success:", response.data);
+      // setTimeout(() => {
+      //   navigate("/login"); // Redirect to login page
+      // }, 2000); // Delay to show the success message
+
+      // console.log("Success:", response.data);
     } catch (error) {
       setMessage("This user already exists.");
       console.error("Error:", error.response ? error.response.data : error.message);
@@ -144,6 +158,8 @@ const SignUp = () => {
 
         <button type="submit" className="submit-button">Sign Up</button>
       </form>
+      {message && <div className="alert">{message}</div>}
+      {error && <div className="alert alert-error">{error}</div>}
     </div>
   );
 };
