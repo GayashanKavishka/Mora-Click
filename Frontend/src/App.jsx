@@ -348,6 +348,7 @@ import Account from "./Pages/Account";
 import { onMessageListener, requestFCMToken } from "./utils/firebaseUtils";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import VerifyEmail from "./Pages/VerifyEmail";
 
 // Token handling functions
 const loadScript = (src) => {
@@ -521,6 +522,8 @@ function AppContent() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/editmenu" element={<EditPage />} />
             <Route path="/account" element={<ProtectedUserRoute><Account /></ProtectedUserRoute>} />
+
+            <Route path="/verify/:token" element={<VerifyEmail></VerifyEmail>}/>
 
             {/*----------------------canteen level----------------------*/}
             <Route path="/login" element={<Login />} />

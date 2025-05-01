@@ -14,6 +14,9 @@ const users = new mongoose.Schema({
   gender: { type: String, default: null, required: true },
   depernment: { type: String, default: null },
   FCMToken : {type: String, default: ""},
+  verified: { type: Boolean, default: false },
+  verificationToken: { type: String, default: null },
+  verificationAt: { type: Date, default: null },
 });
 
 module.exports = mongoose.model.users||mongoose.model('users', users);
