@@ -12,128 +12,202 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 
-const registerUser = (obj) => {
-    return new Promise((resolve, reject) => {
-        // bcrypt.hash(obj.password, saltRounds, function (err, hash) {
-        //     if (err) {
-        //         return reject(err);
-        //     }
-        //     obj.password = hash;
-        //     user.create(obj).then((data) => {
-        //         return resolve({ status: 200, data });
-        //     }).catch((err) => {
-        //         return reject(err);
-        //     })
-        // });
+// const registerUser = (obj) => {
+//     return new Promise((resolve, reject) => {
+//         // bcrypt.hash(obj.password, saltRounds, function (err, hash) {
+//         //     if (err) {
+//         //         return reject(err);
+//         //     }
+//         //     obj.password = hash;
+//         //     user.create(obj).then((data) => {
+//         //         return resolve({ status: 200, data });
+//         //     }).catch((err) => {
+//         //         return reject(err);
+//         //     })
+//         // });
 
-        const{FName, LName, Email, Password, Role, DOB, PNumber, Gender, Depernment, Faculty} = obj;
+//         const{FName, LName, Email, Password, Role, DOB, PNumber, Gender, Depernment, Faculty} = obj;
 
-        const encriptedPassword = bcrypt.hashSync(Password, saltRounds);
+//         const encriptedPassword = bcrypt.hashSync(Password, saltRounds);
 
 
 
-        try {
-            const users = userModel.find({ e_mail: Email })
-            .then((data) => {
-                if (data.length > 0) {
-                    return reject({ status: 409, message: "User already exists" });
-                }
-                else {
-                    const newUser = new userModel({
-                        _id: new mongo.Types.ObjectId(),
-                        firstName: FName,
-                        lastName: LName,
-                        dob: DOB,
-                        username: Email,
-                        password: encriptedPassword,
-                        role: Role,
-                        faculty: Faculty,
-                        e_mail: Email,
-                        contact: PNumber,
-                        gender: Gender,
-                        depernment: Depernment
-            });
+//         try {
+//             const users = userModel.find({ e_mail: Email })
+//             .then((data) => {
+//                 if (data.length > 0) {
+//                     return reject({ status: 409, message: "User already exists" });
+//                 }
+//                 else {
+//                     const newUser = new userModel({
+//                         _id: new mongo.Types.ObjectId(),
+//                         firstName: FName,
+//                         lastName: LName,
+//                         dob: DOB,
+//                         username: Email,
+//                         password: encriptedPassword,
+//                         role: Role,
+//                         faculty: Faculty,
+//                         e_mail: Email,
+//                         contact: PNumber,
+//                         gender: Gender,
+//                         depernment: Depernment
+//             });
 
-            //----------------------------
+//             //----------------------------
 
-            const token = jwt.sign(
-                { 
-                        firstName: FName,
-                        lastName: LName,
-                        dob: DOB,
-                        username: Email,
-                        password: encriptedPassword,
-                        role: Role,
-                        faculty: Faculty,
-                        e_mail: Email,
-                        contact: PNumber,
-                        gender: Gender,
-                        depernment: Depernment 
-                }, 
-                process.env.Secret_Key, 
-                { expiresIn: '5m' }
-            );
+//             const token = jwt.sign(
+//                 { 
+//                         firstName: FName,
+//                         lastName: LName,
+//                         dob: DOB,
+//                         username: Email,
+//                         password: encriptedPassword,
+//                         role: Role,
+//                         faculty: Faculty,
+//                         e_mail: Email,
+//                         contact: PNumber,
+//                         gender: Gender,
+//                         depernment: Depernment 
+//                 }, 
+//                 process.env.Secret_Key, 
+//                 { expiresIn: '5m' }
+//             );
 
-            // newUser.save()
-            // .then((data) => {
-            //     return resolve({ status: 200, data });
-            // }).catch((err) => {
-            //     return reject(err);
-            // }
-            // );
+//             // newUser.save()
+//             // .then((data) => {
+//             //     return resolve({ status: 200, data });
+//             // }).catch((err) => {
+//             //     return reject(err);
+//             // }
+//             // );
 
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                  user: process.env.EMAIL_USER,
-                  pass: process.env.EMAIL_PASS
-                }
-              });
+//             const transporter = nodemailer.createTransport({
+//                 service: 'gmail',
+//                 auth: {
+//                   user: process.env.EMAIL_USER,
+//                   pass: process.env.EMAIL_PASS
+//                 }
+//               });
 
-            const mailOptions = {
-                from: process.env.EMAIL_USER,
-                to: Email,
-                subject: 'Verify Your Email - Mora-Click',
-                html: `
-                    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #f2e70a;">
-                        <h2 style="color: #f2e70a;">Welcome to Mora-Click, ${FName} ${LName}!</h2>
-                        <p>We're excited to have you on board. Please verify your email address to get started.</p>
-                        <p style="margin: 20px 0;">
-                            <a href="http://mora-click-xpzw.onrender.com/verify/${token}" 
-                               style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                               Verify Email
-                            </a>
-                        </p>
-                        <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-                        <p style="word-wrap: break-word; color: #555;">http://mora-click-xpzw.onrender.com/verify/${token}</p>
-                        <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-                        <p style="font-size: 12px; color: #999;">If you did not sign up for Mora-Click, please ignore this email.</p>
-                    </div>
-                `
-            };
+//             const mailOptions = {
+//                 from: process.env.EMAIL_USER,
+//                 to: Email,
+//                 subject: 'Verify Your Email - Mora-Click',
+//                 html: `
+//                     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #f2e70a;">
+//                         <h2 style="color: #f2e70a;">Welcome to Mora-Click, ${FName} ${LName}!</h2>
+//                         <p>We're excited to have you on board. Please verify your email address to get started.</p>
+//                         <p style="margin: 20px 0;">
+//                             <a href="http://localhost:5173/verify/${token}" 
+//                                style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+//                                Verify Email
+//                             </a>
+//                         </p>
+//                         <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+//                         <p style="word-wrap: break-word; color: #555;">http://localhost:5173/verify/${token}</p>
+//                         <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+//                         <p style="font-size: 12px; color: #999;">If you did not sign up for Mora-Click, please ignore this email.</p>
+//                     </div>
+//                 `
+//             };
 
-             transporter.sendMail(mailOptions)
-                .then(() => {
-                    console.log('Email sent successfully!');
-                    return resolve({ status: 200, message: "User registered. Please check your email for verification." });
-                })
-                .catch((error) => {
-                    console.error('Error sending email:', error);
-                    return reject({ status: 500, message: "Error sending email" });
-                });  
+//              transporter.sendMail(mailOptions)
+//                 .then(() => {
+//                     console.log('Email sent successfully!');
+//                     return resolve({ status: 200, message: "User registered. Please check your email for verification." });
+//                 })
+//                 .catch((error) => {
+//                     console.error('Error sending email:', error);
+//                     return reject({ status: 500, message: "Error sending email" });
+//                 });  
 
-            console.log(users);
+//             console.log(users);
+//         }
+//         }).catch((err) => {
+//             return reject(err);
+//         });
+//         } 
+//     catch (err) {
+//         console.error(err);
+//     }
+
+//     });
+// }
+
+//--------new code
+
+const registerUser = async (obj) => {
+    const {
+        FName, LName, Email, Password, Role,
+        DOB, PNumber, Gender, Depernment, Faculty
+    } = obj;
+
+    console.log("Registering user Email");
+
+    const encriptedPassword = bcrypt.hashSync(Password, saltRounds);
+
+    try {
+        const existingUser = await userModel.findOne({ e_mail: Email });
+        console.log("User",existingUser);
+        if (existingUser) {
+            return Promise.reject({ status: 409, message: "User already exists" });
         }
-        }).catch((err) => {
-            return reject(err);
-        });
-        } 
-    catch (err) {
-        console.error(err);
-    }
 
-    });
-}
+        const token = jwt.sign({
+            firstName: FName,
+            lastName: LName,
+            dob: DOB,
+            username: Email,
+            password: encriptedPassword,
+            role: Role,
+            faculty: Faculty,
+            e_mail: Email,
+            contact: PNumber,
+            gender: Gender,
+            depernment: Depernment
+        }, process.env.Secret_Key, { expiresIn: '5m' });
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        const mailOptions = 
+        {
+        from: process.env.EMAIL_USER,
+        to: Email,
+        subject: 'Verify Your Email - Mora-Click',
+        html: `
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #f2e70a;">
+                <h2 style="color: #f2e70a;">Welcome to Mora-Click, ${FName} ${LName}!</h2>
+                <p>We're excited to have you on board. Please verify your email address to get started.</p>
+                <p style="margin: 20px 0;">
+                    <a href="https://mora-click-xpzw.onrender.com//verify/${token}" 
+                        style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                        Verify Email
+                    </a>
+                </p>
+                <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+                <p style="word-wrap: break-word; color: #555;">https://mora-click-xpzw.onrender.com//verify/${token}</p>
+                <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+                <p style="font-size: 12px; color: #999;">If you did not sign up for Mora-Click, please ignore this email.</p>
+            </div>
+        `
+        };    
+        await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully!');
+        return Promise.resolve({ status: 200, message: "Check your email to verify your account." });
+
+    } catch (error) {
+        console.error('Error:', error);
+        return Promise.reject({ status: 500, message: "Registration failed. Try again." });
+    }
+};
+
 
 // const loginUser = (obj) => {
 //     return new Promise((resolve, reject) => {
