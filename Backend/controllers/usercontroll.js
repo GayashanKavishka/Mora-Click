@@ -186,13 +186,13 @@ const registerUser = async (obj) => {
                 <h2 style="color: #f2e70a;">Welcome to Mora-Click, ${FName} ${LName}!</h2>
                 <p>We're excited to have you on board. Please verify your email address to get started.</p>
                 <p style="margin: 20px 0;">
-                    <a href="https://mora-click-xpzw.onrender.com//verify/${token}" 
+                    <a href="https://mora-click-xpzw.onrender.com/verify/${token}" 
                         style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
                         Verify Email
                     </a>
                 </p>
                 <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-                <p style="word-wrap: break-word; color: #555;">https://mora-click-xpzw.onrender.com//verify/${token}</p>
+                <p style="word-wrap: break-word; color: #555;">https://mora-click-xpzw.onrender.com/verify/${token}</p>
                 <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
                 <p style="font-size: 12px; color: #999;">If you did not sign up for Mora-Click, please ignore this email.</p>
             </div>
