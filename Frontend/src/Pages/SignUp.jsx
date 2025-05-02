@@ -80,7 +80,7 @@ const SignUp = () => {
 
     try {
 
-      const response = await axios.post("http://mora-click-7.onrender.com/user/insertUser", userData);
+      const response = await axios.post("https://mora-click-7.onrender.com/user/insertUser", userData);
       setMessage(response.data.message);
       toast.success("We’ve sent a verification link to your email. Please check your inbox(Spam also). If not, please check your email again and submit.", {
         autoClose: false, // Alert will stay until user closes it

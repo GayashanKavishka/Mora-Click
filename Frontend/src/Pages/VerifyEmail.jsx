@@ -12,7 +12,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
      console.log("verify email");
       try {
-        const response = await axios.get(`http://mora-click-7.onrender.com/user/verify/${token}`);
+        const response = await axios.get(`https://mora-click-7.onrender.com/user/verify/${token}`);
         setMessage(response.data);
         setTimeout(() => {
           navigate('/login'); // Redirect to the home page after email is verified
