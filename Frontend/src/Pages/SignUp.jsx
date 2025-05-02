@@ -99,6 +99,13 @@ const SignUp = () => {
       // console.log("Success:", response.data);
     } catch (error) {
       setMessage("This user already exists.");
+      toast.error("This user already exists.", {
+        autoClose: 20000, // Alert will stay for 20 seconds
+        closeOnClick: true,
+        draggable: true,
+      });
+
+
       console.error("Error:", error.response ? error.response.data : error.message);
     }
   };
@@ -109,7 +116,7 @@ const SignUp = () => {
         <h2 className="form-title">Sign Up</h2>
 
         {message && <p className="message success">{message}</p>}
-        {error && <p className="message error">{error}</p>}
+        {/* {error && <p className="message error">{error}</p>} */}
 
         <div className="form-group">
           <label>First Name</label>
@@ -189,8 +196,16 @@ const SignUp = () => {
           <label>Confirm Password</label>
           <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
-
-        <button type="submit" className="submit-button">Sign Up</button>
+        
+        <div className="flex justify-between mt-4">
+          <button type="submit" className="submit-button">Sign Up</button>
+          <button type="button" className="cancel-button" onClick={() => navigate("/")}>
+            Cancel
+          </button>
+        </div>
+        <p className="login-redirect">
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </form>
     </div>
   );
