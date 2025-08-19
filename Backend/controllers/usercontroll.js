@@ -145,16 +145,36 @@ const registerUser = async (obj) => {
 
     console.log("Registering user Email");
 
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(Email)) {
+        return Promise.reject({ status: 400, message: "Please enter a valid email address" });
+    }
+
+    // Check for common email typos
+    const commonDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+    const emailDomain = Email.split('@')[1];
+    if (emailDomain && !commonDomains.includes(emailDomain)) {
+        // You could add a warning here or suggest corrections
+        console.log(`Unusual email domain: ${emailDomain}`);
+    }
+
     const encriptedPassword = bcrypt.hashSync(Password, saltRounds);
 
     try {
         const existingUser = await userModel.findOne({ e_mail: Email });
         console.log("User",existingUser);
-        if (existingUser) {
-            return Promise.reject({ status: 409, message: "User already exists" });
+        if (existingUser && existingUser.verified) {
+            return Promise.reject({ status: 409, message: "User already exists and is verified" });
+        }
+        
+        if (existingUser && !existingUser.verified) {
+            return Promise.reject({ status: 409, message: "User already registered. Please check your email for verification link or contact support to resend." });
         }
 
-        const token = jwt.sign({
+        // Create user in database first (unverified state)
+        const newUser = new userModel({
+            _id: new mongo.Types.ObjectId(),
             firstName: FName,
             lastName: LName,
             dob: DOB,
@@ -165,8 +185,19 @@ const registerUser = async (obj) => {
             e_mail: Email,
             contact: PNumber,
             gender: Gender,
-            depernment: Depernment
-        }, process.env.Secret_Key, { expiresIn: '5m' });
+            depernment: Depernment,
+            verified: false,
+            verifiedAt: null
+        });
+
+        // Create verification token with minimal data
+        const token = jwt.sign({
+            email: Email,
+            userId: newUser._id
+        }, process.env.Secret_Key, { expiresIn: '24h' });
+
+        newUser.verificationToken = token;
+        await newUser.save(); // Save user to database first
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -186,21 +217,46 @@ const registerUser = async (obj) => {
                 <h2 style="color: #f2e70a;">Welcome to Mora-Click, ${FName} ${LName}!</h2>
                 <p>We're excited to have you on board. Please verify your email address to get started.</p>
                 <p style="margin: 20px 0;">
-                    <a href="https://mora-click-xpzw.onrender.com//verify/${token}" 
+                    <a href="http://localhost:5000/user/verify/${token}" 
                         style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
                         Verify Email
                     </a>
                 </p>
                 <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-                <p style="word-wrap: break-word; color: #555;">https://mora-click-xpzw.onrender.com//verify/${token}</p>
+                <p style="word-wrap: break-word; color: #555;">http://localhost:5000/user/verify/${token}</p>
                 <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
                 <p style="font-size: 12px; color: #999;">If you did not sign up for Mora-Click, please ignore this email.</p>
             </div>
         `
         };    
-        await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully!');
-        return Promise.resolve({ status: 200, message: "Check your email to verify your account." });
+        
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log('Email sent successfully!');
+            return Promise.resolve({ 
+                status: 200, 
+                message: "Registration successful! Please check your email to verify your account. If you don't receive the email within 10 minutes, please check your spam folder or contact support.",
+                userEmail: Email 
+            });
+        } catch (emailError) {
+            console.error('Email sending failed:', emailError);
+            
+            // If email fails, remove the user from database or mark as email_failed
+            await userModel.findByIdAndDelete(newUser._id);
+            
+            // Check if it's a specific email error
+            if (emailError.code === 'EENVELOPE' || emailError.responseCode === 550) {
+                return Promise.reject({ 
+                    status: 400, 
+                    message: "The email address you provided appears to be invalid. Please check and try again." 
+                });
+            }
+            
+            return Promise.reject({ 
+                status: 500, 
+                message: "Registration successful but email could not be sent. Please contact support with your email address to complete verification." 
+            });
+        }
 
     } catch (error) {
         console.error('Error:', error);

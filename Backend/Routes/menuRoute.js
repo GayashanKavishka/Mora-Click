@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const {getmenu,updateCanteenMenu,updateavailable,updatefooditem,deletefooditem} = require('../controllers/menucontroll.js');
+const { verifyToken, roleVerification } = require('../middleware/verification.js');
 // const upload = require('../Service/upload.js');
 // const cloudinary = require("../Service/upload.js")
 
 const {upload,cloudinary} = require('../Service/upload.js');
 
 
-router.get('/getmenu', async (req, res) => {
+router.get('/getmenu',  async (req, res) => {
     try {
         const canteen_id = req.query.canteen_id;
         const result = await getmenu(canteen_id);
@@ -37,7 +38,7 @@ router.get('/getmenu', async (req, res) => {
 // }
 // );
 
-router.put('/updatecanteenmenu', upload.single("image"), async (req, res) => {
+router.put('/updatecanteenmenu', upload.single("image"), verifyToken, roleVerification(['canteen']), async (req, res) => {
     try {
         const canteen_id = req.query.canteen_id;
         const catogery = req.query.catogery;
@@ -89,7 +90,7 @@ router.put('/updatecanteenmenu', upload.single("image"), async (req, res) => {
 });
 
 
-router.put('/updateavailable', async (req, res) => {
+router.put('/updateavailable', verifyToken, roleVerification(['canteen']), async (req, res) => {
     try {
         const canteen_id = req.query.canteen_id;
         const catogery = req.query.catogery;
@@ -104,7 +105,7 @@ router.put('/updateavailable', async (req, res) => {
 }
 );
 
-router.put('/updatefooditem', upload.single('image') ,async (req, res) => {
+router.put('/updatefooditem', upload.single('image'), verifyToken, roleVerification(['canteen']), async (req, res) => {
     try {
         const canteen_id = req.query.canteen_id;
         const catogery = req.query.catogery;
@@ -140,7 +141,7 @@ router.put('/updatefooditem', upload.single('image') ,async (req, res) => {
 }
 );
 
-router.delete('/deletefooditem', async (req, res) => {
+router.delete('/deletefooditem', verifyToken, roleVerification(['canteen']), async (req, res) => {
     try {
         const canteen_id = req.query.canteen_id;
         const catogery = req.query.catogery;

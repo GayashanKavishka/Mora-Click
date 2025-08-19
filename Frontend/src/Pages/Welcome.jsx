@@ -141,7 +141,7 @@ export default function Welcome() {
     if(FCMToken && decodedToken){
       console.log("FCM Token",FCMToken);
       console.log("Decoded Token",decodedToken);
-      axios.post("https://mora-click-7.onrender.com/user/addFCM",
+      axios.post("http://localhost:5000/user/addFCM",
       {
         _id:decodedToken.ID,
         FCMToken:FCMToken

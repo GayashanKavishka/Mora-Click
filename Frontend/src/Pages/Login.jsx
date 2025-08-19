@@ -22,7 +22,7 @@ const LoginPage = () => {
 
    const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("https://mora-click-7.onrender.com/auth/login", {
+    axios.post("http://localhost:5000/auth/login", {
       username: userName,
       password: password,
     }).then((response) => {

@@ -9,6 +9,7 @@ const user = require('../model/userModel');
 const {registerUser , getuser , updateUser,UpdateFCM} = require('../controllers/usercontroll.js');
 const userModel = require('../model/userModel');
 const  mongo  = require('mongoose');
+const verifyToken = require('../middleware/verification.js');
 ;
 
 router.post('/insertUser', async (req, res) => {
@@ -23,7 +24,7 @@ router.post('/insertUser', async (req, res) => {
     }
 });
 
-router.get('/getuser', async (req, res) => {
+router.get('/getuser', verifyToken, async (req, res) => {
     try {
         const _id = req.query._id;
         const result = await getuser(_id);
